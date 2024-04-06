@@ -1,0 +1,19 @@
+package model
+
+import (
+	"github.com/STCraft/dragonfly/server/block/cube"
+	"github.com/STCraft/dragonfly/server/world"
+)
+
+// TilledGrass is a model used for grass that has been tilled in some way, such as dirt paths and farmland.
+type TilledGrass struct{}
+
+// BBox returns a physics.BBox that spans an entire block.
+func (TilledGrass) BBox(cube.Pos, *world.World) []cube.BBox {
+	return []cube.BBox{full.ExtendTowards(cube.FaceDown, 0.0625)}
+}
+
+// FaceSolid always returns true.
+func (TilledGrass) FaceSolid(cube.Pos, cube.Face, *world.World) bool {
+	return true
+}
