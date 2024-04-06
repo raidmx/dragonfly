@@ -367,7 +367,13 @@ func (srv *Server) finaliseConn(ctx context.Context, conn session.Conn, l Listen
 	p := s.Controllable().(*player.Player)
 
 	c := event.C()
-	if p.Handler().HandleJoin(c, p.UUID()); c.Cancelled() {
+
+	if p.Handle(func(h player.Handler) *event.Context {
+		h.HandleJoin(c, p.XUID())
+		return c
+	}) {
+		srv.conf.Log.Debugf("Disconnecting session for %s because it was requested", p.Name())
+		p.Disconnect("Disconnected")
 		return
 	}
 
