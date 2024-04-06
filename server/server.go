@@ -98,8 +98,6 @@ func FromDefault() *Server {
 
 // Start is a nonblocking function that will start the Minecraft Server.
 func (srv *Server) Start() {
-	srv.closeOnProgramEnd()
-
 	if !srv.started.CAS(false, true) {
 		panic("start server: already started")
 	}
@@ -224,9 +222,9 @@ func (srv *Server) Broadcast(message string, args ...any) {
 	Console.SendMessage(msg)
 }
 
-// closeOnProgramEnd closes the server right before the program ends, so that
+// CloseOnProgramEnd closes the server right before the program ends, so that
 // all data of the server are saved properly.
-func (srv *Server) closeOnProgramEnd() {
+func (srv *Server) CloseOnProgramEnd() {
 	c := make(chan os.Signal, 2)
 	signal.Notify(c, syscall.SIGINT, syscall.SIGTERM)
 	go func() {
