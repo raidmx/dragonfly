@@ -15,6 +15,7 @@ import (
 	"syscall"
 
 	"github.com/STCraft/dragonfly/server/cmd"
+	"github.com/STCraft/dragonfly/server/event"
 	"github.com/STCraft/dragonfly/server/internal/blockinternal"
 	"github.com/STCraft/dragonfly/server/internal/iteminternal"
 	"github.com/STCraft/dragonfly/server/internal/sliceutil"
@@ -125,6 +126,15 @@ func (srv *Server) Accept(f HandleFunc) bool {
 
 	if f != nil {
 		f(p)
+	}
+
+	c := event.C()
+
+	if p.Handle(func(h player.Handler) *event.Context {
+		h.HandleJoin(c, p.XUID())
+		return c
+	}) {
+		p.Disconnect("Disconnected")
 	}
 
 	srv.pmu.Lock()
