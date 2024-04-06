@@ -21,6 +21,7 @@ import (
 	"github.com/STCraft/dragonfly/server/internal/sliceutil"
 	_ "github.com/STCraft/dragonfly/server/item" // Imported for maintaining correct initialisation order.
 	"github.com/STCraft/dragonfly/server/player"
+	"github.com/STCraft/dragonfly/server/player/chat"
 	"github.com/STCraft/dragonfly/server/player/skin"
 	"github.com/STCraft/dragonfly/server/session"
 	"github.com/STCraft/dragonfly/server/world"
@@ -69,10 +70,27 @@ type Server struct {
 // used to prepare the session of a player before it can do anything.
 type HandleFunc func(p *player.Player)
 
-// New creates a Server using a default Config. The Server's worlds are created
+// New creates and returns a new Server using the config.toml if present or returns
+// a Server from the DefaultConfig and creates a new config.toml
+func New() *Server {
+	log := logrus.New()
+	log.Formatter = &logrus.TextFormatter{ForceColors: true}
+	log.Level = logrus.DebugLevel
+
+	chat.Global.Subscribe(chat.StdoutSubscriber{})
+
+	config, err := Read(log)
+	if err != nil {
+		panic(err)
+	}
+
+	return config.New()
+}
+
+// FromDefault creates a Server using a default Config. The Server's worlds are created
 // and connections from the Server's listeners may be accepted by calling
 // Server.Listen() and Server.Accept() afterwards.
-func New() *Server {
+func FromDefault() *Server {
 	var conf Config
 	return conf.New()
 }
@@ -158,6 +176,18 @@ func (srv *Server) PlayerByXUID(xuid string) (*player.Player, bool) {
 	return sliceutil.SearchValue(srv.Players(), func(p *player.Player) bool {
 		return p.XUID() == xuid
 	})
+}
+
+// Broadcast broadcasts the provided message to all the players on the server and to
+// the console.
+func (srv *Server) Broadcast(message string, args ...any) {
+	msg := fmt.Sprintln(fmt.Sprintf(message, args...))
+
+	for _, p := range srv.Players() {
+		p.Message(msg)
+	}
+
+	console.SendMessage(msg)
 }
 
 // closeOnProgramEnd closes the server right before the program ends, so that

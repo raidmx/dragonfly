@@ -17,6 +17,7 @@ import (
 	"github.com/STCraft/dragonfly/server/world/generator"
 	"github.com/STCraft/dragonfly/server/world/mcdb"
 	"github.com/google/uuid"
+	"github.com/pelletier/go-toml"
 	"github.com/sandertv/gophertunnel/minecraft/resource"
 	"github.com/sirupsen/logrus"
 )
@@ -107,6 +108,36 @@ type Logger interface {
 	Infof(format string, v ...any)
 	Fatalf(format string, v ...any)
 	Warnf(format string, v ...any)
+}
+
+// Read reads the config file from the config.toml file if it exists or creates one and loads
+// and returns a DefaultConfig.
+func Read(log Logger) (Config, error) {
+	c := DefaultConfig()
+	var zero Config
+
+	if _, err := os.Stat("config.toml"); os.IsNotExist(err) {
+		data, err := toml.Marshal(c)
+		if err != nil {
+			return zero, fmt.Errorf("encode default config: %v", err)
+		}
+		if err := os.WriteFile("config.toml", data, 0644); err != nil {
+			return zero, fmt.Errorf("create default config: %v", err)
+		}
+		return c.Config(log)
+	}
+
+	data, err := os.ReadFile("config.toml")
+
+	if err != nil {
+		return zero, fmt.Errorf("read config: %v", err)
+	}
+
+	if err := toml.Unmarshal(data, &c); err != nil {
+		return zero, fmt.Errorf("decode config: %v", err)
+	}
+
+	return c.Config(log)
 }
 
 // New creates a Server using fields of conf. The Server's worlds are created
