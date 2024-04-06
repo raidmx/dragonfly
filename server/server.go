@@ -187,7 +187,7 @@ func (srv *Server) Broadcast(message string, args ...any) {
 		p.Message(msg)
 	}
 
-	console.SendMessage(msg)
+	Console.SendMessage(msg)
 }
 
 // closeOnProgramEnd closes the server right before the program ends, so that
