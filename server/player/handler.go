@@ -16,8 +16,8 @@ import (
 // Handler handles events that are called by a player. Implementations of Handler may be used to listen to
 // specific events such as when a player chats or moves.
 type Handler interface {
-	// HandleJoin is fired when a player joins the server. The xuid is the xuid of the player that joined.
-	HandleJoin(ctx *event.Context, xuid string)
+	// HandleJoin is fired when a player joins the server.
+	HandleJoin(ctx *event.Context, p *Player)
 	// HandleMove handles the movement of a player. ctx.Cancel() may be called to cancel the movement event.
 	// The new position, yaw and pitch are passed.
 	HandleMove(ctx *event.Context, newPos mgl64.Vec3, newYaw, newPitch float64)
@@ -144,7 +144,7 @@ type NopHandler struct{}
 // Compile time check to make sure NopHandler implements Handler.
 var _ Handler = NopHandler{}
 
-func (NopHandler) HandleJoin(*event.Context, string)                                          {}
+func (NopHandler) HandleJoin(*event.Context, *Player)                                         {}
 func (NopHandler) HandleItemDrop(*event.Context, world.Entity)                                {}
 func (NopHandler) HandleMove(*event.Context, mgl64.Vec3, float64, float64)                    {}
 func (NopHandler) HandleJump()                                                                {}

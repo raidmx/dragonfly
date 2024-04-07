@@ -398,7 +398,7 @@ func (srv *Server) finaliseConn(ctx context.Context, conn session.Conn, l Listen
 	c := event.C()
 
 	if p.Handle(func(h player.Handler) *event.Context {
-		h.HandleJoin(c, p.XUID())
+		h.HandleJoin(c, p)
 		return c
 	}) {
 		p.Disconnect("Disconnected")
