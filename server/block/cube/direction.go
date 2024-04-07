@@ -12,6 +12,14 @@ const (
 	West
 	// East represents the east direction, towards the positive X.
 	East
+	// NorthEast represents the north east direction
+	NorthEast
+	// NorthWest represents the north west direction
+	NorthWest
+	// SouthEast represents the south east direction
+	SouthEast
+	// SouthWest represents the south west direction
+	SouthWest
 )
 
 // Face converts the direction to a Face and returns it.
@@ -30,6 +38,14 @@ func (d Direction) Opposite() Direction {
 		return East
 	case East:
 		return West
+	case NorthEast:
+		return SouthWest
+	case NorthWest:
+		return SouthEast
+	case SouthEast:
+		return NorthWest
+	case SouthWest:
+		return NorthEast
 	}
 	panic("invalid direction")
 }
@@ -45,6 +61,14 @@ func (d Direction) RotateRight() Direction {
 		return West
 	case West:
 		return North
+	case NorthEast:
+		return SouthEast
+	case NorthWest:
+		return NorthEast
+	case SouthEast:
+		return SouthWest
+	case SouthWest:
+		return NorthWest
 	}
 	panic("invalid direction")
 }
@@ -60,6 +84,14 @@ func (d Direction) RotateLeft() Direction {
 		return East
 	case West:
 		return South
+	case NorthEast:
+		return NorthWest
+	case NorthWest:
+		return SouthWest
+	case SouthEast:
+		return NorthEast
+	case SouthWest:
+		return SouthEast
 	}
 	panic("invalid direction")
 }
@@ -75,6 +107,14 @@ func (d Direction) String() string {
 		return "south"
 	case West:
 		return "west"
+	case NorthEast:
+		return "northeast"
+	case NorthWest:
+		return "northwest"
+	case SouthEast:
+		return "southeast"
+	case SouthWest:
+		return "southwest"
 	}
 	panic("invalid direction")
 }
@@ -84,4 +124,8 @@ var directions = [...]Direction{North, East, South, West}
 // Directions returns a list of all directions, going from North to West.
 func Directions() []Direction {
 	return directions[:]
+}
+
+func AllDirections() []Direction {
+	return []Direction{North, East, South, West, NorthEast, NorthWest, SouthEast, SouthWest}
 }
