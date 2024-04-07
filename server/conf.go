@@ -184,6 +184,7 @@ func (conf Config) New() *Server {
 		incoming: make(chan *session.Session),
 		p:        make(map[uuid.UUID]*player.Player),
 		world:    &world.World{}, nether: &world.World{}, end: &world.World{},
+		handlers: make(map[string]player.Handler),
 	}
 	srv.world = srv.createWorld(world.Overworld, &srv.nether, &srv.end)
 	srv.nether = srv.createWorld(world.Nether, &srv.world, &srv.end)

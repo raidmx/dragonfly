@@ -65,6 +65,9 @@ type Server struct {
 	// wg is used to wait for all Listeners to be closed and their respective
 	// goroutines to be finished.
 	wg sync.WaitGroup
+
+	// handlers store all the player handlers that are registered during the initialisation period.
+	handlers map[string]player.Handler
 }
 
 // HandleFunc is a function that may be passed to Server.Accept(). It can be
@@ -125,6 +128,12 @@ func (srv *Server) Accept(f HandleFunc) bool {
 		f(p)
 	}
 
+	for key, handler := range srv.handlers {
+		if !p.AddHandler(key, handler) {
+			srv.conf.Log.Debugf("Handler %s failed to register as one already exists!", key)
+		}
+	}
+
 	srv.pmu.Lock()
 	srv.p[p.UUID()] = p
 	srv.pmu.Unlock()
@@ -141,6 +150,23 @@ func (srv *Server) Accept(f HandleFunc) bool {
 
 	s.Start()
 	return true
+}
+
+// RegisterHandler registers the specified handler with the provided key.
+// This returns false if a handler with the specified name already exists.
+func (srv *Server) RegisterHandler(key string, h player.Handler) bool {
+	if _, ok := srv.handlers[key]; ok {
+		return false
+	}
+
+	srv.handlers[key] = h
+	return true
+}
+
+// UnregisterHandler unregisters the specified handler with the provided key
+// if found.
+func (srv *Server) UnregisterHandler(key string) {
+	delete(srv.handlers, key)
 }
 
 // World returns the overworld of the server. Players will be spawned in this
