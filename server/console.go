@@ -58,14 +58,9 @@ func (s ConsoleSource) SendCommandOutput(o *cmd.Output) {
 }
 
 // SendMessage prints out message in console
-func (s ConsoleSource) SendMessage(message string) {
-	message = format(fmt.Sprintln(message))
+func (s ConsoleSource) SendMessage(message string, args ...any) {
+	message = format(fmt.Sprintf(message, args...))
 	s.log.Info(text.ANSI(message + "§r"))
-}
-
-// SendMessagef sends a formatted message using a specified format to console
-func (s ConsoleSource) SendMessagef(message string, args ...any) {
-	s.SendMessage(fmt.Sprintf(message, args...))
 }
 
 // World ...
