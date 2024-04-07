@@ -107,6 +107,7 @@ func (srv *Server) Start() {
 
 	srv.conf.Log.Infof("Starting Dragonfly for Minecraft v%v...", protocol.CurrentVersion)
 	srv.startListening()
+	srv.closeOnProgramEnd()
 
 	go startConsole()
 	srv.wait()
@@ -208,9 +209,9 @@ func (srv *Server) Broadcast(message string, args ...any) {
 	Console.SendMessage(msg)
 }
 
-// CloseOnProgramEnd closes the server right before the program ends, so that
+// closeOnProgramEnd closes the server right before the program ends, so that
 // all data of the server are saved properly.
-func (srv *Server) CloseOnProgramEnd() {
+func (srv *Server) closeOnProgramEnd() {
 	c := make(chan os.Signal, 2)
 	signal.Notify(c, syscall.SIGINT, syscall.SIGTERM)
 	go func() {
