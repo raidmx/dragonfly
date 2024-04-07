@@ -180,10 +180,9 @@ func (conf Config) New() *Server {
 	conf.Resources = slices.Clone(conf.Resources)
 
 	srv := &Server{
-		conf:     conf,
-		incoming: make(chan *session.Session),
-		p:        make(map[uuid.UUID]*player.Player),
-		world:    &world.World{}, nether: &world.World{}, end: &world.World{},
+		conf:  conf,
+		p:     make(map[uuid.UUID]*player.Player),
+		world: &world.World{}, nether: &world.World{}, end: &world.World{},
 		handlers: make(map[string]player.Handler),
 	}
 	srv.world = srv.createWorld(world.Overworld, &srv.nether, &srv.end)

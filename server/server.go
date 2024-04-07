@@ -53,7 +53,6 @@ type Server struct {
 	customItems  []protocol.ItemComponentEntry
 
 	listeners []Listener
-	incoming  chan *session.Session
 
 	pmu sync.RWMutex
 	// p holds a map of all players currently connected to the server. When they
@@ -99,7 +98,8 @@ func FromDefault() *Server {
 	return conf.New()
 }
 
-// Start is a nonblocking function that will start the Minecraft Server.
+// Start is a blocking function that will start the Minecraft Server and it will start listening
+// for connections on the registered listeners.
 func (srv *Server) Start() {
 	if !srv.started.CAS(false, true) {
 		panic("start server: already started")
@@ -107,49 +107,9 @@ func (srv *Server) Start() {
 
 	srv.conf.Log.Infof("Starting Dragonfly for Minecraft v%v...", protocol.CurrentVersion)
 	srv.startListening()
+
 	go startConsole()
-	go srv.wait()
-}
-
-// Accept accepts an incoming player into the server. It blocks until a player
-// connects to the server. A HandleFunc may be passed which is run immediately
-// before a *player.Player is accepted to the Server. This function may be used
-// to add a player.Handler to the player and prepare its session. The function
-// may be nil if player joining does not need to be handled. Accept returns
-// false if the Server is closed using a call to Close.
-func (srv *Server) Accept(f HandleFunc) bool {
-	s, ok := <-srv.incoming
-	if !ok {
-		return false
-	}
-	p := s.Controllable().(*player.Player)
-
-	if f != nil {
-		f(p)
-	}
-
-	for key, handler := range srv.handlers {
-		if !p.AddHandler(key, handler) {
-			srv.conf.Log.Debugf("Handler %s failed to register as one already exists!", key)
-		}
-	}
-
-	srv.pmu.Lock()
-	srv.p[p.UUID()] = p
-	srv.pmu.Unlock()
-
-	c := event.C()
-
-	if p.Handle(func(h player.Handler) *event.Context {
-		h.HandleJoin(c, p.XUID())
-		return c
-	}) {
-		p.Disconnect("Disconnected")
-		return true
-	}
-
-	s.Start()
-	return true
+	srv.wait()
 }
 
 // RegisterHandler registers the specified handler with the provided key.
@@ -389,7 +349,6 @@ func (srv *Server) makeItemComponents() {
 // to listen and closed the players channel once that happens.
 func (srv *Server) wait() {
 	srv.wg.Wait()
-	close(srv.incoming)
 }
 
 // finaliseConn finalises the session.Conn passed and subtracts from the
@@ -422,7 +381,30 @@ func (srv *Server) finaliseConn(ctx context.Context, conn session.Conn, l Listen
 		p.Disconnect("Logged in from another location.")
 	}
 
-	srv.incoming <- srv.createPlayer(id, conn, playerData)
+	s := srv.createPlayer(id, conn, playerData)
+	p := s.Controllable().(*player.Player)
+
+	for key, handler := range srv.handlers {
+		if !p.AddHandler(key, handler) {
+			srv.conf.Log.Debugf("Handler %s failed to register as one already exists!", key)
+		}
+	}
+
+	srv.pmu.Lock()
+	srv.p[p.UUID()] = p
+	srv.pmu.Unlock()
+
+	c := event.C()
+
+	if p.Handle(func(h player.Handler) *event.Context {
+		h.HandleJoin(c, p.XUID())
+		return c
+	}) {
+		p.Disconnect("Disconnected")
+		return
+	}
+
+	s.Start()
 }
 
 // defaultGameData returns a minecraft.GameData as sent for a new player. It
