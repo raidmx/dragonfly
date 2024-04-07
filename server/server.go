@@ -87,6 +87,7 @@ func New() *Server {
 		panic(err)
 	}
 
+	go startConsole(log)
 	return config.New()
 }
 
@@ -109,7 +110,6 @@ func (srv *Server) Start() {
 	srv.startListening()
 	srv.closeOnProgramEnd()
 
-	go startConsole(srv.conf.Log)
 	srv.wait()
 }
 
