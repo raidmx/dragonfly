@@ -10,16 +10,14 @@ import (
 	"github.com/STCraft/dragonfly/server/world"
 	"github.com/go-gl/mathgl/mgl64"
 	"github.com/sandertv/gophertunnel/minecraft/text"
-	"github.com/sirupsen/logrus"
 )
 
 // Console represents the Console Source that is responsible for execution of commands
-var Console = ConsoleSource{log: logrus.New()}
+var Console ConsoleSource
 
 // startConsole initialises the Console after which Commands can be sent from the console
-func startConsole() {
-	Console.log.Formatter = &logrus.TextFormatter{ForceColors: true}
-	Console.log.Level = logrus.DebugLevel
+func startConsole(logger Logger) {
+	Console.logger = logger
 	scanner := bufio.NewScanner(os.Stdin)
 
 	for scanner.Scan() {
@@ -38,7 +36,7 @@ func startConsole() {
 
 // ConsoleSource represents a Console Source that is used to send commands
 type ConsoleSource struct {
-	log *logrus.Logger
+	logger Logger
 }
 
 // Name returns the name of console.
@@ -50,17 +48,17 @@ func (ConsoleSource) Position() mgl64.Vec3 { return mgl64.Vec3{} }
 // SendCommandOutput prints out command outputs.
 func (s ConsoleSource) SendCommandOutput(o *cmd.Output) {
 	for _, e := range o.Errors() {
-		s.log.Error(text.ANSI(e))
+		s.logger.Errorf(text.ANSI(e))
 	}
 	for _, m := range o.Messages() {
-		s.log.Info(text.ANSI(m))
+		s.logger.Infof(text.ANSI(m))
 	}
 }
 
 // SendMessage prints out message in console
 func (s ConsoleSource) SendMessage(message string, args ...any) {
 	message = format(fmt.Sprintf(message, args...))
-	s.log.Info(text.ANSI(message + "§r"))
+	s.logger.Infof(text.ANSI(message + "§r"))
 }
 
 // World ...

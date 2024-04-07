@@ -109,7 +109,7 @@ func (srv *Server) Start() {
 	srv.startListening()
 	srv.closeOnProgramEnd()
 
-	go startConsole()
+	go startConsole(srv.conf.Log)
 	srv.wait()
 }
 

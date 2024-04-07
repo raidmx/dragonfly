@@ -21,7 +21,6 @@ import (
 	"github.com/STCraft/dragonfly/server/item/enchantment"
 	"github.com/STCraft/dragonfly/server/item/inventory"
 	"github.com/STCraft/dragonfly/server/player/bossbar"
-	"github.com/STCraft/dragonfly/server/player/chat"
 	"github.com/STCraft/dragonfly/server/player/form"
 	"github.com/STCraft/dragonfly/server/player/scoreboard"
 	"github.com/STCraft/dragonfly/server/player/skin"
@@ -401,8 +400,6 @@ func (p *Player) Chat(msg ...any) {
 	}) {
 		return
 	}
-
-	_, _ = fmt.Fprintf(chat.Global, "<%v> %v\n", p.name, message)
 }
 
 // ExecuteCommand executes a command passed as the player. If the command could not be found, or if the usage
