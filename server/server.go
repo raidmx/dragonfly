@@ -386,7 +386,9 @@ func (srv *Server) finaliseConn(ctx context.Context, conn session.Conn, l Listen
 	p := s.Controllable().(*player.Player)
 
 	for key, handler := range srv.handlers {
-		if !p.AddHandler(key, handler) {
+		h := handler.New(p)
+
+		if !p.AddHandler(key, h) {
 			srv.conf.Log.Debugf("Handler %s failed to register as one already exists!", key)
 		}
 	}
@@ -398,7 +400,7 @@ func (srv *Server) finaliseConn(ctx context.Context, conn session.Conn, l Listen
 	c := event.C()
 
 	if p.Handle(func(h player.Handler) *event.Context {
-		h.HandleJoin(c, p)
+		h.HandleJoin(c)
 		return c
 	}) {
 		p.Disconnect("Disconnected")
