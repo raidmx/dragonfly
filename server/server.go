@@ -104,7 +104,6 @@ func (srv *Server) Start() {
 
 	srv.conf.Log.Infof("Starting Dragonfly for Minecraft v%v...", protocol.CurrentVersion)
 	srv.startListening()
-
 	go startConsole()
 	go srv.wait()
 }
@@ -126,6 +125,10 @@ func (srv *Server) Accept(f HandleFunc) bool {
 		f(p)
 	}
 
+	srv.pmu.Lock()
+	srv.p[p.UUID()] = p
+	srv.pmu.Unlock()
+
 	c := event.C()
 
 	if p.Handle(func(h player.Handler) *event.Context {
@@ -133,11 +136,8 @@ func (srv *Server) Accept(f HandleFunc) bool {
 		return c
 	}) {
 		p.Disconnect("Disconnected")
+		return true
 	}
-
-	srv.pmu.Lock()
-	srv.p[p.UUID()] = p
-	srv.pmu.Unlock()
 
 	s.Start()
 	return true
@@ -363,6 +363,7 @@ func (srv *Server) makeItemComponents() {
 // to listen and closed the players channel once that happens.
 func (srv *Server) wait() {
 	srv.wg.Wait()
+	close(srv.incoming)
 }
 
 // finaliseConn finalises the session.Conn passed and subtracts from the
