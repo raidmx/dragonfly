@@ -594,6 +594,17 @@ func (srv *Server) WorldExists(name string) bool {
 	return ok
 }
 
+// LoadedWorlds return a list of loaded worlds
+func (srv *Server) LoadedWorlds() []string {
+	list := make([]string, len(srv.worlds))
+
+	for name := range srv.worlds {
+		list = append(list, name)
+	}
+
+	return list
+}
+
 // UnloadWorld unloads the world from the server with the provided name
 // if it is loaded. This will panic if the world does not exist
 func (srv *Server) UnloadWorld(name string) {
