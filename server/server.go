@@ -48,7 +48,9 @@ type Server struct {
 	once    sync.Once
 	started atomic.Bool
 
-	worlds       sync.Map
+	wmu    sync.Mutex
+	worlds map[string]*world.World
+
 	customBlocks []protocol.BlockEntry
 	customItems  []protocol.ItemComponentEntry
 
@@ -130,41 +132,29 @@ func (srv *Server) UnregisterHandler(key string) {
 	delete(srv.handlers, key)
 }
 
-// World returns the overworld of the server. Players will be spawned in this
-// world and this world will be read from and written to when the world is
-// edited.
-func (srv *Server) World() *world.World {
-	v, ok := srv.worlds.Load("overworld")
-
-	if !ok {
-		return nil
-	}
-
-	return v.(*world.World)
+// Overworld returns the overworld of the server. Players will be spawned in
+// this world and this world will be read from and written to when the world
+// is edited.
+func (srv *Server) Overworld() *world.World {
+	defer srv.wmu.Unlock()
+	srv.wmu.Lock()
+	return srv.worlds["overworld"]
 }
 
 // Nether returns the nether world of the server. Players are transported to it
 // when entering a nether portal in the world returned by the World method.
 func (srv *Server) Nether() *world.World {
-	v, ok := srv.worlds.Load("nether")
-
-	if !ok {
-		return nil
-	}
-
-	return v.(*world.World)
+	defer srv.wmu.Unlock()
+	srv.wmu.Lock()
+	return srv.worlds["nether"]
 }
 
 // End returns the end world of the server. Players are transported to it when
 // entering an end portal in the world returned by the World method.
 func (srv *Server) End() *world.World {
-	v, ok := srv.worlds.Load("end")
-
-	if !ok {
-		return nil
-	}
-
-	return v.(*world.World)
+	defer srv.wmu.Unlock()
+	srv.wmu.Lock()
+	return srv.worlds["end"]
 }
 
 // MaxPlayerCount returns the maximum amount of players that are allowed to
@@ -267,15 +257,16 @@ func (srv *Server) close() {
 	}
 
 	srv.conf.Log.Debugf("Closing worlds...")
-	srv.worlds.Range(func(key, value any) bool {
-		w := value.(*world.World)
 
+	srv.wmu.Lock()
+
+	for _, w := range srv.worlds {
 		if err := w.Close(); err != nil {
 			srv.conf.Log.Errorf("Error closing %v: %v", w.Dimension(), err)
 		}
+	}
 
-		return true
-	})
+	srv.wmu.Unlock()
 
 	srv.conf.Log.Debugf("Closing listeners...")
 	for _, l := range srv.listeners {
@@ -383,7 +374,7 @@ func (srv *Server) finaliseConn(ctx context.Context, conn session.Conn, l Listen
 	var playerData *player.Data
 	if d, err := srv.conf.PlayerProvider.Load(id, srv.dimension); err == nil {
 		if d.World == nil {
-			d.World = srv.World()
+			d.World = srv.Overworld()
 		}
 		data.PlayerPosition = vec64To32(d.Position).Add(mgl32.Vec3{0, 1.62})
 		dim, _ := world.DimensionID(d.World.Dimension())
@@ -444,12 +435,12 @@ func (srv *Server) defaultGameData() minecraft.GameData {
 		WorldName:       srv.conf.Name,
 		BaseGameVersion: protocol.CurrentVersion,
 
-		Time:       int64(srv.World().Time()),
+		Time:       int64(srv.Overworld().Time()),
 		Difficulty: 2,
 
 		PlayerGameMode:    packet.GameTypeCreative,
 		PlayerPermissions: packet.PermissionLevelMember,
-		PlayerPosition:    vec64To32(srv.World().Spawn().Vec3Centre().Add(mgl64.Vec3{0, 1.62})),
+		PlayerPosition:    vec64To32(srv.Overworld().Spawn().Vec3Centre().Add(mgl64.Vec3{0, 1.62})),
 
 		Items:        srv.itemEntries(),
 		CustomBlocks: srv.customBlocks,
@@ -467,7 +458,7 @@ func (srv *Server) defaultGameData() minecraft.GameData {
 func (srv *Server) dimension(dimension world.Dimension) *world.World {
 	switch dimension {
 	default:
-		return srv.World()
+		return srv.Overworld()
 	case world.Nether:
 		return srv.Nether()
 	case world.End:
@@ -513,7 +504,7 @@ func (srv *Server) handleSessionClose(c session.Controllable) {
 // createPlayer creates a new player instance using the UUID and connection
 // passed.
 func (srv *Server) createPlayer(id uuid.UUID, conn session.Conn, data *player.Data) *session.Session {
-	w, gm, pos := srv.World(), srv.World().DefaultGameMode(), srv.World().Spawn().Vec3Middle()
+	w, gm, pos := srv.Overworld(), srv.Overworld().DefaultGameMode(), srv.Overworld().Spawn().Vec3Middle()
 	if data != nil {
 		w, gm, pos = data.World, data.GameMode, data.Position
 	}

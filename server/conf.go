@@ -5,7 +5,6 @@ import (
 	"os"
 	"path/filepath"
 	"slices"
-	"sync"
 
 	"github.com/STCraft/dragonfly/server/block"
 	"github.com/STCraft/dragonfly/server/entity"
@@ -165,7 +164,7 @@ func (conf Config) New() *Server {
 	srv := &Server{
 		conf:     conf,
 		p:        make(map[uuid.UUID]*player.Player),
-		worlds:   sync.Map{},
+		worlds:   make(map[string]*world.World),
 		handlers: make(map[string]player.Handler),
 	}
 
@@ -173,9 +172,13 @@ func (conf Config) New() *Server {
 	nether := srv.createWorld("nether", world.Nether, nil, conf.ReadOnly)
 	end := srv.createWorld("end", world.End, nil, conf.ReadOnly)
 
-	srv.worlds.Store("overworld", overworld)
-	srv.worlds.Store("nether", nether)
-	srv.worlds.Store("end", end)
+	srv.wmu.Lock()
+
+	srv.worlds["overworld"] = overworld
+	srv.worlds["nether"] = nether
+	srv.worlds["end"] = end
+
+	srv.wmu.Unlock()
 
 	srv.registerTargetFunc()
 	srv.checkNetIsolation()
