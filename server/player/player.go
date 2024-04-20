@@ -192,36 +192,36 @@ func (p *Player) XUID() string {
 // DeviceID returns the device ID of the player. If the Player is not connected to a network session, an empty string is
 // returned. Otherwise, the device ID the network session sent in the ClientData is returned.
 func (p *Player) DeviceID() string {
-	if p.session() == session.Nop {
+	if p.Session() == session.Nop {
 		return ""
 	}
-	return p.session().ClientData().DeviceID
+	return p.Session().ClientData().DeviceID
 }
 
 // DeviceModel returns the device model of the player. If the Player is not connected to a network session, an empty
 // string is returned. Otherwise, the device model the network session sent in the ClientData is returned.
 func (p *Player) DeviceModel() string {
-	if p.session() == session.Nop {
+	if p.Session() == session.Nop {
 		return ""
 	}
-	return p.session().ClientData().DeviceModel
+	return p.Session().ClientData().DeviceModel
 }
 
 // SelfSignedID returns the self-signed ID of the player. If the Player is not connected to a network session, an empty
 // string is returned. Otherwise, the self-signed ID the network session sent in the ClientData is returned.
 func (p *Player) SelfSignedID() string {
-	if p.session() == session.Nop {
+	if p.Session() == session.Nop {
 		return ""
 	}
-	return p.session().ClientData().SelfSignedID
+	return p.Session().ClientData().SelfSignedID
 }
 
 // Addr returns the net.Addr of the Player. If the Player is not connected to a network session, nil is returned.
 func (p *Player) Addr() net.Addr {
-	if p.session() == session.Nop {
+	if p.Session() == session.Nop {
 		return nil
 	}
-	return p.session().Addr()
+	return p.Session().Addr()
 }
 
 // Skin returns the skin that a player is currently using. This skin will be visible to other players
@@ -243,7 +243,7 @@ func (p *Player) SetSkin(skin skin.Skin) {
 		h.HandleSkinChange(ctx, &skin)
 		return ctx
 	}) {
-		p.session().ViewSkin(p)
+		p.Session().ViewSkin(p)
 		return
 	}
 
@@ -301,38 +301,38 @@ func (p *Player) RemoveHandler(key string) {
 // Message sends a formatted message to the player. The message is formatted following the rules of
 // fmt.Sprintln, however the newline at the end is not written.
 func (p *Player) Message(a ...any) {
-	p.session().SendMessage(format(a))
+	p.Session().SendMessage(format(a))
 }
 
 // Messagef sends a formatted message using a specific format to the player. The message is formatted
 // according to the fmt.Sprintf formatting rules.
 func (p *Player) Messagef(f string, a ...any) {
-	p.session().SendMessage(fmt.Sprintf(f, a...))
+	p.Session().SendMessage(fmt.Sprintf(f, a...))
 }
 
 // SendPopup sends a formatted popup to the player. The popup is shown above the hotbar of the player and
 // overwrites/is overwritten by the name of the item equipped.
 // The popup is formatted following the rules of fmt.Sprintln without a newline at the end.
 func (p *Player) SendPopup(a ...any) {
-	p.session().SendPopup(format(a))
+	p.Session().SendPopup(format(a))
 }
 
 // SendTip sends a tip to the player. The tip is shown in the middle of the screen of the player.
 // The tip is formatted following the rules of fmt.Sprintln without a newline at the end.
 func (p *Player) SendTip(a ...any) {
-	p.session().SendTip(format(a))
+	p.Session().SendTip(format(a))
 }
 
 // SendJukeboxPopup sends a formatted jukebox popup to the player. This popup is shown above the hotbar of the player.
 // The popup is close to the position of an action bar message and the text has no background.
 func (p *Player) SendJukeboxPopup(a ...any) {
-	p.session().SendJukeboxPopup(format(a))
+	p.Session().SendJukeboxPopup(format(a))
 }
 
 // SendToast sends a toast to the player. This toast is shown at the top of the screen, similar to achievements or pack
 // loading.
 func (p *Player) SendToast(title, message string) {
-	p.session().SendToast(title, message)
+	p.Session().SendToast(title, message)
 }
 
 // ResetFallDistance resets the player's fall distance.
@@ -350,15 +350,15 @@ func (p *Player) FallDistance() float64 {
 // If non-empty, the subtitle is shown in a smaller font below the title. The same counts for the action text
 // of the title, which is shown in a font similar to that of a tip/popup.
 func (p *Player) SendTitle(t title.Title) {
-	p.session().SetTitleDurations(t.FadeInDuration(), t.Duration(), t.FadeOutDuration())
+	p.Session().SetTitleDurations(t.FadeInDuration(), t.Duration(), t.FadeOutDuration())
 	if t.Text() != "" || t.Subtitle() != "" {
-		p.session().SendTitle(t.Text())
+		p.Session().SendTitle(t.Text())
 		if t.Subtitle() != "" {
-			p.session().SendSubtitle(t.Subtitle())
+			p.Session().SendSubtitle(t.Subtitle())
 		}
 	}
 	if t.ActionText() != "" {
-		p.session().SendActionBarMessage(t.ActionText())
+		p.Session().SendActionBarMessage(t.ActionText())
 	}
 }
 
@@ -366,26 +366,26 @@ func (p *Player) SendTitle(t title.Title) {
 // by the caller.
 // SendScoreboard may be called at any time to change the scoreboard of the player.
 func (p *Player) SendScoreboard(scoreboard *scoreboard.Scoreboard) {
-	p.session().SendScoreboard(scoreboard)
+	p.Session().SendScoreboard(scoreboard)
 }
 
 // RemoveScoreboard removes any scoreboard currently present on the screen of the player. Nothing happens if
 // the player has no scoreboard currently active.
 func (p *Player) RemoveScoreboard() {
-	p.session().RemoveScoreboard()
+	p.Session().RemoveScoreboard()
 }
 
 // SendBossBar sends a boss bar to the player, so that it will be shown indefinitely at the top of the
 // player's screen.
 // The boss bar may be removed by calling Player.RemoveBossBar().
 func (p *Player) SendBossBar(bar bossbar.BossBar) {
-	p.session().SendBossBar(bar.Text(), bar.Colour().Uint8(), bar.HealthPercentage())
+	p.Session().SendBossBar(bar.Text(), bar.Colour().Uint8(), bar.HealthPercentage())
 }
 
 // RemoveBossBar removes any boss bar currently active on the player's screen. If no boss bar is currently
 // present, nothing happens.
 func (p *Player) RemoveBossBar() {
-	p.session().RemoveBossBar()
+	p.Session().RemoveBossBar()
 }
 
 // Chat writes a message in the global chat (chat.Global). The message is prefixed with the name of the
@@ -445,13 +445,13 @@ func (p *Player) Transfer(address string) error {
 		return nil
 	}
 
-	p.session().Transfer(addr.IP, addr.Port)
+	p.Session().Transfer(addr.IP, addr.Port)
 	return nil
 }
 
 // SendCommandOutput sends the output of a command to the player.
 func (p *Player) SendCommandOutput(output *cmd.Output) {
-	p.session().SendCommandOutput(output)
+	p.Session().SendCommandOutput(output)
 }
 
 // SendForm sends a form to the player for the client to fill out. Once the client fills it out, the Submit
@@ -460,27 +460,27 @@ func (p *Player) SendCommandOutput(output *cmd.Output) {
 // having its Submit method called at all. Forms should never depend on the player actually filling out the
 // form.
 func (p *Player) SendForm(f form.Form) {
-	p.session().SendForm(f)
+	p.Session().SendForm(f)
 }
 
 // ShowCoordinates enables the vanilla coordinates for the player.
 func (p *Player) ShowCoordinates() {
-	p.session().EnableCoordinates(true)
+	p.Session().EnableCoordinates(true)
 }
 
 // HideCoordinates disables the vanilla coordinates for the player.
 func (p *Player) HideCoordinates() {
-	p.session().EnableCoordinates(false)
+	p.Session().EnableCoordinates(false)
 }
 
 // EnableInstantRespawn enables the vanilla instant respawn for the player.
 func (p *Player) EnableInstantRespawn() {
-	p.session().EnableInstantRespawn(true)
+	p.Session().EnableInstantRespawn(true)
 }
 
 // DisableInstantRespawn disables the vanilla instant respawn for the player.
 func (p *Player) DisableInstantRespawn() {
-	p.session().EnableInstantRespawn(false)
+	p.Session().EnableInstantRespawn(false)
 }
 
 // SetNameTag changes the name tag displayed over the player in-game. Changing the name tag does not change
@@ -511,7 +511,7 @@ func (p *Player) ScoreTag() string {
 // obtain.
 func (p *Player) SetSpeed(speed float64) {
 	p.speed.Store(speed)
-	p.session().SendSpeed(speed)
+	p.Session().SendSpeed(speed)
 }
 
 // Speed returns the speed of the player, returning a value that indicates the blocks/tick speed. The default
@@ -536,13 +536,13 @@ func (p *Player) MaxHealth() float64 {
 // SetMaxHealth panics if the max health passed is 0 or lower.
 func (p *Player) SetMaxHealth(health float64) {
 	p.health.SetMaxHealth(health)
-	p.session().SendHealth(p.health)
+	p.Session().SendHealth(p.health)
 }
 
 // addHealth adds health to the player's current health.
 func (p *Player) addHealth(health float64) {
 	p.health.AddHealth(health)
-	p.session().SendHealth(p.health)
+	p.Session().SendHealth(p.health)
 }
 
 // Heal heals the entity for a given amount of health. The source passed
@@ -706,7 +706,7 @@ func (p *Player) Explode(explosionPos mgl64.Vec3, impact float64, c block.Explos
 func (p *Player) SetAbsorption(health float64) {
 	health = math.Max(health, 0)
 	p.absorptionHealth.Store(health)
-	p.session().SendAbsorption(health)
+	p.Session().SendAbsorption(health)
 }
 
 // Absorption returns the absorption health that the player has.
@@ -784,7 +784,7 @@ func (p *Player) Saturate(food int, saturation float64) {
 func (p *Player) sendFood() {
 	p.hunger.mu.RLock()
 	defer p.hunger.mu.RUnlock()
-	p.session().SendFood(p.hunger.foodLevel, p.hunger.saturationLevel, p.hunger.exhaustionLevel)
+	p.Session().SendFood(p.hunger.foodLevel, p.hunger.saturationLevel, p.hunger.exhaustionLevel)
 }
 
 // AddEffect adds an entity.Effect to the Player. If the effect is instant, it is applied to the Player
@@ -792,14 +792,14 @@ func (p *Player) sendFood() {
 // AddEffect will overwrite any effects present if the level of the effect is higher than the existing one, or
 // if the effects' levels are equal and the new effect has a longer duration.
 func (p *Player) AddEffect(e effect.Effect) {
-	p.session().SendEffect(p.effects.Add(e, p))
+	p.Session().SendEffect(p.effects.Add(e, p))
 	p.updateState()
 }
 
 // RemoveEffect removes any effect that might currently be active on the Player.
 func (p *Player) RemoveEffect(e effect.Type) {
 	p.effects.Remove(e, p)
-	p.session().SendEffectRemoval(e)
+	p.Session().SendEffectRemoval(e)
 	p.updateState()
 }
 
@@ -896,7 +896,7 @@ func (p *Player) kill(src world.DamageSource) {
 
 	// Wait a little before removing the entity. The client displays a death animation while the player is dying.
 	time.AfterFunc(time.Millisecond*1100, func() {
-		if p.session() == session.Nop {
+		if p.Session() == session.Nop {
 			_ = p.Close()
 			return
 		}
@@ -918,9 +918,9 @@ func (p *Player) dropContents() {
 		w.AddEntity(orb)
 	}
 	p.experience.Reset()
-	p.session().SendExperience(p.experience)
+	p.Session().SendExperience(p.experience)
 
-	p.session().EmptyUIInventory()
+	p.Session().EmptyUIInventory()
 	for _, it := range append(p.inv.Clear(), append(p.armour.Clear(), p.offHand.Clear()...)...) {
 		if _, ok := it.Enchantment(enchantment.CurseOfVanishing{}); ok {
 			continue
@@ -935,7 +935,7 @@ func (p *Player) dropContents() {
 // again. Nothing will happen if the player does not have a session connected to it.
 func (p *Player) Respawn() {
 	w := p.World()
-	if !p.Dead() || w == nil || p.session() == session.Nop {
+	if !p.Dead() || w == nil || p.Session() == session.Nop {
 		return
 	}
 	p.addHealth(p.MaxHealth())
@@ -957,7 +957,7 @@ func (p *Player) Respawn() {
 
 	w.AddEntity(p)
 	p.Teleport(pos)
-	p.session().SendRespawn(pos)
+	p.Session().SendRespawn(pos)
 
 	p.SetVisible()
 }
@@ -1103,7 +1103,7 @@ func (p *Player) StartFlying() {
 	if !p.GameMode().AllowsFlying() || !p.flying.CAS(false, true) {
 		return
 	}
-	p.session().SendGameMode(p.GameMode())
+	p.Session().SendGameMode(p.GameMode())
 }
 
 // Flying checks if the player is currently flying.
@@ -1116,7 +1116,7 @@ func (p *Player) StopFlying() {
 	if !p.flying.CAS(true, false) {
 		return
 	}
-	p.session().SendGameMode(p.GameMode())
+	p.Session().SendGameMode(p.GameMode())
 }
 
 // Jump makes the player jump if they are on ground. It exhausts the player by 0.05 food points, an additional 0.15
@@ -1262,7 +1262,7 @@ func (p *Player) EnderChestInventory() *inventory.Inventory {
 // with the world that it is in.
 func (p *Player) SetGameMode(mode world.GameMode) {
 	previous := p.gameMode.Swap(mode)
-	p.session().SendGameMode(mode)
+	p.Session().SendGameMode(mode)
 	for _, v := range p.viewers() {
 		v.ViewEntityGameMode(p)
 	}
@@ -1315,7 +1315,7 @@ func (p *Player) SetCooldown(item world.Item, cooldown time.Duration) {
 
 	name, _ := item.EncodeItem()
 	p.cooldowns[name] = time.Now().Add(cooldown)
-	p.session().ViewItemCooldown(item, cooldown)
+	p.Session().ViewItemCooldown(item, cooldown)
 }
 
 // UseItem uses the item currently held in the player's main hand in the air. Generally, nothing happens,
@@ -1970,7 +1970,7 @@ func (p *Player) PickBlock(pos cube.Pos) {
 
 	if found {
 		if slot < 9 {
-			_ = p.session().SetHeldSlot(slot)
+			_ = p.Session().SetHeldSlot(slot)
 			return
 		}
 		_ = p.Inventory().Swap(slot, int(p.heldSlot.Load()))
@@ -1983,7 +1983,7 @@ func (p *Player) PickBlock(pos cube.Pos) {
 		return
 	}
 	if firstEmpty < 8 {
-		_ = p.session().SetHeldSlot(firstEmpty)
+		_ = p.Session().SetHeldSlot(firstEmpty)
 		_ = p.Inventory().SetItem(firstEmpty, pickedItem)
 		return
 	}
@@ -2041,7 +2041,7 @@ func (p *Player) Move(deltaPos mgl64.Vec3, deltaYaw, deltaPitch float64) {
 		h.HandleMove(ctx, res, resYaw, resPitch)
 		return ctx
 	}) {
-		if p.session() != session.Nop && pos.ApproxEqual(p.Position()) {
+		if p.Session() != session.Nop && pos.ApproxEqual(p.Position()) {
 			// The position of the player was changed and the event cancelled. This means we still need to notify the
 			// player of this movement change.
 			p.teleport(pos)
@@ -2080,7 +2080,7 @@ func (p *Player) Move(deltaPos mgl64.Vec3, deltaYaw, deltaPitch float64) {
 	if submergedBefore != submergedAfter {
 		// Player wasn't either breathing before and no longer isn't, or wasn't breathing before and now is,
 		// so send the updated metadata.
-		p.session().ViewEntityState(p)
+		p.Session().ViewEntityState(p)
 	}
 
 	p.onGround.Store(p.checkOnGround(w))
@@ -2113,7 +2113,7 @@ func (p *Player) Velocity() mgl64.Vec3 {
 // SetVelocity updates the player's velocity. If there is an attached session, this will just send
 // the velocity to the player session for the player to update.
 func (p *Player) SetVelocity(velocity mgl64.Vec3) {
-	if p.session() == session.Nop {
+	if p.Session() == session.Nop {
 		p.vel.Store(velocity)
 		return
 	}
@@ -2180,14 +2180,14 @@ func (p *Player) AddExperience(amount int) int {
 	} else if amount > 0 {
 		p.PlaySound(sound.Experience{})
 	}
-	p.session().SendExperience(p.experience)
+	p.Session().SendExperience(p.experience)
 	return amount
 }
 
 // RemoveExperience removes experience from the player.
 func (p *Player) RemoveExperience(amount int) {
 	p.experience.Add(-amount)
-	p.session().SendExperience(p.experience)
+	p.Session().SendExperience(p.experience)
 }
 
 // ExperienceLevel returns the experience level of the player.
@@ -2199,7 +2199,7 @@ func (p *Player) ExperienceLevel() int {
 // otherwise the method panics.
 func (p *Player) SetExperienceLevel(level int) {
 	p.experience.SetLevel(level)
-	p.session().SendExperience(p.experience)
+	p.Session().SendExperience(p.experience)
 }
 
 // ExperienceProgress returns the experience progress of the player.
@@ -2211,7 +2211,7 @@ func (p *Player) ExperienceProgress() float64 {
 // the method panics.
 func (p *Player) SetExperienceProgress(progress float64) {
 	p.experience.SetProgress(progress)
-	p.session().SendExperience(p.experience)
+	p.Session().SendExperience(p.experience)
 }
 
 // CollectExperience makes the player collect the experience points passed, adding it to the experience manager. A bool
@@ -2298,24 +2298,24 @@ func (p *Player) Drop(s item.Stack) int {
 // present at that location, OpenBlockContainer does nothing.
 // OpenBlockContainer will also do nothing if the player has no session connected to it.
 func (p *Player) OpenBlockContainer(pos cube.Pos) {
-	if p.session() != session.Nop {
-		p.session().OpenBlockContainer(pos)
+	if p.Session() != session.Nop {
+		p.Session().OpenBlockContainer(pos)
 	}
 }
 
 // HideEntity hides a world.Entity from the Player so that it can under no circumstance see it. Hidden entities can be
 // made visible again through a call to ShowEntity.
 func (p *Player) HideEntity(e world.Entity) {
-	if p.session() != session.Nop && p != e {
-		p.session().StopShowingEntity(e)
+	if p.Session() != session.Nop && p != e {
+		p.Session().StopShowingEntity(e)
 	}
 }
 
 // ShowEntity shows a world.Entity previously hidden from the Player using HideEntity. It does nothing if the entity
 // wasn't currently hidden.
 func (p *Player) ShowEntity(e world.Entity) {
-	if p.session() != session.Nop {
-		p.session().StartShowingEntity(e)
+	if p.Session() != session.Nop {
+		p.Session().StartShowingEntity(e)
 	}
 }
 
@@ -2324,10 +2324,10 @@ func (p *Player) ShowEntity(e world.Entity) {
 // The latency returned is updated continuously and is half the round trip time (RTT).
 // If the Player does not have a session associated with it, Latency returns 0.
 func (p *Player) Latency() time.Duration {
-	if p.session() == session.Nop {
+	if p.Session() == session.Nop {
 		return 0
 	}
-	return p.session().Latency()
+	return p.Session().Latency()
 }
 
 // Tick ticks the entity, performing actions such as checking if the player is still breaking a block.
@@ -2406,7 +2406,7 @@ func (p *Player) Tick(w *world.World, current int64) {
 	}
 	p.cooldownMu.Unlock()
 
-	if p.session() == session.Nop && !p.Immobile() {
+	if p.Session() == session.Nop && !p.Immobile() {
 		m := p.mc.TickMovement(p, p.Position(), p.Velocity(), cube.Rotation{p.yaw.Load(), p.pitch.Load()})
 		m.Send()
 
@@ -2684,7 +2684,7 @@ func (p *Player) SetScale(s float64) {
 
 // OnGround checks if the player is considered to be on the ground.
 func (p *Player) OnGround() bool {
-	if p.session() == session.Nop {
+	if p.Session() == session.Nop {
 		return p.mc.OnGround()
 	}
 	return p.onGround.Load()
@@ -2701,19 +2701,19 @@ func (p *Player) EyeHeight() float64 {
 // PlaySound plays a world.Sound that only this Player can hear. Unlike World.PlaySound, it is not broadcast
 // to players around it.
 func (p *Player) PlaySound(sound world.Sound) {
-	p.session().PlaySound(sound)
+	p.Session().PlaySound(sound)
 }
 
 // ShowParticle shows a particle that only this Player can see. Unlike World.AddParticle, it is not broadcast
 // to players around it.
 func (p *Player) ShowParticle(pos mgl64.Vec3, particle world.Particle) {
-	p.session().ViewParticle(pos, particle)
+	p.Session().ViewParticle(pos, particle)
 }
 
 // OpenSign makes the player open the sign at the cube.Pos passed, with the specific side provided. The client will not
 // show the interface if it is not aware of a sign at the position.
 func (p *Player) OpenSign(pos cube.Pos, frontSide bool) {
-	p.session().OpenSign(pos, frontSide)
+	p.Session().OpenSign(pos, frontSide)
 }
 
 // EditSign edits the sign at the cube.Pos passed and writes the text passed to a sign at that position. If no sign is
@@ -2916,7 +2916,7 @@ func (p *Player) Close() error {
 func (p *Player) close(msg string) {
 	// If the player is being disconnected while they are dead, we respawn the player
 	// so that the player logic works correctly the next time they join.
-	if p.Dead() && p.session() != nil {
+	if p.Dead() && p.Session() != nil {
 		p.Respawn()
 	}
 
@@ -2943,10 +2943,10 @@ func (p *Player) load(data Data) {
 
 	p.health.SetMaxHealth(data.MaxHealth)
 	p.health.AddHealth(data.Health - p.Health())
-	p.session().SendHealth(p.health)
+	p.Session().SendHealth(p.health)
 
 	p.absorptionHealth.Store(data.AbsorptionLevel)
-	p.session().SendAbsorption(p.absorptionHealth.Load())
+	p.Session().SendAbsorption(p.absorptionHealth.Load())
 
 	p.hunger.SetFood(data.Hunger)
 	p.hunger.foodTick = data.FoodTick
@@ -2957,7 +2957,7 @@ func (p *Player) load(data Data) {
 	p.maxAirSupplyTicks.Store(data.MaxAirSupply)
 
 	p.experience.Add(data.Experience)
-	p.session().SendExperience(p.experience)
+	p.Session().SendExperience(p.experience)
 
 	p.enchantSeed.Store(data.EnchantmentSeed)
 
@@ -3028,9 +3028,9 @@ func (p *Player) Data() Data {
 	}
 }
 
-// session returns the network session of the player. If it has one, it is returned. If not, a no-op session
+// Session returns the network Session of the player. If it has one, it is returned. If not, a no-op Session
 // is returned.
-func (p *Player) session() *session.Session {
+func (p *Player) Session() *session.Session {
 	if s := p.s.Load(); s != nil {
 		return s
 	}
@@ -3098,7 +3098,7 @@ func (p *Player) broadcastArmour(_ int, before, after item.Stack) {
 // viewers returns a list of all viewers of the Player.
 func (p *Player) viewers() []world.Viewer {
 	viewers := p.World().Viewers(p.Position())
-	var s world.Viewer = p.session()
+	var s world.Viewer = p.Session()
 
 	if sliceutil.Index(viewers, s) == -1 {
 		return append(viewers, s)
@@ -3108,7 +3108,7 @@ func (p *Player) viewers() []world.Viewer {
 
 // resendBlocks resends blocks in a world.World at the cube.Pos passed and the block next to it at the cube.Face passed.
 func (p *Player) resendBlocks(pos cube.Pos, w *world.World, faces ...cube.Face) {
-	if p.session() == session.Nop {
+	if p.Session() == session.Nop {
 		return
 	}
 	p.resendBlock(pos, w)
@@ -3120,10 +3120,10 @@ func (p *Player) resendBlocks(pos cube.Pos, w *world.World, faces ...cube.Face) 
 // resendBlock resends the block at a cube.Pos in the world.World passed.
 func (p *Player) resendBlock(pos cube.Pos, w *world.World) {
 	b := w.Block(pos)
-	p.session().ViewBlockUpdate(pos, b, 0)
+	p.Session().ViewBlockUpdate(pos, b, 0)
 	if _, ok := b.(world.Liquid); !ok {
 		if liq, ok := w.Liquid(pos); ok {
-			p.session().ViewBlockUpdate(pos, liq, 1)
+			p.Session().ViewBlockUpdate(pos, liq, 1)
 		}
 	}
 }
