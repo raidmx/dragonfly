@@ -546,10 +546,10 @@ func (srv *Server) createPlayer(id uuid.UUID, conn session.Conn, data *player.Da
 	return s
 }
 
-// CreateWorld loads a world of the server with a specific dimension, ending
+// LoadWorld loads a world of the server with a specific dimension, ending
 // the program if the world could not be loaded. The layers passed are used to
 // create a generator.Flat that is used as generator for the world.
-func (srv *Server) CreateWorld(name string, dim world.Dimension, gen world.Generator, readOnly bool) *world.World {
+func (srv *Server) LoadWorld(name string, dim world.Dimension, gen world.Generator, readOnly bool) {
 	logger := srv.conf.Log
 	if v, ok := logger.(interface {
 		WithField(key string, field any) *logrus.Entry
@@ -582,7 +582,10 @@ func (srv *Server) CreateWorld(name string, dim world.Dimension, gen world.Gener
 
 	w := conf.New()
 	logger.Infof(`Opened world "%v".`, w.Name())
-	return w
+
+	srv.wmu.Lock()
+	srv.worlds[name] = w
+	srv.wmu.Unlock()
 }
 
 // parseSkin parses a skin from the login.ClientData  and returns it.

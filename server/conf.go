@@ -168,17 +168,9 @@ func (conf Config) New() *Server {
 		handlers: make(map[string]player.Handler),
 	}
 
-	overworld := srv.CreateWorld("overworld", world.Overworld, nil, conf.ReadOnly)
-	nether := srv.CreateWorld("nether", world.Nether, nil, conf.ReadOnly)
-	end := srv.CreateWorld("end", world.End, nil, conf.ReadOnly)
-
-	srv.wmu.Lock()
-
-	srv.worlds["overworld"] = overworld
-	srv.worlds["nether"] = nether
-	srv.worlds["end"] = end
-
-	srv.wmu.Unlock()
+	srv.LoadWorld("overworld", world.Overworld, nil, conf.ReadOnly)
+	srv.LoadWorld("nether", world.Nether, nil, conf.ReadOnly)
+	srv.LoadWorld("end", world.End, nil, conf.ReadOnly)
 
 	srv.registerTargetFunc()
 	srv.checkNetIsolation()
