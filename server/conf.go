@@ -168,9 +168,9 @@ func (conf Config) New() *Server {
 		handlers: make(map[string]player.Handler),
 	}
 
-	overworld := srv.createWorld("overworld", world.Overworld, nil, conf.ReadOnly)
-	nether := srv.createWorld("nether", world.Nether, nil, conf.ReadOnly)
-	end := srv.createWorld("end", world.End, nil, conf.ReadOnly)
+	overworld := srv.CreateWorld("overworld", world.Overworld, nil, conf.ReadOnly)
+	nether := srv.CreateWorld("nether", world.Nether, nil, conf.ReadOnly)
+	end := srv.CreateWorld("end", world.End, nil, conf.ReadOnly)
 
 	srv.wmu.Lock()
 

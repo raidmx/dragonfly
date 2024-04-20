@@ -516,10 +516,10 @@ func (srv *Server) createPlayer(id uuid.UUID, conn session.Conn, data *player.Da
 	return s
 }
 
-// createWorld loads a world of the server with a specific dimension, ending
+// CreateWorld loads a world of the server with a specific dimension, ending
 // the program if the world could not be loaded. The layers passed are used to
 // create a generator.Flat that is used as generator for the world.
-func (srv *Server) createWorld(name string, dim world.Dimension, gen world.Generator, readOnly bool) *world.World {
+func (srv *Server) CreateWorld(name string, dim world.Dimension, gen world.Generator, readOnly bool) *world.World {
 	logger := srv.conf.Log
 	if v, ok := logger.(interface {
 		WithField(key string, field any) *logrus.Entry
