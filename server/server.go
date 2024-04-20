@@ -261,9 +261,7 @@ func (srv *Server) close() {
 	srv.wmu.Lock()
 
 	for _, w := range srv.worlds {
-		if err := w.Close(); err != nil {
-			srv.conf.Log.Errorf("Error closing %v: %v", w.Dimension(), err)
-		}
+		w.Close()
 	}
 
 	srv.wmu.Unlock()

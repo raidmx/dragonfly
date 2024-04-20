@@ -995,12 +995,12 @@ func (w *World) Viewers(pos mgl64.Vec3) (viewers []Viewer) {
 }
 
 // Close closes the world and saves all chunks currently loaded.
-func (w *World) Close() error {
+func (w *World) Close() {
 	if w == nil {
-		return nil
+		return
 	}
 	w.o.Do(w.close)
-	return nil
+	return
 }
 
 // close stops the World from ticking, saves all chunks to the Provider and updates the world's settings.
