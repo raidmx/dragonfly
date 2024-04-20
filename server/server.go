@@ -596,7 +596,10 @@ func (srv *Server) WorldExists(name string) bool {
 
 // LoadedWorlds return a list of loaded worlds
 func (srv *Server) LoadedWorlds() []string {
-	list := make([]string, len(srv.worlds))
+	defer srv.wmu.Unlock()
+	srv.wmu.Lock()
+
+	list := make([]string, 0, len(srv.worlds))
 
 	for name := range srv.worlds {
 		list = append(list, name)
