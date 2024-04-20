@@ -48,7 +48,10 @@ type Config struct {
 // passed. If a world is present at the path, Open will parse its data and
 // initialise the world with it. If the data cannot be parsed, an error is
 // returned.
-func (conf Config) Open(dir string) (*DB, error) {
+func (conf Config) Open(name string) (*DB, error) {
+	if err := os.MkdirAll("worlds", 077); err != nil {
+		panic(err)
+	}
 	if conf.Log == nil {
 		conf.Log = logrus.New()
 	}
@@ -58,12 +61,14 @@ func (conf Config) Open(dir string) (*DB, error) {
 	if len(conf.Entities.Types()) == 0 {
 		conf.Entities = entity.DefaultRegistry
 	}
+
+	dir := filepath.Join("worlds", name)
 	_ = os.MkdirAll(filepath.Join(dir, "db"), 0777)
 
 	db := &DB{conf: conf, dir: dir, ldat: &leveldat.Data{}}
 	if _, err := os.Stat(filepath.Join(dir, "level.dat")); os.IsNotExist(err) {
 		// A level.dat was not currently present for the world.
-		db.ldat.FillDefault()
+		db.ldat.FillDefault(name)
 	} else {
 		ldat, err := leveldat.ReadFile(filepath.Join(dir, "level.dat"))
 		if err != nil {

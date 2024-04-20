@@ -146,7 +146,7 @@ type Data struct {
 }
 
 // FillDefault fills out d with all the default level.dat values.
-func (d *Data) FillDefault() {
+func (d *Data) FillDefault(name string) {
 	d.Abilities.AttackMobs = true
 	d.Abilities.AttackPlayers = true
 	d.Abilities.Build = true
@@ -181,7 +181,7 @@ func (d *Data) FillDefault() {
 	d.LANBroadcast = true
 	d.LANBroadcastIntent = true
 	d.LastOpenedWithVersion = minimumCompatibleClientVersion
-	d.LevelName = "World"
+	d.LevelName = name
 	d.LightningLevel = 1.0
 	d.LimitedWorldDepth = 16
 	d.LimitedWorldOriginY = math.MaxInt16

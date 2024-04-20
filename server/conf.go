@@ -5,6 +5,7 @@ import (
 	"os"
 	"path/filepath"
 	"slices"
+	"sync"
 
 	"github.com/STCraft/dragonfly/server/block"
 	"github.com/STCraft/dragonfly/server/entity"
@@ -15,7 +16,6 @@ import (
 	"github.com/STCraft/dragonfly/server/world"
 	"github.com/STCraft/dragonfly/server/world/biome"
 	"github.com/STCraft/dragonfly/server/world/generator"
-	"github.com/STCraft/dragonfly/server/world/mcdb"
 	"github.com/google/uuid"
 	"github.com/pelletier/go-toml"
 	"github.com/sandertv/gophertunnel/minecraft/resource"
@@ -58,6 +58,9 @@ type Config struct {
 	// local games. Allowing players to join without authentication is generally
 	// a security hazard.
 	AuthDisabled bool
+	// ReadOnly specifies whether the default worlds such as Overworld, Nether
+	// and the End should be opened in read only mode.
+	ReadOnly bool
 	// MaxPlayers is the maximum amount of players allowed to join the server at
 	// once.
 	MaxPlayers int
@@ -74,20 +77,6 @@ type Config struct {
 	// data. If left as nil, player data will be newly created every time a
 	// player joins the server and no data will be stored.
 	PlayerProvider player.Provider
-	// WorldProvider is the world.Provider used for storing and loading world
-	// data. If left as nil, world data will be newly created every time and
-	// chunks will always be newly generated when loaded. The world provider
-	// will be used for storing/loading the default overworld, nether and end.
-	WorldProvider world.Provider
-	// ReadOnlyWorld specifies if the standard worlds should be read only. If
-	// set to true, the WorldProvider won't be saved to at all.
-	ReadOnlyWorld bool
-	// Generator should return a function that specifies the world.Generator to
-	// use for every world.Dimension (world.Overworld, world.Nether and
-	// world.End). If left empty, Generator will be set to a flat world for each
-	// of the dimensions (with netherrack and end stone for nether/end
-	// respectively).
-	Generator func(dim world.Dimension) world.Generator
 	// RandomTickSpeed specifies the rate at which blocks should be ticked in
 	// the default worlds. Setting this value to -1 or lower will stop random
 	// ticking altogether, while setting it higher results in faster ticking. If
@@ -110,8 +99,8 @@ type Logger interface {
 	Warnf(format string, v ...any)
 }
 
-// Read reads the config file from the config.toml file if it exists or creates one and loads
-// and returns a DefaultConfig.
+// Read reads the config.toml file if it exists or creates a default one. Returns
+// the instance of Config.
 func Read(log Logger) (Config, error) {
 	c := DefaultConfig()
 	var zero Config
@@ -159,12 +148,6 @@ func (conf Config) New() *Server {
 	if conf.Allower == nil {
 		conf.Allower = allower{}
 	}
-	if conf.WorldProvider == nil {
-		conf.WorldProvider = world.NopProvider{}
-	}
-	if conf.Generator == nil {
-		conf.Generator = loadGenerator
-	}
 	if conf.MaxChunkRadius == 0 {
 		conf.MaxChunkRadius = 12
 	}
@@ -180,14 +163,19 @@ func (conf Config) New() *Server {
 	conf.Resources = slices.Clone(conf.Resources)
 
 	srv := &Server{
-		conf:  conf,
-		p:     make(map[uuid.UUID]*player.Player),
-		world: &world.World{}, nether: &world.World{}, end: &world.World{},
+		conf:     conf,
+		p:        make(map[uuid.UUID]*player.Player),
+		worlds:   sync.Map{},
 		handlers: make(map[string]player.Handler),
 	}
-	srv.world = srv.createWorld(world.Overworld, &srv.nether, &srv.end)
-	srv.nether = srv.createWorld(world.Nether, &srv.world, &srv.end)
-	srv.end = srv.createWorld(world.End, &srv.nether, &srv.world)
+
+	overworld := srv.createWorld("overworld", world.Overworld, nil, conf.ReadOnly)
+	nether := srv.createWorld("nether", world.Nether, nil, conf.ReadOnly)
+	end := srv.createWorld("end", world.End, nil, conf.ReadOnly)
+
+	srv.worlds.Store("overworld", overworld)
+	srv.worlds.Store("nether", nether)
+	srv.worlds.Store("end", end)
 
 	srv.registerTargetFunc()
 	srv.checkNetIsolation()
@@ -226,14 +214,9 @@ type UserConfig struct {
 		QuitMessage string
 	}
 	World struct {
-		// SaveData controls whether a world's data will be saved and loaded.
-		// If true, the server will use the default LevelDB data provider and if
-		// false, an empty provider will be used. To use your own provider, turn
-		// this value to false, as you will still be able to pass your own
-		// provider.
-		SaveData bool
-		// Folder is the folder that the data of the world resides in.
-		Folder string
+		// ReadOnly specifies whether the default worlds like Overworld, Nether, End
+		// should be opened in read only mode
+		ReadOnly bool
 	}
 	Players struct {
 		// MaxCount is the maximum amount of players allowed to join the server
@@ -277,18 +260,13 @@ func (uc UserConfig) Config(log Logger) (Config, error) {
 		Name:                    uc.Server.Name,
 		ResourcesRequired:       uc.Resources.Required,
 		AuthDisabled:            !uc.Server.AuthEnabled,
+		ReadOnly:                uc.World.ReadOnly,
 		MaxPlayers:              uc.Players.MaxCount,
 		MaxChunkRadius:          uc.Players.MaximumChunkRadius,
 		JoinMessage:             uc.Server.JoinMessage,
 		QuitMessage:             uc.Server.QuitMessage,
 		ShutdownMessage:         uc.Server.ShutdownMessage,
 		DisableResourceBuilding: !uc.Resources.AutoBuildPack,
-	}
-	if uc.World.SaveData {
-		conf.WorldProvider, err = mcdb.Config{Log: log}.Open(uc.World.Folder)
-		if err != nil {
-			return conf, fmt.Errorf("create world provider: %w", err)
-		}
 	}
 	conf.Resources, err = loadResources(uc.Resources.Folder)
 	if err != nil {
@@ -322,8 +300,21 @@ func loadResources(dir string) ([]*resource.Pack, error) {
 	return packs, nil
 }
 
-// loadGenerator loads a standard world.Generator for a world.Dimension.
-func loadGenerator(dim world.Dimension) world.Generator {
+// VoidGenerator loads a standard void world.Generator for a world.Dimension
+func VoidGenerator(dim world.Dimension) world.Generator {
+	switch dim {
+	case world.Overworld:
+		return generator.NewVoid(biome.Plains{})
+	case world.Nether:
+		return generator.NewVoid(biome.NetherWastes{})
+	case world.End:
+		return generator.NewVoid(biome.End{})
+	}
+	panic("should never happen")
+}
+
+// FlatGenerator loads a standard flat world.Generator for a world.Dimension.
+func FlatGenerator(dim world.Dimension) world.Generator {
 	switch dim {
 	case world.Overworld:
 		return generator.NewFlat(biome.Plains{}, []world.Block{block.Grass{}, block.Dirt{}, block.Dirt{}, block.Bedrock{}})
@@ -344,8 +335,7 @@ func DefaultConfig() UserConfig {
 	c.Server.AuthEnabled = true
 	c.Server.JoinMessage = "%v has joined the game"
 	c.Server.QuitMessage = "%v has left the game"
-	c.World.SaveData = true
-	c.World.Folder = "world"
+	c.World.ReadOnly = false
 	c.Players.MaximumChunkRadius = 32
 	c.Players.SaveData = true
 	c.Players.Folder = "players"

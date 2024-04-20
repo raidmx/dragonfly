@@ -944,9 +944,10 @@ func (p *Player) Respawn() {
 	p.Extinguish()
 	p.ResetFallDistance()
 
-	// We can use the principle here that returning through a portal of a specific dimension inside that dimension will
-	// always bring us back to the overworld.
-	w = w.PortalDestination(w.Dimension())
+	/*
+		TODO: Teleport back to overworld if in the end of nether
+	*/
+
 	pos := w.PlayerSpawn(p.UUID()).Vec3Middle()
 
 	p.Handle(func(h Handler) *event.Context {

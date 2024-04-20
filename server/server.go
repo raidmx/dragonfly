@@ -25,6 +25,7 @@ import (
 	"github.com/STCraft/dragonfly/server/player/skin"
 	"github.com/STCraft/dragonfly/server/session"
 	"github.com/STCraft/dragonfly/server/world"
+	"github.com/STCraft/dragonfly/server/world/mcdb"
 	"github.com/df-mc/atomic"
 	"github.com/go-gl/mathgl/mgl32"
 	"github.com/go-gl/mathgl/mgl64"
@@ -47,8 +48,7 @@ type Server struct {
 	once    sync.Once
 	started atomic.Bool
 
-	world, nether, end *world.World
-
+	worlds       sync.Map
 	customBlocks []protocol.BlockEntry
 	customItems  []protocol.ItemComponentEntry
 
@@ -134,19 +134,37 @@ func (srv *Server) UnregisterHandler(key string) {
 // world and this world will be read from and written to when the world is
 // edited.
 func (srv *Server) World() *world.World {
-	return srv.world
+	v, ok := srv.worlds.Load("overworld")
+
+	if !ok {
+		return nil
+	}
+
+	return v.(*world.World)
 }
 
 // Nether returns the nether world of the server. Players are transported to it
 // when entering a nether portal in the world returned by the World method.
 func (srv *Server) Nether() *world.World {
-	return srv.nether
+	v, ok := srv.worlds.Load("nether")
+
+	if !ok {
+		return nil
+	}
+
+	return v.(*world.World)
 }
 
 // End returns the end world of the server. Players are transported to it when
 // entering an end portal in the world returned by the World method.
 func (srv *Server) End() *world.World {
-	return srv.end
+	v, ok := srv.worlds.Load("end")
+
+	if !ok {
+		return nil
+	}
+
+	return v.(*world.World)
 }
 
 // MaxPlayerCount returns the maximum amount of players that are allowed to
@@ -249,11 +267,15 @@ func (srv *Server) close() {
 	}
 
 	srv.conf.Log.Debugf("Closing worlds...")
-	for _, w := range []*world.World{srv.end, srv.nether, srv.world} {
+	srv.worlds.Range(func(key, value any) bool {
+		w := value.(*world.World)
+
 		if err := w.Close(); err != nil {
 			srv.conf.Log.Errorf("Error closing %v: %v", w.Dimension(), err)
 		}
-	}
+
+		return true
+	})
 
 	srv.conf.Log.Debugf("Closing listeners...")
 	for _, l := range srv.listeners {
@@ -361,7 +383,7 @@ func (srv *Server) finaliseConn(ctx context.Context, conn session.Conn, l Listen
 	var playerData *player.Data
 	if d, err := srv.conf.PlayerProvider.Load(id, srv.dimension); err == nil {
 		if d.World == nil {
-			d.World = srv.world
+			d.World = srv.World()
 		}
 		data.PlayerPosition = vec64To32(d.Position).Add(mgl32.Vec3{0, 1.62})
 		dim, _ := world.DimensionID(d.World.Dimension())
@@ -422,12 +444,12 @@ func (srv *Server) defaultGameData() minecraft.GameData {
 		WorldName:       srv.conf.Name,
 		BaseGameVersion: protocol.CurrentVersion,
 
-		Time:       int64(srv.world.Time()),
+		Time:       int64(srv.World().Time()),
 		Difficulty: 2,
 
 		PlayerGameMode:    packet.GameTypeCreative,
 		PlayerPermissions: packet.PermissionLevelMember,
-		PlayerPosition:    vec64To32(srv.world.Spawn().Vec3Centre().Add(mgl64.Vec3{0, 1.62})),
+		PlayerPosition:    vec64To32(srv.World().Spawn().Vec3Centre().Add(mgl64.Vec3{0, 1.62})),
 
 		Items:        srv.itemEntries(),
 		CustomBlocks: srv.customBlocks,
@@ -445,11 +467,11 @@ func (srv *Server) defaultGameData() minecraft.GameData {
 func (srv *Server) dimension(dimension world.Dimension) *world.World {
 	switch dimension {
 	default:
-		return srv.world
+		return srv.World()
 	case world.Nether:
-		return srv.nether
+		return srv.Nether()
 	case world.End:
-		return srv.end
+		return srv.End()
 	}
 }
 
@@ -491,7 +513,7 @@ func (srv *Server) handleSessionClose(c session.Controllable) {
 // createPlayer creates a new player instance using the UUID and connection
 // passed.
 func (srv *Server) createPlayer(id uuid.UUID, conn session.Conn, data *player.Data) *session.Session {
-	w, gm, pos := srv.world, srv.world.DefaultGameMode(), srv.world.Spawn().Vec3Middle()
+	w, gm, pos := srv.World(), srv.World().DefaultGameMode(), srv.World().Spawn().Vec3Middle()
 	if data != nil {
 		w, gm, pos = data.World, data.GameMode, data.Position
 	}
@@ -506,7 +528,7 @@ func (srv *Server) createPlayer(id uuid.UUID, conn session.Conn, data *player.Da
 // createWorld loads a world of the server with a specific dimension, ending
 // the program if the world could not be loaded. The layers passed are used to
 // create a generator.Flat that is used as generator for the world.
-func (srv *Server) createWorld(dim world.Dimension, nether, end **world.World) *world.World {
+func (srv *Server) createWorld(name string, dim world.Dimension, gen world.Generator, readOnly bool) *world.World {
 	logger := srv.conf.Log
 	if v, ok := logger.(interface {
 		WithField(key string, field any) *logrus.Entry
@@ -518,23 +540,25 @@ func (srv *Server) createWorld(dim world.Dimension, nether, end **world.World) *
 	}
 	logger.Debugf("Loading world...")
 
+	provider, err := mcdb.Config{Log: srv.conf.Log}.Open(name)
+	if err != nil {
+		panic(err)
+	}
+
+	if gen == nil {
+		gen = FlatGenerator(dim)
+	}
+
 	conf := world.Config{
 		Log:             logger,
 		Dim:             dim,
-		Provider:        srv.conf.WorldProvider,
-		Generator:       srv.conf.Generator(dim),
+		Provider:        provider,
+		Generator:       gen,
 		RandomTickSpeed: srv.conf.RandomTickSpeed,
-		ReadOnly:        srv.conf.ReadOnlyWorld,
+		ReadOnly:        readOnly,
 		Entities:        srv.conf.Entities,
-		PortalDestination: func(dim world.Dimension) *world.World {
-			if dim == world.Nether {
-				return *nether
-			} else if dim == world.End {
-				return *end
-			}
-			return nil
-		},
 	}
+
 	w := conf.New()
 	logger.Infof(`Opened world "%v".`, w.Name())
 	return w
