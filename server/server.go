@@ -607,6 +607,8 @@ func (srv *Server) UnloadWorld(name string) {
 		}
 	}
 
+	w.Close()
+
 	srv.wmu.Lock()
 	delete(srv.worlds, name)
 	srv.wmu.Unlock()
