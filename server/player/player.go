@@ -944,10 +944,6 @@ func (p *Player) Respawn() {
 	p.Extinguish()
 	p.ResetFallDistance()
 
-	/*
-		TODO: Teleport back to overworld if in the end of nether
-	*/
-
 	pos := w.PlayerSpawn(p.UUID()).Vec3Middle()
 
 	p.Handle(func(h Handler) *event.Context {

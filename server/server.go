@@ -588,6 +588,26 @@ func (srv *Server) LoadWorld(name string, dim world.Dimension, gen world.Generat
 	srv.wmu.Unlock()
 }
 
+// WorldExists returns whether the world with the provided name is loaded
+func (srv *Server) WorldExists(name string) bool {
+	_, ok := srv.worlds[name]
+	return ok
+}
+
+// UnloadWorld unloads the world from the server with the provided name
+// if it is loaded. This will panic if the world does not exist
+func (srv *Server) UnloadWorld(name string) {
+	w := srv.World(name)
+	overworld := srv.Overworld()
+
+	for _, p := range srv.Players() {
+		if p.World() == w {
+			w.RemoveEntity(p)
+			overworld.AddEntity(p)
+		}
+	}
+}
+
 // parseSkin parses a skin from the login.ClientData  and returns it.
 func (srv *Server) parseSkin(data login.ClientData) skin.Skin {
 	// Gophertunnel guarantees the following values are valid data and are of
