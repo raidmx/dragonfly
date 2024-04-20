@@ -606,6 +606,10 @@ func (srv *Server) UnloadWorld(name string) {
 			overworld.AddEntity(p)
 		}
 	}
+
+	srv.wmu.Lock()
+	delete(srv.worlds, name)
+	srv.wmu.Unlock()
 }
 
 // parseSkin parses a skin from the login.ClientData  and returns it.
