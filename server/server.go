@@ -132,13 +132,33 @@ func (srv *Server) UnregisterHandler(key string) {
 	delete(srv.handlers, key)
 }
 
+// World returns the world with the specified name. This will return nil if no
+// world with the specified name was found.
+func (srv *Server) World(name string) *world.World {
+	defer srv.wmu.Unlock()
+	srv.wmu.Lock()
+
+	w, ok := srv.worlds[name]
+	if !ok {
+		return nil
+	}
+
+	return w
+}
+
 // Overworld returns the overworld of the server. Players will be spawned in
 // this world and this world will be read from and written to when the world
 // is edited.
 func (srv *Server) Overworld() *world.World {
 	defer srv.wmu.Unlock()
 	srv.wmu.Lock()
-	return srv.worlds["overworld"]
+
+	w, ok := srv.worlds["overworld"]
+	if !ok {
+		return nil
+	}
+
+	return w
 }
 
 // Nether returns the nether world of the server. Players are transported to it
@@ -146,7 +166,13 @@ func (srv *Server) Overworld() *world.World {
 func (srv *Server) Nether() *world.World {
 	defer srv.wmu.Unlock()
 	srv.wmu.Lock()
-	return srv.worlds["nether"]
+
+	w, ok := srv.worlds["nether"]
+	if !ok {
+		return nil
+	}
+
+	return w
 }
 
 // End returns the end world of the server. Players are transported to it when
@@ -154,7 +180,13 @@ func (srv *Server) Nether() *world.World {
 func (srv *Server) End() *world.World {
 	defer srv.wmu.Unlock()
 	srv.wmu.Lock()
-	return srv.worlds["end"]
+
+	w, ok := srv.worlds["end"]
+	if !ok {
+		return nil
+	}
+
+	return w
 }
 
 // MaxPlayerCount returns the maximum amount of players that are allowed to
