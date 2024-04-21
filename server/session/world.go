@@ -950,12 +950,8 @@ func (s *Session) OpenFakeContainer(pos cube.Pos, b block.Container) uint32 {
 	var containerType byte
 
 	switch b.(type) {
-	case block.Furnace:
-		containerType = protocol.ContainerTypeFurnace
-	case block.BlastFurnace:
-		containerType = protocol.ContainerTypeBlastFurnace
-	case block.Smoker:
-		containerType = protocol.ContainerTypeSmoker
+	case block.Chest:
+		containerType = protocol.ContainerTypeContainer
 	}
 
 	s.writePacket(&packet.ContainerOpen{
@@ -1178,6 +1174,7 @@ func (s *Session) closeWindow() {
 	if !s.containerOpened.CAS(true, false) {
 		return
 	}
+
 	s.openedContainerID.Store(0)
 	s.openedWindow.Store(inventory.New(1, nil))
 	s.writePacket(&packet.ContainerClose{WindowID: byte(s.openedWindowID.Load())})

@@ -27,9 +27,9 @@ func (h *ContainerCloseHandler) Handle(p packet.Packet, s *Session) error {
 			s.closeCurrentContainer()
 		} else if _, enderChest := b.(block.EnderChest); enderChest {
 			s.closeCurrentContainer()
+		} else {
+			s.CloseFakeContainer()
 		}
-
-		s.CloseFakeContainer()
 	case 0xff:
 		// TODO: Handle closing the crafting grid.
 	default:
