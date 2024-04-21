@@ -969,10 +969,13 @@ func (s *Session) OpenFakeContainer(pos cube.Pos, b block.Container) uint32 {
 
 // CloseFakeContainer closes the fake container that is opened currently
 func (s *Session) CloseFakeContainer() {
-	if !s.containerOpened.Load() {
+	if !s.containerOpened.CAS(true, false) {
 		return
 	}
-	s.closeWindow()
+
+	s.openedContainerID.Store(0)
+	s.openedWindow.Store(inventory.New(1, nil))
+	s.writePacket(&packet.ContainerClose{WindowID: byte(s.openedWindowID.Load()), ServerSide: true})
 }
 
 // OpenBlockContainer ...
