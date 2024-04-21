@@ -964,6 +964,7 @@ func (s *Session) OpenFakeContainer(pos cube.Pos, b block.Container) {
 		ContainerEntityUniqueID: -1,
 	})
 
+	s.openedContainerID.Store(uint32(containerType))
 	s.sendInv(b.Inventory(), uint32(nextID))
 }
 
