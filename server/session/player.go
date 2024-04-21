@@ -416,9 +416,9 @@ func (s *Session) SendHealth(health *entity.HealthManager) {
 }
 
 // SendDeath sends the death to the player with the specified reason
-func (s *Session) SendDeath(cause string) {
+func (s *Session) SendDeath(msg string) {
 	s.writePacket(&packet.DeathInfo{
-		Cause:    cause,
+		Cause:    msg,
 		Messages: []string{},
 	})
 }

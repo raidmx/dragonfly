@@ -675,7 +675,7 @@ func (p *Player) Hurt(dmg float64, src world.DamageSource) (float64, bool) {
 
 	p.SetAttackImmunity(immunity)
 	if p.Dead() {
-		p.Kill(src)
+		p.Kill(src, "You got killed!")
 	}
 	return totalDamage, true
 }
@@ -868,7 +868,7 @@ func (p *Player) DeathPosition() (mgl64.Vec3, world.Dimension, bool) {
 }
 
 // Kill kills the player, clearing its inventories and resetting it to its base state.
-func (p *Player) Kill(src world.DamageSource) {
+func (p *Player) Kill(src world.DamageSource, msg string) {
 	for _, viewer := range p.viewers() {
 		viewer.ViewEntityAction(p, entity.DeathAction{})
 	}
@@ -892,7 +892,7 @@ func (p *Player) Kill(src world.DamageSource) {
 	}
 
 	p.Session().SendRespawn(pos, packet.RespawnStateSearchingForSpawn)
-	p.Session().SendDeath(fmt.Sprintf("%v", src))
+	p.Session().SendDeath(msg)
 
 	p.deathMu.Lock()
 	defer p.deathMu.Unlock()
