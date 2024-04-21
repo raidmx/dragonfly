@@ -20,6 +20,7 @@ func (h *ContainerCloseHandler) Handle(p packet.Packet, s *Session) error {
 		// Closing of the normal inventory.
 		s.writePacket(&packet.ContainerClose{WindowID: 0})
 		s.invOpened = false
+		println("Closing main inventory")
 	case byte(s.openedWindowID.Load()):
 		b := s.c.World().Block(s.openedPos.Load())
 

@@ -2,6 +2,7 @@ package session
 
 import (
 	"fmt"
+
 	"github.com/sandertv/gophertunnel/minecraft/protocol"
 	"github.com/sandertv/gophertunnel/minecraft/protocol/packet"
 )
@@ -21,6 +22,7 @@ func (h *InteractHandler) Handle(p packet.Packet, s *Session) error {
 		if s.invOpened {
 			// When there is latency, this might end up being sent multiple times. If we send a ContainerOpen
 			// multiple times, the client crashes.
+			println("Main inventory still open")
 			return nil
 		}
 		s.invOpened = true
