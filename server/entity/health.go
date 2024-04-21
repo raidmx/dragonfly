@@ -40,6 +40,14 @@ func (m *HealthManager) AddHealth(health float64) {
 	m.health = l
 }
 
+// SetHealth sets the health of the player to the provided amount
+func (m *HealthManager) SetHealth(health float64) {
+	defer m.mu.Unlock()
+	m.mu.Lock()
+
+	m.health = health
+}
+
 // MaxHealth returns the maximum health of the entity.
 func (m *HealthManager) MaxHealth() float64 {
 	m.mu.RLock()

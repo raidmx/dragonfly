@@ -32,6 +32,7 @@ import (
 	"github.com/df-mc/atomic"
 	"github.com/go-gl/mathgl/mgl64"
 	"github.com/google/uuid"
+	"github.com/sandertv/gophertunnel/minecraft/protocol/packet"
 	"golang.org/x/text/language"
 )
 
@@ -674,7 +675,7 @@ func (p *Player) Hurt(dmg float64, src world.DamageSource) (float64, bool) {
 
 	p.SetAttackImmunity(immunity)
 	if p.Dead() {
-		p.kill(src)
+		p.Kill(src)
 	}
 	return totalDamage, true
 }
@@ -866,13 +867,13 @@ func (p *Player) DeathPosition() (mgl64.Vec3, world.Dimension, bool) {
 	return *p.deathPos, p.deathDimension, true
 }
 
-// kill kills the player, clearing its inventories and resetting it to its base state.
-func (p *Player) kill(src world.DamageSource) {
+// Kill kills the player, clearing its inventories and resetting it to its base state.
+func (p *Player) Kill(src world.DamageSource) {
 	for _, viewer := range p.viewers() {
 		viewer.ViewEntityAction(p, entity.DeathAction{})
 	}
 
-	p.addHealth(-p.MaxHealth())
+	p.health.SetHealth(0)
 
 	keepInv := false
 	p.Handle(func(h Handler) *event.Context {
@@ -889,6 +890,9 @@ func (p *Player) kill(src world.DamageSource) {
 	for _, e := range p.Effects() {
 		p.RemoveEffect(e.Type())
 	}
+
+	p.Session().SendRespawn(pos, packet.RespawnStateSearchingForSpawn)
+	p.Session().SendDeath(fmt.Sprintf("%v", src))
 
 	p.deathMu.Lock()
 	defer p.deathMu.Unlock()
@@ -931,12 +935,6 @@ func (p *Player) dropContents() {
 	}
 }
 
-// Kill is used to kill the player by setting their health to 0
-func (p *Player) Kill() {
-	p.health.AddHealth(-p.Health())
-	p.Session().SendDeath("Died")
-}
-
 // Respawn spawns the player after it dies, so that its health is replenished and it is spawned in the world
 // again. Nothing will happen if the player does not have a session connected to it.
 func (p *Player) Respawn() {
@@ -959,7 +957,7 @@ func (p *Player) Respawn() {
 
 	w.AddEntity(p)
 	p.Teleport(pos)
-	p.Session().SendRespawn(pos)
+	p.Session().SendRespawn(pos, packet.RespawnStateReadyToSpawn)
 
 	p.SetVisible()
 }

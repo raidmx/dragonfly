@@ -84,10 +84,10 @@ func (s *Session) EmptyUIInventory() {
 }
 
 // SendRespawn spawns the Controllable entity of the session client-side in the world, provided it has died.
-func (s *Session) SendRespawn(pos mgl64.Vec3) {
+func (s *Session) SendRespawn(pos mgl64.Vec3, state byte) {
 	s.writePacket(&packet.Respawn{
 		Position:        vec64To32(pos.Add(entityOffset(s.c))),
-		State:           packet.RespawnStateReadyToSpawn,
+		State:           state,
 		EntityRuntimeID: selfEntityRuntimeID,
 	})
 }
