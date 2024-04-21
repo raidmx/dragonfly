@@ -934,7 +934,7 @@ func (p *Player) dropContents() {
 // Kill is used to kill the player by setting their health to 0
 func (p *Player) Kill() {
 	p.health.AddHealth(-p.Health())
-	p.Respawn()
+	p.Session().SendDeath("Died")
 }
 
 // Respawn spawns the player after it dies, so that its health is replenished and it is spawned in the world

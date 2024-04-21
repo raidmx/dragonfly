@@ -415,6 +415,14 @@ func (s *Session) SendHealth(health *entity.HealthManager) {
 	})
 }
 
+// SendDeath sends the death to the player with the specified reason
+func (s *Session) SendDeath(cause string) {
+	s.writePacket(&packet.DeathInfo{
+		Cause:    cause,
+		Messages: []string{},
+	})
+}
+
 // SendAbsorption sends the absorption value passed to the player.
 func (s *Session) SendAbsorption(value float64) {
 	s.writePacket(&packet.UpdateAttributes{
