@@ -929,6 +929,52 @@ func (s *Session) ViewEntityAnimation(e world.Entity, animationName string) {
 	})
 }
 
+// OpenFakeContainer opens the fake container of the specified type at the provided position.
+// Make sure the block at the specified position is already sent along with it's NBT data as a
+// fake block first. The block container passed must also have a non-nil inventory associated with
+// it.
+func (s *Session) OpenFakeContainer(pos cube.Pos, b block.Container) {
+	if s.containerOpened.Load() && s.openedPos.Load() == pos {
+		return
+	}
+	s.closeCurrentContainer()
+
+	b.AddViewer(s, s.c.World(), pos)
+
+	nextID := s.nextWindowID()
+	s.containerOpened.Store(true)
+	s.openedWindow.Store(b.Inventory())
+	s.openedPos.Store(pos)
+
+	var containerType byte
+
+	switch b.(type) {
+	case block.Furnace:
+		containerType = protocol.ContainerTypeFurnace
+	case block.BlastFurnace:
+		containerType = protocol.ContainerTypeBlastFurnace
+	case block.Smoker:
+		containerType = protocol.ContainerTypeSmoker
+	}
+
+	s.writePacket(&packet.ContainerOpen{
+		WindowID:                nextID,
+		ContainerType:           containerType,
+		ContainerPosition:       protocol.BlockPos{int32(pos[0]), int32(pos[1]), int32(pos[2])},
+		ContainerEntityUniqueID: -1,
+	})
+
+	s.sendInv(b.Inventory(), uint32(nextID))
+}
+
+// CloseFakeContainer closes the fake container that is opened currently
+func (s *Session) CloseFakeContainer() {
+	if !s.containerOpened.Load() {
+		return
+	}
+	s.closeWindow()
+}
+
 // OpenBlockContainer ...
 func (s *Session) OpenBlockContainer(pos cube.Pos) {
 	if s.containerOpened.Load() && s.openedPos.Load() == pos {
