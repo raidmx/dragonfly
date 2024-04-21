@@ -218,6 +218,11 @@ func (s *Session) Start() {
 	go s.handlePackets()
 }
 
+// OpenedWindowID returns the window ID of the opened container of the session
+func (s *Session) OpenedWindowID() uint32 {
+	return s.openedWindowID.Load()
+}
+
 // Controllable returns the Controllable entity that the Session controls.
 func (s *Session) Controllable() Controllable {
 	return s.c

@@ -932,11 +932,12 @@ func (s *Session) ViewEntityAnimation(e world.Entity, animationName string) {
 // OpenFakeContainer opens the fake container of the specified type at the provided position.
 // Make sure the block at the specified position is already sent along with it's NBT data as a
 // fake block first. The block container passed must also have a non-nil inventory associated with
-// it.
-func (s *Session) OpenFakeContainer(pos cube.Pos, b block.Container) {
+// it. This function returns the window ID of the opened inventory
+func (s *Session) OpenFakeContainer(pos cube.Pos, b block.Container) uint32 {
 	if s.containerOpened.Load() && s.openedPos.Load() == pos {
-		return
+		return s.OpenedWindowID()
 	}
+
 	s.closeCurrentContainer()
 
 	b.AddViewer(s, s.c.World(), pos)
@@ -966,6 +967,8 @@ func (s *Session) OpenFakeContainer(pos cube.Pos, b block.Container) {
 
 	s.openedContainerID.Store(uint32(containerType))
 	s.sendInv(b.Inventory(), uint32(nextID))
+
+	return uint32(nextID)
 }
 
 // CloseFakeContainer closes the fake container that is opened currently
