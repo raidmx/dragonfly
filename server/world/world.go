@@ -585,6 +585,11 @@ func (w *World) SetTime(new int) {
 	if w == nil {
 		return
 	}
+
+	if new > 24000 {
+		new -= 24000
+	}
+
 	w.set.Lock()
 	w.set.Time = int64(new)
 	w.set.Unlock()
