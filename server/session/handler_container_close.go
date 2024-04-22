@@ -3,7 +3,6 @@ package session
 import (
 	"fmt"
 
-	"github.com/STCraft/dragonfly/server/block"
 	"github.com/sandertv/gophertunnel/minecraft/protocol/packet"
 )
 

@@ -51,6 +51,7 @@ func (s *Session) closeCurrentContainer() {
 	if !s.containerOpened.Load() {
 		return
 	}
+
 	s.closeWindow()
 
 	pos := s.openedPos.Load()
