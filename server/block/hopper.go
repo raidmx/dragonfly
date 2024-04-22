@@ -20,7 +20,7 @@ type Hopper struct {
 
 	CustomName string
 	Facing     cube.Face
-	Toggled    bool
+	Triggered  bool
 
 	inventory *inventory.Inventory
 	viewerMu  *sync.RWMutex
@@ -73,7 +73,7 @@ func (h Hopper) EncodeBlock() (string, map[string]any) {
 
 	return "minecraft:hopper", map[string]any{
 		"facing_direction": facing,
-		"toggle_bit":       h.Toggled,
+		"toggle_bit":       h.Triggered,
 	}
 }
 
@@ -161,8 +161,8 @@ func (h Hopper) EncodeNBT() map[string]any {
 // allHoppers ...
 func allHoppers() (hoppers []world.Block) {
 	for _, face := range cube.Faces() {
-		hoppers = append(hoppers, Hopper{Facing: face, Toggled: false})
-		hoppers = append(hoppers, Hopper{Facing: face, Toggled: true})
+		hoppers = append(hoppers, Hopper{Facing: face, Triggered: false})
+		hoppers = append(hoppers, Hopper{Facing: face, Triggered: true})
 	}
 	return
 }

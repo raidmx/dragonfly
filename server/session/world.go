@@ -954,6 +954,8 @@ func (s *Session) OpenFakeContainer(pos cube.Pos, b block.Container) uint32 {
 		containerType = protocol.ContainerTypeContainer
 	case block.Hopper:
 		containerType = protocol.ContainerTypeHopper
+	case block.Dispenser:
+		containerType = protocol.ContainerTypeDispenser
 	}
 
 	s.writePacket(&packet.ContainerOpen{
@@ -1054,6 +1056,8 @@ func (s *Session) openNormalContainer(b block.Container, pos cube.Pos) {
 		containerType = protocol.ContainerTypeSmoker
 	case block.Hopper:
 		containerType = protocol.ContainerTypeHopper
+	case block.Dispenser:
+		containerType = protocol.ContainerTypeDispenser
 	}
 
 	s.writePacket(&packet.ContainerOpen{

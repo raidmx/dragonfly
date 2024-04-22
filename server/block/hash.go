@@ -51,6 +51,7 @@ const (
 	hashDiorite
 	hashDirt
 	hashDirtPath
+	hashDispenser
 	hashDoubleFlower
 	hashDoubleTallGrass
 	hashDragonEgg
@@ -425,6 +426,11 @@ func (DirtPath) Hash() uint64 {
 }
 
 // Hash ...
+func (d Dispenser) Hash() uint64 {
+	return hashDispenser | uint64(d.Facing)<<8 | uint64(boolByte(d.Triggered))<<11
+}
+
+// Hash ...
 func (d DoubleFlower) Hash() uint64 {
 	return hashDoubleFlower | uint64(boolByte(d.UpperPart))<<8 | uint64(d.Type.Uint8())<<9
 }
@@ -571,7 +577,7 @@ func (Honeycomb) Hash() uint64 {
 
 // Hash ...
 func (h Hopper) Hash() uint64 {
-	return hashHopper | uint64(h.Facing)<<8 | uint64(boolByte(h.Toggled))<<11
+	return hashHopper | uint64(h.Facing)<<8 | uint64(boolByte(h.Triggered))<<11
 }
 
 // Hash ...
