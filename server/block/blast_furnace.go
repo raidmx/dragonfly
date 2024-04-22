@@ -16,7 +16,7 @@ import (
 // twice the speed. It also serves as an armorer's job site block.
 // The empty value of BlastFurnace is not valid. It must be created using block.NewBlastFurnace(cube.Face).
 type BlastFurnace struct {
-	SolidModel
+	solid
 	bassDrum
 	*smelter
 

@@ -6,7 +6,7 @@ import (
 
 // RawCopper is a raw metal block equivalent to nine raw copper.
 type RawCopper struct {
-	SolidModel
+	solid
 	bassDrum
 }
 

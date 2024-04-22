@@ -8,7 +8,7 @@ import (
 
 // Bookshelf is a decorative block that primarily serves to enhance enchanting with an enchanting table.
 type Bookshelf struct {
-	SolidModel
+	solid
 	bass
 }
 

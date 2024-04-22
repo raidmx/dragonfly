@@ -10,12 +10,12 @@ import (
 type (
 	// Purpur is a decorative block that is naturally generated in End cities and End ships.
 	Purpur struct {
-		SolidModel
+		solid
 		bassDrum
 	}
 	// PurpurPillar is a variant of Purpur that can be rotated.
 	PurpurPillar struct {
-		SolidModel
+		solid
 		bassDrum
 
 		// Axis is the axis which the purpur pillar block faces.

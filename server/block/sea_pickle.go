@@ -14,7 +14,7 @@ import (
 // SeaPickle is a small stationary underwater block that emits light, and is typically found in colonies of up to
 // four sea pickles.
 type SeaPickle struct {
-	EmptyModel
+	empty
 	transparent
 	sourceWaterDisplacer
 

@@ -19,7 +19,7 @@ import (
 // single container.
 // The empty value of Chest is not valid. It must be created using block.NewChest().
 type Chest struct {
-	ChestModel
+	chest
 	transparent
 	bass
 	sourceWaterDisplacer

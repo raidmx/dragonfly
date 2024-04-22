@@ -7,7 +7,7 @@ import (
 
 // Netherrack is a block found in The Nether.
 type Netherrack struct {
-	SolidModel
+	solid
 	bassDrum
 }
 

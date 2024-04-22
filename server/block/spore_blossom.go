@@ -10,7 +10,7 @@ import (
 
 // SporeBlossom is a decorative block.
 type SporeBlossom struct {
-	EmptyModel
+	empty
 	transparent
 }
 

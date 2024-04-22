@@ -13,7 +13,7 @@ import (
 
 // Jukebox is a block used to play music discs.
 type Jukebox struct {
-	SolidModel
+	solid
 	bass
 
 	// Item is the music disc played by the jukebox.

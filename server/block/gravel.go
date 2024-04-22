@@ -11,7 +11,7 @@ import (
 // Gravel is a block affected by gravity. It has a 10% chance of dropping flint instead of itself on break.
 type Gravel struct {
 	gravityAffected
-	SolidModel
+	solid
 	snare
 }
 

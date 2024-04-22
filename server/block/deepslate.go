@@ -9,7 +9,7 @@ import (
 
 // Deepslate is similar to stone but is naturally found deep underground around Y0 and below, and is harder to break.
 type Deepslate struct {
-	SolidModel
+	solid
 	bassDrum
 
 	// Type is the type of deepslate of the block.

@@ -10,7 +10,7 @@ import (
 
 // Bone is a decorative block that can face different directions.
 type Bone struct {
-	SolidModel
+	solid
 
 	// Axis is the axis which the bone block faces.
 	Axis cube.Axis

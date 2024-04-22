@@ -2,7 +2,7 @@ package block
 
 // MudBricks are a decorative block obtained by crafting 4 packed mud.
 type MudBricks struct {
-	SolidModel
+	solid
 	bassDrum
 }
 

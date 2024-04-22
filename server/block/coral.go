@@ -13,7 +13,7 @@ import (
 
 // Coral is a non-solid block that comes in 5 variants.
 type Coral struct {
-	EmptyModel
+	empty
 	transparent
 	bassDrum
 	sourceWaterDisplacer

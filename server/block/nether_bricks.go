@@ -8,7 +8,7 @@ import (
 // NetherBricks are blocks used to form nether fortresses in the Nether.
 // Red Nether bricks, Cracked Nether bricks and Chiseled Nether bricks are decorative variants that do not naturally generate.
 type NetherBricks struct {
-	SolidModel
+	solid
 	bassDrum
 
 	// NetherBricksType is the type of nether bricks of the block.

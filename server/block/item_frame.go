@@ -15,7 +15,7 @@ import (
 
 // ItemFrame is a block entity that displays the item or block that is inside it.
 type ItemFrame struct {
-	EmptyModel
+	empty
 	transparent
 	sourceWaterDisplacer
 

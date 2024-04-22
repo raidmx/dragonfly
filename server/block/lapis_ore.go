@@ -8,7 +8,7 @@ import (
 
 // LapisOre is an ore block from which lapis lazuli is obtained.
 type LapisOre struct {
-	SolidModel
+	solid
 	bassDrum
 
 	// Type is the type of lapis ore.

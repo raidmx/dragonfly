@@ -11,7 +11,7 @@ import (
 // CraftingTable is a utility block that allows the player to craft a variety of blocks and items.
 type CraftingTable struct {
 	bass
-	SolidModel
+	solid
 }
 
 // EncodeItem ...

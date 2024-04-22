@@ -2,7 +2,7 @@ package block
 
 // ReinforcedDeepslate is a tough decorative block that spawns in ancient cities.
 type ReinforcedDeepslate struct {
-	SolidModel
+	solid
 	bassDrum
 }
 

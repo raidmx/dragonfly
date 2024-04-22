@@ -10,7 +10,7 @@ import (
 
 // CoralBlock is a solid block that comes in 5 variants.
 type CoralBlock struct {
-	SolidModel
+	solid
 	bassDrum
 
 	// Type is the type of coral of the block.

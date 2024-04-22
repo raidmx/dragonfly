@@ -6,7 +6,7 @@ import (
 
 // GoldOre is a rare mineral block found underground.
 type GoldOre struct {
-	SolidModel
+	solid
 	bassDrum
 
 	// Type is the type of gold ore.

@@ -7,7 +7,7 @@ import (
 // Obsidian is a dark purple block known for its high blast resistance and strength, most commonly found when
 // water flows over lava.
 type Obsidian struct {
-	SolidModel
+	solid
 	bassDrum
 	// Crying specifies if the block is a crying obsidian block. If true, the block is blue and emits light.
 	Crying bool

@@ -9,7 +9,7 @@ import (
 type Barrier struct {
 	sourceWaterDisplacer
 	transparent
-	SolidModel
+	solid
 }
 
 // SideClosed ...

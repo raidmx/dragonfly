@@ -2,7 +2,7 @@ package block
 
 // NetherWartBlock is a decorative block found in crimson forests and crafted using Nether wart.
 type NetherWartBlock struct {
-	SolidModel
+	solid
 
 	// Warped is the turquoise variant found in warped forests, but cannot be crafted unlike Nether wart block.
 	Warped bool

@@ -6,7 +6,7 @@ import (
 
 // PackedIce is an opaque solid block variant of ice. Unlike regular ice, it does not melt near bright light sources.
 type PackedIce struct {
-	SolidModel
+	solid
 }
 
 // Instrument ...

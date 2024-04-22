@@ -4,7 +4,7 @@ import "github.com/STCraft/dragonfly/server/item"
 
 // CoalOre is a common ore.
 type CoalOre struct {
-	SolidModel
+	solid
 	bassDrum
 
 	// Type is the type of coal ore.

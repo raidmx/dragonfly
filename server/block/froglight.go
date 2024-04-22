@@ -9,7 +9,7 @@ import (
 
 // Froglight is a luminous natural block that can be obtained if a frog eats a tiny magma cube.
 type Froglight struct {
-	SolidModel
+	solid
 
 	// Type is the type of froglight.
 	Type FroglightType

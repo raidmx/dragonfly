@@ -12,7 +12,7 @@ import (
 // Loom is a block used to apply patterns on banners. It is also used as a shepherd's job site block that is found in
 // villages.
 type Loom struct {
-	SolidModel
+	solid
 	bass
 
 	// Facing is the direction the loom is facing.

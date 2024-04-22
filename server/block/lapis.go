@@ -6,7 +6,7 @@ import (
 
 // Lapis is a decorative mineral block that is crafted from lapis lazuli.
 type Lapis struct {
-	SolidModel
+	solid
 }
 
 // BreakInfo ...

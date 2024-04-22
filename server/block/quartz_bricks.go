@@ -2,7 +2,7 @@ package block
 
 // QuartzBricks is a mineral block used only for decoration.
 type QuartzBricks struct {
-	SolidModel
+	solid
 	bassDrum
 }
 

@@ -11,7 +11,7 @@ import (
 // HayBale is a decorative, flammable block that can also be used to
 // feed horses, breed llamas, reduce fall damage, and extend campfire smokes.
 type HayBale struct {
-	SolidModel
+	solid
 
 	// Axis is the axis which the hay bale block faces.
 	Axis cube.Axis

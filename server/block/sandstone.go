@@ -7,7 +7,7 @@ import (
 
 // Sandstone is a solid block commonly found in deserts and beaches underneath sand.
 type Sandstone struct {
-	SolidModel
+	solid
 	bassDrum
 
 	// Type is the type of sandstone of the block.

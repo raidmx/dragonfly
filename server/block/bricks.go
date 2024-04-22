@@ -2,7 +2,7 @@ package block
 
 // Bricks are decorative building blocks.
 type Bricks struct {
-	SolidModel
+	solid
 	bassDrum
 }
 

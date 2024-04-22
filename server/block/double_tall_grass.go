@@ -14,7 +14,7 @@ import (
 type DoubleTallGrass struct {
 	transparent
 	replaceable
-	EmptyModel
+	empty
 
 	// UpperPart is set if the plant is the upper part.
 	UpperPart bool

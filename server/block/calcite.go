@@ -2,7 +2,7 @@ package block
 
 // Calcite is a carbonate mineral found as part of amethyst geodes.
 type Calcite struct {
-	SolidModel
+	solid
 	bassDrum
 }
 

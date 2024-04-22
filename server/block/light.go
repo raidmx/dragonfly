@@ -7,7 +7,7 @@ import (
 
 // Light is an invisible block that can produce any light level.
 type Light struct {
-	EmptyModel
+	empty
 	replaceable
 	transparent
 	flowingWaterDisplacer

@@ -4,7 +4,7 @@ import "github.com/STCraft/dragonfly/server/world"
 
 // Mud is a decorative block obtained by using a water bottle on a dirt block.
 type Mud struct {
-	SolidModel
+	solid
 }
 
 // SoilFor ...

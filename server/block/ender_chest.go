@@ -19,7 +19,7 @@ type enderChestOwner interface {
 // EnderChest is a type of chest whose contents are exclusive to each player, and can be accessed from anywhere.
 // The empty value of EnderChest is not valid. It must be created using block.NewEnderChest().
 type EnderChest struct {
-	ChestModel
+	chest
 	transparent
 	bass
 	sourceWaterDisplacer

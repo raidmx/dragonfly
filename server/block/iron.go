@@ -7,7 +7,7 @@ import (
 
 // Iron is a precious metal block made from 9 iron ingots.
 type Iron struct {
-	SolidModel
+	solid
 }
 
 // Instrument ...

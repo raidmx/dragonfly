@@ -7,7 +7,7 @@ import (
 
 // Emerald is a precious mineral block crafted using 9 emeralds.
 type Emerald struct {
-	SolidModel
+	solid
 }
 
 // Instrument ...

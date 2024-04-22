@@ -4,7 +4,7 @@ import "github.com/STCraft/dragonfly/server/world"
 
 // SoulSoil is a block naturally found only in the soul sand valley.
 type SoulSoil struct {
-	SolidModel
+	solid
 }
 
 // SoilFor ...

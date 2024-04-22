@@ -17,7 +17,7 @@ import (
 type Fire struct {
 	replaceable
 	transparent
-	EmptyModel
+	empty
 
 	// Type is the type of fire.
 	Type FireType

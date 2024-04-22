@@ -14,7 +14,7 @@ import (
 
 // Water is a natural fluid that generates abundantly in the world.
 type Water struct {
-	EmptyModel
+	empty
 	replaceable
 
 	// Still makes the water appear as if it is not flowing.

@@ -8,7 +8,7 @@ import (
 // StainedGlass is a decorative, fully transparent solid block that is dyed into a different colour.
 type StainedGlass struct {
 	transparent
-	SolidModel
+	solid
 	clicksAndSticks
 
 	// Colour specifies the colour of the block.

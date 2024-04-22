@@ -17,7 +17,7 @@ type Crop interface {
 // crop is a base for crop plants.
 type crop struct {
 	transparent
-	EmptyModel
+	empty
 
 	// Growth is the current stage of growth. The max value is 7.
 	Growth int

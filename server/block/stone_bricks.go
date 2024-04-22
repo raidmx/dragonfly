@@ -8,7 +8,7 @@ import (
 // StoneBricks are materials found in structures such as strongholds, igloo basements, jungle temples, ocean ruins
 // and ruined portals.
 type StoneBricks struct {
-	SolidModel
+	solid
 	bassDrum
 
 	// Type is the type of stone bricks of the block.

@@ -2,7 +2,7 @@ package block
 
 // PackedMud is a block crafted from mud and wheat. It is used to create mud bricks.
 type PackedMud struct {
-	SolidModel
+	solid
 }
 
 // BreakInfo ...

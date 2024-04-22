@@ -8,7 +8,7 @@ import (
 
 // Melon is a fruit block that grows from melon stems.
 type Melon struct {
-	SolidModel
+	solid
 }
 
 // BreakInfo ...

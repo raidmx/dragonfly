@@ -12,7 +12,7 @@ import (
 
 // Lava is a light-emitting fluid block that causes fire damage.
 type Lava struct {
-	EmptyModel
+	empty
 	replaceable
 
 	// Still makes the lava not spread whenever it is updated. Still lava cannot be acquired in the game

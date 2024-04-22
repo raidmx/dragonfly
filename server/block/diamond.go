@@ -6,7 +6,7 @@ import (
 
 // Diamond is a block which can only be gained by crafting it.
 type Diamond struct {
-	SolidModel
+	solid
 }
 
 // BreakInfo ...

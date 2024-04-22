@@ -13,7 +13,7 @@ import (
 
 // Note is a musical block that emits sounds when powered with redstone.
 type Note struct {
-	SolidModel
+	solid
 	bass
 
 	// Pitch is the current pitch the note block is set to. Value ranges from 0-24.

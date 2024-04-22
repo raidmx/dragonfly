@@ -13,7 +13,7 @@ import (
 
 // Banner is a tall decorative block that can be customized.
 type Banner struct {
-	EmptyModel
+	empty
 	transparent
 
 	// Colour is the colour of the banner.

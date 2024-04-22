@@ -5,59 +5,59 @@ import (
 	"github.com/STCraft/dragonfly/server/world"
 )
 
-// SolidModel represents a block that is fully SolidModel. It always returns a model.SolidModel when Model is called.
-type SolidModel struct{}
+// solid represents a block that is fully solid. It always returns a model.Solid when Model is called.
+type solid struct{}
 
 // Model ...
-func (SolidModel) Model() world.BlockModel {
+func (solid) Model() world.BlockModel {
 	return model.Solid{}
 }
 
-// EmptyModel represents a block that is fully EmptyModel/transparent, such as air or a plant. It always returns a
-// model.EmptyModel when Model is called.
-type EmptyModel struct{}
+// empty represents a block that is fully empty/transparent, such as air or a plant. It always returns a
+// model.Empty when Model is called.
+type empty struct{}
 
 // Model ...
-func (EmptyModel) Model() world.BlockModel {
+func (empty) Model() world.BlockModel {
 	return model.Empty{}
 }
 
-// ChestModel represents a block that has a model of a ChestModel.
-type ChestModel struct{}
+// chest represents a block that has a model of a chest.
+type chest struct{}
 
 // Model ...
-func (ChestModel) Model() world.BlockModel {
+func (chest) Model() world.BlockModel {
 	return model.Chest{}
 }
 
-// CarpetModel represents a block that has a model of a CarpetModel.
-type CarpetModel struct{}
+// carpet represents a block that has a model of a carpet.
+type carpet struct{}
 
 // Model ...
-func (CarpetModel) Model() world.BlockModel {
+func (carpet) Model() world.BlockModel {
 	return model.Carpet{}
 }
 
-// TilledGrassModel represents a block that has a model of farmland or dirt paths.
-type TilledGrassModel struct{}
+// tilledGrass represents a block that has a model of farmland or dirt paths.
+type tilledGrass struct{}
 
 // Model ...
-func (TilledGrassModel) Model() world.BlockModel {
+func (tilledGrass) Model() world.BlockModel {
 	return model.TilledGrass{}
 }
 
-// LeavesModel represents a block that has a model of LeavesModel. A full block but with no solid faces.
-type LeavesModel struct{}
+// leaves represents a block that has a model of leaves. A full block but with no solid faces.
+type leaves struct{}
 
 // Model ...
-func (LeavesModel) Model() world.BlockModel {
+func (leaves) Model() world.BlockModel {
 	return model.Leaves{}
 }
 
-// ThinModel represents a ThinModel, partial block such as a glass pane or an iron bar, that connects to nearby solid faces.
-type ThinModel struct{}
+// thin represents a thin, partial block such as a glass pane or an iron bar, that connects to nearby solid faces.
+type thin struct{}
 
 // Model ...
-func (ThinModel) Model() world.BlockModel {
+func (thin) Model() world.BlockModel {
 	return model.Thin{}
 }
