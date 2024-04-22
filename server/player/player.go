@@ -1920,30 +1920,35 @@ func (p *Player) drops(held item.Stack, pos cube.Pos, w *world.World) []item.Sta
 	var drops []item.Stack
 
 	if container, ok := b.(block.Container); ok {
+
+		/*
+			If the block that got broken is a double chest and is paired we must
+			handle the drops properly
+		*/
+
 		if c, ok := b.(block.Chest); ok && c.Paired() {
-			pos := cube.Pos{int(c.PairX()), pos.Y(), int(c.PairZ())}
+			// Get the position of the other pair and get its facing
+			pos := c.Pair(pos)
 			facing := w.Block(pos).(block.Chest).Facing
 
+			// Create a new chest block of single inventory type and put
+			// the same facing we got earlier
 			pair := block.NewChest(block.ChestTypeSingle)
 			pair.Facing = facing
 			inv := c.Inventory()
 
-			count := inv.Size()
-			if count%2 != 0 {
-				count += 1
-			}
-			count /= 2
-
-			i := 1
-			for _, it := range inv.Clear() {
-				if i > count {
-					pair.Inventory().AddItem(it)
-				} else {
+			// Distribute the inventory of the large chest properly so that no more
+			// than half of the total items get dropped and no more than half of the
+			// items get put in the inventory.
+			for slot, it := range inv.Clear() {
+				if slot >= block.ChestTypeSingle {
 					drops = append(drops, it)
+				} else {
+					pair.Inventory().AddItem(it)
 				}
-				i += 1
 			}
 
+			// Send the updated block
 			w.SetBlock(pos, pair, nil)
 		} else {
 			// If the block is a container, it should drop its inventory contents regardless whether the

@@ -97,11 +97,19 @@ func (c Chest) PairZ() int32 {
 	return c.pairZ
 }
 
+// Pair returns the cube.Pos of the chest paired with this chest
+func (c Chest) Pair(pos cube.Pos) cube.Pos {
+	return cube.Pos{int(c.pairX), pos.Y(), int(c.pairZ)}
+}
+
 // open opens the chest, displaying the animation and playing a sound.
 func (c Chest) open(w *world.World, pos cube.Pos) {
 	for _, v := range w.Viewers(pos.Vec3()) {
-		println("View Block Open")
 		v.ViewBlockAction(pos, OpenAction{})
+
+		if c.paired {
+			v.ViewBlockAction(c.Pair(pos), OpenAction{})
+		}
 	}
 	w.PlaySound(pos.Vec3Centre(), sound.ChestOpen{})
 }
@@ -110,13 +118,16 @@ func (c Chest) open(w *world.World, pos cube.Pos) {
 func (c Chest) close(w *world.World, pos cube.Pos) {
 	for _, v := range w.Viewers(pos.Vec3()) {
 		v.ViewBlockAction(pos, CloseAction{})
+
+		if c.paired {
+			v.ViewBlockAction(c.Pair(pos), CloseAction{})
+		}
 	}
 	w.PlaySound(pos.Vec3Centre(), sound.ChestClose{})
 }
 
 // AddViewer adds a viewer to the chest, so that it is updated whenever the inventory of the chest is changed.
 func (c Chest) AddViewer(v ContainerViewer, w *world.World, pos cube.Pos) {
-	println("Add Viewer")
 	c.viewerMu.Lock()
 	defer c.viewerMu.Unlock()
 	if len(c.viewers) == 0 {
@@ -143,7 +154,6 @@ func (c Chest) RemoveViewer(v ContainerViewer, w *world.World, pos cube.Pos) {
 func (c Chest) Activate(pos cube.Pos, _ cube.Face, w *world.World, u item.User, _ *item.UseContext) bool {
 	if opener, ok := u.(ContainerOpener); ok {
 		if d, ok := w.Block(pos.Side(cube.FaceUp)).(LightDiffuser); ok && d.LightDiffusionLevel() <= 2 {
-			println("Open Block Container")
 			opener.OpenBlockContainer(pos)
 		}
 		return true
@@ -178,7 +188,7 @@ func (c Chest) NeighbourUpdateTick(pos, neighbour cube.Pos, w *world.World) {
 	// If a block was broken and it was the chest pair of this paired chest
 	// then we must unpair the chests
 	if _, ok := b.(Air); ok && c.paired {
-		n := cube.Pos{int(c.pairX), pos.Y(), int(c.pairZ)}
+		n := c.Pair(pos)
 
 		// The paired chest block got broken. We should unpair the chests
 		// now.
@@ -213,9 +223,11 @@ func (c Chest) NeighbourUpdateTick(pos, neighbour cube.Pos, w *world.World) {
 	// Merge the inventory of both the chests into a single large inventory
 	// of a double chest
 	inv := c.inventory
+	facing := c.Facing
 
 	//noinspection GoAssignmentToReceiver
 	c = NewChest(ChestTypeDouble)
+	c.Facing = facing
 
 	// Add the items from the original chest inventory
 	for _, it := range inv.Clear() {
