@@ -56,7 +56,6 @@ const (
 	hashDragonEgg
 	hashDriedKelp
 	hashDripstone
-	hashDropper
 	hashEmerald
 	hashEmeraldOre
 	hashEnchantingTable
@@ -156,6 +155,7 @@ const (
 	hashStone
 	hashStoneBricks
 	hashStonecutter
+	hashStructureBlock
 	hashSugarCane
 	hashTNT
 	hashTallGrass
@@ -250,7 +250,7 @@ func (b Blackstone) Hash() uint64 {
 
 // Hash ...
 func (b BlastFurnace) Hash() uint64 {
-	return hashBlastFurnace | uint64(b.Facing)<<8 | uint64(boolByte(b.Lit))<<11
+	return hashBlastFurnace | uint64(b.Facing)<<8 | uint64(boolByte(b.Lit))<<10
 }
 
 // Hash ...
@@ -505,7 +505,7 @@ func (f Froglight) Hash() uint64 {
 
 // Hash ...
 func (f Furnace) Hash() uint64 {
-	return hashFurnace | uint64(f.Facing)<<8 | uint64(boolByte(f.Lit))<<11
+	return hashFurnace | uint64(f.Facing)<<8 | uint64(boolByte(f.Lit))<<10
 }
 
 // Hash ...
@@ -880,7 +880,7 @@ func (SmithingTable) Hash() uint64 {
 
 // Hash ...
 func (s Smoker) Hash() uint64 {
-	return hashSmoker | uint64(s.Facing)<<8 | uint64(boolByte(s.Lit))<<11
+	return hashSmoker | uint64(s.Facing)<<8 | uint64(boolByte(s.Lit))<<10
 }
 
 // Hash ...
@@ -941,6 +941,11 @@ func (s StoneBricks) Hash() uint64 {
 // Hash ...
 func (s Stonecutter) Hash() uint64 {
 	return hashStonecutter | uint64(s.Facing)<<8
+}
+
+// Hash ...
+func (StructureBlock) Hash() uint64 {
+	return hashStructureBlock
 }
 
 // Hash ...

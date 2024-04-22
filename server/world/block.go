@@ -80,6 +80,7 @@ var hashes = intintmap.New(7000, 0.999)
 // block passed. RegisterBlock panics if the block properties returned were not valid, existing properties.
 func RegisterBlock(b Block) {
 	name, properties := b.EncodeBlock()
+
 	if _, ok := b.(CustomBlock); ok {
 		registerBlockState(blockState{Name: name, Properties: properties}, true)
 	}
