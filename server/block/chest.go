@@ -24,18 +24,26 @@ type Chest struct {
 	bass
 	sourceWaterDisplacer
 
-	// Facing is the direction that the chest is facing.
-	Facing cube.Direction
 	// CustomName is the custom name of the chest. This name is displayed when the chest is opened, and may
 	// include colour codes.
 	CustomName string
+	// Facing is the direction that the chest is facing.
+	Facing cube.Direction
+
+	// paired is true if the chest is paired
+	paired bool
+	// pairX is the x coordinate of the pair
+	pairX int32
+	// pairZ is the z coordinate of the pair
+	pairZ int32
 
 	inventory *inventory.Inventory
 	viewerMu  *sync.RWMutex
 	viewers   map[ContainerViewer]struct{}
 }
 
-// NewChest creates a new initialised chest. The inventory is properly initialised.
+// NewChest creates a new initialised single chest. The inventory
+// is properly initialised.
 func NewChest() Chest {
 	m := new(sync.RWMutex)
 	v := make(map[ContainerViewer]struct{}, 1)
@@ -69,9 +77,25 @@ func (Chest) SideClosed(cube.Pos, cube.Pos, *world.World) bool {
 	return false
 }
 
+// Paired returns whether the chest is paired
+func (c Chest) Paired() bool {
+	return c.paired
+}
+
+// PairX returns the X coordinate of the pair
+func (c Chest) PairX() int32 {
+	return c.pairX
+}
+
+// PairZ returns the Z coordinate of the pair
+func (c Chest) PairZ() int32 {
+	return c.pairZ
+}
+
 // open opens the chest, displaying the animation and playing a sound.
 func (c Chest) open(w *world.World, pos cube.Pos) {
 	for _, v := range w.Viewers(pos.Vec3()) {
+		println("View Block Open")
 		v.ViewBlockAction(pos, OpenAction{})
 	}
 	w.PlaySound(pos.Vec3Centre(), sound.ChestOpen{})
@@ -87,6 +111,7 @@ func (c Chest) close(w *world.World, pos cube.Pos) {
 
 // AddViewer adds a viewer to the chest, so that it is updated whenever the inventory of the chest is changed.
 func (c Chest) AddViewer(v ContainerViewer, w *world.World, pos cube.Pos) {
+	println("Add Viewer")
 	c.viewerMu.Lock()
 	defer c.viewerMu.Unlock()
 	if len(c.viewers) == 0 {
@@ -113,6 +138,7 @@ func (c Chest) RemoveViewer(v ContainerViewer, w *world.World, pos cube.Pos) {
 func (c Chest) Activate(pos cube.Pos, _ cube.Face, w *world.World, u item.User, _ *item.UseContext) bool {
 	if opener, ok := u.(ContainerOpener); ok {
 		if d, ok := w.Block(pos.Side(cube.FaceUp)).(LightDiffuser); ok && d.LightDiffusionLevel() <= 2 {
+			println("Open Block Container")
 			opener.OpenBlockContainer(pos)
 		}
 		return true
@@ -132,6 +158,86 @@ func (c Chest) UseOnBlock(pos cube.Pos, face cube.Face, _ mgl64.Vec3, w *world.W
 
 	place(w, pos, c, user, ctx)
 	return placed(ctx)
+}
+
+// NeighbourUpdateTick ...
+func (c Chest) NeighbourUpdateTick(pos, neighbour cube.Pos, w *world.World) {
+	// Make sure to ignore the neighbour update ticks for same
+	// block
+	if pos == neighbour {
+		return
+	}
+
+	b := w.Block(neighbour)
+
+	// If a block was broken and it was the chest pair of this paired chest
+	// then we must unpair the chests
+	if _, ok := b.(Air); ok && c.paired {
+		n := cube.Pos{int(c.pairX), pos.Y(), int(c.pairZ)}
+
+		// The paired chest block got broken. We should unpair the chests
+		// now.
+		if n == neighbour {
+			c.paired = false
+			w.SetBlock(pos, c, nil)
+		}
+
+		return
+	}
+
+	// Check if the block that got placed is a chest
+	pair, ok := b.(Chest)
+
+	// It means some other block got placed, we must return
+	if !ok {
+		return
+	}
+
+	// We must ensure that the two chests we are trying to pair must
+	// be facing in the same direction
+	if c.Facing != pair.Facing {
+		return
+	}
+
+	// If either of the chests are already paired with each other or some
+	// other chest then we must return
+	if c.paired || pair.paired {
+		return
+	}
+
+	// Merge the inventory of both the chests into a single large inventory
+	// of a double chest
+	inv := inventory.New(54, func(slot int, _, item item.Stack) {
+		c.viewerMu.RLock()
+		defer c.viewerMu.RUnlock()
+
+		for viewer := range c.viewers {
+			viewer.ViewSlotChange(slot, item)
+		}
+	})
+
+	// Add the items from the original chest inventory
+	for _, it := range c.inventory.Clear() {
+		inv.AddItem(it)
+	}
+
+	// Add the items from the placed chest inventory
+	for _, it := range pair.inventory.Clear() {
+		inv.AddItem(it)
+	}
+
+	pair.paired = true
+	pair.pairX = int32(pos.X())
+	pair.pairZ = int32(pos.Z())
+	pair.inventory = inv
+
+	c.paired = true
+	c.pairX = int32(neighbour.X())
+	c.pairZ = int32(neighbour.Z())
+	c.inventory = inv
+
+	w.SetBlock(pos, c, nil)
+	w.SetBlock(neighbour, pair, nil)
 }
 
 // BreakInfo ...
@@ -157,6 +263,16 @@ func (c Chest) DecodeNBT(data map[string]any) any {
 	c.Facing = facing
 	c.CustomName = nbtconv.String(data, "CustomName")
 	nbtconv.InvFromNBT(c.inventory, nbtconv.Slice(data, "Items"))
+
+	pairx := data["pairx"]
+	pairz, ok := data["pairz"]
+
+	if ok {
+		c.paired = true
+		c.pairX = pairx.(int32)
+		c.pairZ = pairz.(int32)
+	}
+
 	return c
 }
 
@@ -174,6 +290,10 @@ func (c Chest) EncodeNBT() map[string]any {
 	}
 	if c.CustomName != "" {
 		m["CustomName"] = c.CustomName
+	}
+	if c.paired {
+		m["pairx"] = c.pairX
+		m["pairz"] = c.pairZ
 	}
 	return m
 }
