@@ -8,7 +8,7 @@ import (
 // GlassPane is a transparent block that can be used as a more efficient alternative to glass blocks.
 type GlassPane struct {
 	transparent
-	thin
+	ThinModel
 	clicksAndSticks
 	sourceWaterDisplacer
 }

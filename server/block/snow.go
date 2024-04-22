@@ -4,7 +4,7 @@ import "github.com/STCraft/dragonfly/server/item"
 
 // Snow is a full-sized block of snow.
 type Snow struct {
-	solid
+	SolidModel
 }
 
 // BreakInfo ...

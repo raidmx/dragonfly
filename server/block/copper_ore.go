@@ -8,7 +8,7 @@ import (
 
 // CopperOre is a rare mineral block found underground.
 type CopperOre struct {
-	solid
+	SolidModel
 	bassDrum
 
 	// Type is the type of copper ore.

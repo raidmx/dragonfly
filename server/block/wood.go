@@ -13,7 +13,7 @@ import (
 // acacia, dark oak, crimson, and warped.
 // Stripped wood is a variant obtained by using an axe on the wood.
 type Wood struct {
-	solid
+	SolidModel
 	bass
 
 	// Wood is the type of wood.

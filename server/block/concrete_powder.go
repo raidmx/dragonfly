@@ -10,7 +10,7 @@ import (
 // it becomes concrete.
 type ConcretePowder struct {
 	gravityAffected
-	solid
+	SolidModel
 	snare
 
 	// Colour is the colour of the concrete powder.

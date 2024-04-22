@@ -16,7 +16,7 @@ import (
 // butcher's job site block.
 // The empty value of Smoker is not valid. It must be created using block.NewSmoker(cube.Face).
 type Smoker struct {
-	solid
+	SolidModel
 	bassDrum
 	*smelter
 

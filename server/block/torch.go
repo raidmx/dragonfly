@@ -10,7 +10,7 @@ import (
 // Torch are non-solid blocks that emit light.
 type Torch struct {
 	transparent
-	empty
+	EmptyModel
 
 	// Facing is the direction from the torch to the block.
 	Facing cube.Face

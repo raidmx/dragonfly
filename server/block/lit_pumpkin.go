@@ -9,7 +9,7 @@ import (
 
 // LitPumpkin is a decorative light emitting block crafted with a Carved Pumpkin & Torch
 type LitPumpkin struct {
-	solid
+	SolidModel
 
 	// Facing is the direction the pumpkin is facing.
 	Facing cube.Direction

@@ -10,7 +10,7 @@ import (
 // netherite gear.
 type SmithingTable struct {
 	bass
-	solid
+	SolidModel
 }
 
 // EncodeItem ...

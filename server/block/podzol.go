@@ -5,7 +5,7 @@ import "github.com/STCraft/dragonfly/server/world"
 // Podzol is a dirt-type block that naturally blankets the surface of the giant tree taiga and bamboo jungles, along
 // with their respective variants.
 type Podzol struct {
-	solid
+	SolidModel
 }
 
 // SoilFor ...

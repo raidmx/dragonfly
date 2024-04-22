@@ -9,7 +9,7 @@ import (
 
 // Planks are common blocks used in crafting recipes. They are made by crafting logs into planks.
 type Planks struct {
-	solid
+	SolidModel
 	bass
 
 	// Wood is the type of wood of the planks. This field must have one of the values found in the material

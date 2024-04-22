@@ -7,7 +7,7 @@ import (
 
 // DirtPath is a decorative block that can be created by using a shovel on a dirt or grass block.
 type DirtPath struct {
-	tilledGrass
+	TilledGrassModel
 	transparent
 }
 

@@ -2,7 +2,7 @@ package block
 
 // EndBricks is a block made from combining four endstone blocks together.
 type EndBricks struct {
-	solid
+	SolidModel
 	bassDrum
 }
 

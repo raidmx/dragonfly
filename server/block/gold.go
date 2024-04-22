@@ -7,7 +7,7 @@ import (
 
 // Gold is a precious metal block crafted from 9 gold ingots.
 type Gold struct {
-	solid
+	SolidModel
 }
 
 // Instrument ...

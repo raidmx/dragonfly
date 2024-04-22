@@ -9,7 +9,7 @@ import (
 
 // Grass blocks generate abundantly across the surface of the world.
 type Grass struct {
-	solid
+	SolidModel
 }
 
 // plantSelection are the plants that are picked from when a bone meal is attempted.

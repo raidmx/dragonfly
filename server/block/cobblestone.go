@@ -4,7 +4,7 @@ import "github.com/STCraft/dragonfly/server/item"
 
 // Cobblestone is a common block, obtained from mining stone.
 type Cobblestone struct {
-	solid
+	SolidModel
 	bassDrum
 
 	// Mossy specifies if the cobblestone is mossy. This variant of cobblestone is typically found in

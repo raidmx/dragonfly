@@ -9,7 +9,7 @@ import (
 // StainedGlassPane is a transparent block that can be used as a more efficient alternative to glass blocks.
 type StainedGlassPane struct {
 	transparent
-	thin
+	ThinModel
 	clicksAndSticks
 	sourceWaterDisplacer
 

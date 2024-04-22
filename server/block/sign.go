@@ -16,7 +16,7 @@ import (
 // Sign is a non-solid block that can display text on the front and back of the block.
 type Sign struct {
 	transparent
-	empty
+	EmptyModel
 	bass
 	sourceWaterDisplacer
 

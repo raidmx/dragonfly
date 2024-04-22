@@ -10,7 +10,7 @@ import (
 
 // Pumpkin is a crop block. Interacting with shears results in the carved variant.
 type Pumpkin struct {
-	solid
+	SolidModel
 
 	// Carved is whether the pumpkin is carved.
 	Carved bool

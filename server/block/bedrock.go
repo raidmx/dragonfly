@@ -2,7 +2,7 @@ package block
 
 // Bedrock is a block that is indestructible in survival.
 type Bedrock struct {
-	solid
+	SolidModel
 	bassDrum
 
 	// InfiniteBurning specifies if the bedrock block is set aflame and will burn forever. This is the case

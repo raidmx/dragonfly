@@ -8,7 +8,7 @@ import (
 
 // DriedKelp is a block primarily used as fuel in furnaces.
 type DriedKelp struct {
-	solid
+	SolidModel
 }
 
 // BreakInfo ...

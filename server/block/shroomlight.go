@@ -2,7 +2,7 @@ package block
 
 // Shroomlight are light-emitting blocks that generate in huge fungi.
 type Shroomlight struct {
-	solid
+	SolidModel
 }
 
 // LightEmissionLevel ...

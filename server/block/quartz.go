@@ -10,7 +10,7 @@ import (
 type (
 	// Quartz is a mineral block used only for decoration.
 	Quartz struct {
-		solid
+		SolidModel
 		bassDrum
 		// Smooth specifies if the quartz block is smooth or not.
 		Smooth bool
@@ -18,12 +18,12 @@ type (
 
 	// ChiseledQuartz is a mineral block used only for decoration.
 	ChiseledQuartz struct {
-		solid
+		SolidModel
 		bassDrum
 	}
 	// QuartzPillar is a mineral block used only for decoration.
 	QuartzPillar struct {
-		solid
+		SolidModel
 		bassDrum
 		// Axis is the axis which the quartz pillar block faces.
 		Axis cube.Axis

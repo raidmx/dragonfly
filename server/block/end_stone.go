@@ -2,7 +2,7 @@ package block
 
 // EndStone is a block found in The End.
 type EndStone struct {
-	solid
+	SolidModel
 	bassDrum
 }
 

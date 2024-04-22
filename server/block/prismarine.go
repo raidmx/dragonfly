@@ -6,7 +6,7 @@ import (
 
 // Prismarine is a type of stone that appears underwater in ruins and ocean monuments.
 type Prismarine struct {
-	solid
+	SolidModel
 	bassDrum
 
 	// Type is the type of prismarine of the block.

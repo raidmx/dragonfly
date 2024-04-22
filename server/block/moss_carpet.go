@@ -9,7 +9,7 @@ import (
 
 // MossCarpet is a thin decorative variant of the moss block.
 type MossCarpet struct {
-	carpet
+	CarpetModel
 	transparent
 	sourceWaterDisplacer
 }

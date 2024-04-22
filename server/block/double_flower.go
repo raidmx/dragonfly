@@ -11,7 +11,7 @@ import (
 // DoubleFlower is a two block high flower consisting of an upper and lower part.
 type DoubleFlower struct {
 	transparent
-	empty
+	EmptyModel
 
 	// UpperPart is set if the plant is the upper part.
 	UpperPart bool

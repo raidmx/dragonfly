@@ -18,7 +18,7 @@ import (
 // Barrel is a fisherman's job site block, used to store items. It functions like a single chest, although
 // it requires no airspace above it to be opened.
 type Barrel struct {
-	solid
+	SolidModel
 	bass
 
 	// Facing is the direction that the barrel is facing.

@@ -2,7 +2,7 @@ package block
 
 // Amethyst is a decorative block crafted from four amethyst shards.
 type Amethyst struct {
-	solid
+	SolidModel
 }
 
 // BreakInfo ...

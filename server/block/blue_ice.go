@@ -2,7 +2,7 @@ package block
 
 // BlueIce is a solid block similar to packed ice.
 type BlueIce struct {
-	solid
+	SolidModel
 }
 
 // BreakInfo ...

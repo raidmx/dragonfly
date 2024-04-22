@@ -4,7 +4,7 @@ import "github.com/STCraft/dragonfly/server/item"
 
 // DeepslateTiles are a tiled variant of deepslate and can spawn in ancient cities.
 type DeepslateTiles struct {
-	solid
+	SolidModel
 	bassDrum
 
 	// Cracked specifies if the deepslate tiles is its cracked variant.

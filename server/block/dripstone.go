@@ -2,7 +2,7 @@ package block
 
 // Dripstone is a rock block that allows pointed dripstone to grow beneath it.
 type Dripstone struct {
-	solid
+	SolidModel
 	bassDrum
 }
 

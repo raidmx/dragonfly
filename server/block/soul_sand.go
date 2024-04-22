@@ -7,7 +7,7 @@ import (
 
 // SoulSand is a block found naturally only in the Nether. SoulSand slows movement of mobs & players.
 type SoulSand struct {
-	solid
+	SolidModel
 }
 
 // TODO: Implement bubble columns.

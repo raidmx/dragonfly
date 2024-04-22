@@ -4,7 +4,7 @@ package block
 // It shares many of its properties with barriers.
 type InvisibleBedrock struct {
 	transparent
-	solid
+	SolidModel
 }
 
 // EncodeItem ...

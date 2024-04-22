@@ -4,7 +4,7 @@ import "github.com/STCraft/dragonfly/server/item"
 
 // DeepslateBricks are a brick variant of deepslate and can spawn in ancient cities.
 type DeepslateBricks struct {
-	solid
+	SolidModel
 	bassDrum
 
 	// Cracked specifies if the deepslate bricks is its cracked variant.

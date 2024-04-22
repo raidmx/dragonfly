@@ -6,7 +6,7 @@ import (
 
 // DiamondOre is a rare ore that generates underground.
 type DiamondOre struct {
-	solid
+	SolidModel
 	bassDrum
 
 	// Type is the type of diamond ore.

@@ -6,7 +6,7 @@ import (
 
 // Netherite is a precious mineral block made from 9 netherite ingots.
 type Netherite struct {
-	solid
+	SolidModel
 	bassDrum
 }
 

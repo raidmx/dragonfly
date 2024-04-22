@@ -5,7 +5,7 @@ import "github.com/STCraft/dragonfly/server/item"
 type (
 	// Stone is a block found underground in the world or on mountains.
 	Stone struct {
-		solid
+		SolidModel
 		bassDrum
 
 		// Smooth specifies if the stone is its smooth variant.
@@ -21,7 +21,7 @@ type (
 
 	// polishable forms the base of blocks that may be polished.
 	polishable struct {
-		solid
+		SolidModel
 		bassDrum
 		// Polished specifies if the block is polished or not. When set to true, the block will represent its
 		// polished variant, for example polished andesite.

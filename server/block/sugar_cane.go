@@ -12,7 +12,7 @@ import (
 
 // SugarCane is a plant block that generates naturally near water.
 type SugarCane struct {
-	empty
+	EmptyModel
 	transparent
 
 	// Age is the growth state of sugar cane. Values range from 0 to 15.

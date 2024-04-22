@@ -6,7 +6,7 @@ import (
 
 // RawIron is a raw metal block equivalent to nine raw iron.
 type RawIron struct {
-	solid
+	SolidModel
 	bassDrum
 }
 

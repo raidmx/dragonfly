@@ -2,7 +2,7 @@ package block
 
 // Tuff is an ornamental rock formed from volcanic ash, occurring in underground blobs below Y=16.
 type Tuff struct {
-	solid
+	SolidModel
 	bassDrum
 }
 

@@ -4,7 +4,7 @@ import "github.com/STCraft/dragonfly/server/item"
 
 // NetherQuartzOre is ore found in the Nether.
 type NetherQuartzOre struct {
-	solid
+	SolidModel
 	bassDrum
 }
 

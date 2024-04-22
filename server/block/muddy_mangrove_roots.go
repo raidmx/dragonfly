@@ -9,7 +9,7 @@ import (
 
 // MuddyMangroveRoots are a decorative variant of mangrove roots.
 type MuddyMangroveRoots struct {
-	solid
+	SolidModel
 
 	// Axis is the axis which the muddy mangrove roots faces.
 	Axis cube.Axis

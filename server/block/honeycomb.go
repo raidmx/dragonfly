@@ -6,7 +6,7 @@ import (
 
 // Honeycomb is a decorative blocks crafted from honeycombs.
 type Honeycomb struct {
-	solid
+	SolidModel
 }
 
 // Instrument ...

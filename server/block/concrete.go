@@ -8,7 +8,7 @@ import (
 // Concrete is a solid block which comes in the 16 regular dye colors, created by placing concrete powder
 // adjacent to water.
 type Concrete struct {
-	solid
+	SolidModel
 	bassDrum
 
 	// Colour is the colour of the concrete block.

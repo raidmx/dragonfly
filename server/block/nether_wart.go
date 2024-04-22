@@ -12,7 +12,7 @@ import (
 // NetherWart is a fungus found in the Nether that is vital in the creation of potions.
 type NetherWart struct {
 	transparent
-	empty
+	EmptyModel
 
 	// Age is the age of the nether wart block. 3 is fully grown.
 	Age int

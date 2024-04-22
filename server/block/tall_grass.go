@@ -14,7 +14,7 @@ import (
 type TallGrass struct {
 	replaceable
 	transparent
-	empty
+	EmptyModel
 
 	// Type is the type of tall grass that the plant represents.
 	Type TallGrassType

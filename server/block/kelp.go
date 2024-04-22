@@ -11,7 +11,7 @@ import (
 
 // Kelp is an underwater block which can grow on top of solids underwater.
 type Kelp struct {
-	empty
+	EmptyModel
 	transparent
 	sourceWaterDisplacer
 

@@ -6,7 +6,7 @@ import (
 
 // IronOre is a mineral block found underground.
 type IronOre struct {
-	solid
+	SolidModel
 	bassDrum
 
 	// Type is the type of iron ore.

@@ -4,7 +4,7 @@ import "github.com/STCraft/dragonfly/server/item"
 
 // PolishedBlackstoneBrick are a brick variant of polished blackstone and can spawn in bastion remnants and ruined portals.
 type PolishedBlackstoneBrick struct {
-	solid
+	SolidModel
 	bassDrum
 
 	// Cracked specifies if the polished blackstone bricks is its cracked variant.

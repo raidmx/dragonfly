@@ -8,7 +8,7 @@ import (
 
 // Coal is a precious mineral block made from 9 coal.
 type Coal struct {
-	solid
+	SolidModel
 	bassDrum
 }
 
