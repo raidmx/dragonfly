@@ -100,21 +100,33 @@ func (c Chest) PairZ() int32 {
 // LeftPair returns whether the chest at the specified position
 // is a paired chest on the left side
 func (c Chest) LeftPair(pos cube.Pos) bool {
-	if int(c.pairX) == pos.X() {
-		return pos.Z() > int(c.pairZ)
+	if pos.X() == int(c.pairX) {
+		if c.Facing == cube.East {
+			return pos.Z() > int(c.pairZ)
+		}
+
+		if c.Facing == cube.West {
+			return pos.Z() < int(c.pairZ)
+		}
 	}
 
-	return pos.X() > int(c.pairX)
+	if pos.Z() == int(c.pairZ) {
+		if c.Facing == cube.North {
+			return pos.X() > int(c.pairX)
+		}
+
+		if c.Facing == cube.South {
+			return pos.X() < int(c.pairX)
+		}
+	}
+
+	panic("this should never happen")
 }
 
 // RightPair returns whether the chest at the specified position
 // is a paired chest on the right side
 func (c Chest) RightPair(pos cube.Pos) bool {
-	if int(c.pairX) == pos.X() {
-		return pos.Z() < int(c.pairZ)
-	}
-
-	return pos.X() < int(c.pairX)
+	return !c.LeftPair(pos)
 }
 
 // Pair returns the cube.Pos of the chest paired with this chest

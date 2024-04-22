@@ -1941,14 +1941,13 @@ func (p *Player) drops(held item.Stack, pos cube.Pos, w *world.World) []item.Sta
 			// than half of the total items get dropped and no more than half of the
 			// items get put in the inventory.
 			isLeftPair := c.LeftPair(pos)
-			isRightPair := c.RightPair(pos)
 
 			for slot, it := range inv.Slots() {
 				if it.Empty() {
 					continue
 				}
 
-				if (isLeftPair && slot < block.ChestTypeSingle) || (isRightPair && slot >= block.ChestTypeSingle) {
+				if (isLeftPair && slot < block.ChestTypeSingle) || (!isLeftPair && slot >= block.ChestTypeSingle) {
 					drops = append(drops, it)
 				} else {
 					pair.Inventory().AddItem(it)
