@@ -1924,7 +1924,7 @@ func (p *Player) drops(held item.Stack, pos cube.Pos, w *world.World) []item.Sta
 			pos := cube.Pos{int(c.PairX()), pos.Y(), int(c.PairZ())}
 			facing := w.Block(pos).(block.Chest).Facing
 
-			pair := block.NewChest()
+			pair := block.NewChest(block.ChestTypeSingle)
 			pair.Facing = facing
 			inv := c.Inventory()
 

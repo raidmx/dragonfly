@@ -15,6 +15,11 @@ import (
 	"github.com/go-gl/mathgl/mgl64"
 )
 
+const (
+	ChestTypeSingle int = 27
+	ChestTypeDouble int = 54
+)
+
 // Chest is a container block which may be used to store items. Chests may also be paired to create a bigger
 // single container.
 // The empty value of Chest is not valid. It must be created using block.NewChest().
@@ -42,13 +47,13 @@ type Chest struct {
 	viewers   map[ContainerViewer]struct{}
 }
 
-// NewChest creates a new initialised single chest. The inventory
+// NewChest creates a new initialised chest of the provided type. The inventory
 // is properly initialised.
-func NewChest() Chest {
+func NewChest(chestType int) Chest {
 	m := new(sync.RWMutex)
 	v := make(map[ContainerViewer]struct{}, 1)
 	return Chest{
-		inventory: inventory.New(27, func(slot int, _, item item.Stack) {
+		inventory: inventory.New(chestType, func(slot int, _, item item.Stack) {
 			m.RLock()
 			defer m.RUnlock()
 			for viewer := range v {
@@ -153,7 +158,7 @@ func (c Chest) UseOnBlock(pos cube.Pos, face cube.Face, _ mgl64.Vec3, w *world.W
 		return
 	}
 	//noinspection GoAssignmentToReceiver
-	c = NewChest()
+	c = NewChest(ChestTypeSingle)
 	c.Facing = user.Rotation().Direction().Opposite()
 
 	place(w, pos, c, user, ctx)
@@ -207,34 +212,24 @@ func (c Chest) NeighbourUpdateTick(pos, neighbour cube.Pos, w *world.World) {
 
 	// Merge the inventory of both the chests into a single large inventory
 	// of a double chest
-	inv := inventory.New(54, func(slot int, _, item item.Stack) {
-		c.viewerMu.RLock()
-		defer c.viewerMu.RUnlock()
+	inv := c.inventory
 
-		for viewer := range c.viewers {
-			viewer.ViewSlotChange(slot, item)
-		}
-	})
+	//noinspection GoAssignmentToReceiver
+	c = NewChest(ChestTypeDouble)
 
 	// Add the items from the original chest inventory
-	for _, it := range c.inventory.Clear() {
-		inv.AddItem(it)
-	}
-
-	// Add the items from the placed chest inventory
-	for _, it := range pair.inventory.Clear() {
-		inv.AddItem(it)
+	for _, it := range inv.Clear() {
+		c.inventory.AddItem(it)
 	}
 
 	pair.paired = true
 	pair.pairX = int32(pos.X())
 	pair.pairZ = int32(pos.Z())
-	pair.inventory = inv
+	pair.inventory = c.inventory
 
 	c.paired = true
 	c.pairX = int32(neighbour.X())
 	c.pairZ = int32(neighbour.Z())
-	c.inventory = inv
 
 	w.SetBlock(pos, c, nil)
 	w.SetBlock(neighbour, pair, nil)
@@ -258,20 +253,24 @@ func (c Chest) FlammabilityInfo() FlammabilityInfo {
 // DecodeNBT ...
 func (c Chest) DecodeNBT(data map[string]any) any {
 	facing := c.Facing
-	//noinspection GoAssignmentToReceiver
-	c = NewChest()
-	c.Facing = facing
-	c.CustomName = nbtconv.String(data, "CustomName")
-	nbtconv.InvFromNBT(c.inventory, nbtconv.Slice(data, "Items"))
-
 	pairx := data["pairx"]
 	pairz, ok := data["pairz"]
 
 	if ok {
+		//noinspection GoAssignmentToReceiver
+		c = NewChest(ChestTypeDouble)
+
 		c.paired = true
 		c.pairX = pairx.(int32)
 		c.pairZ = pairz.(int32)
+	} else {
+		//noinspection GoAssignmentToReceiver
+		c = NewChest(ChestTypeSingle)
 	}
+
+	c.Facing = facing
+	c.CustomName = nbtconv.String(data, "CustomName")
+	nbtconv.InvFromNBT(c.inventory, nbtconv.Slice(data, "Items"))
 
 	return c
 }
@@ -280,8 +279,13 @@ func (c Chest) DecodeNBT(data map[string]any) any {
 func (c Chest) EncodeNBT() map[string]any {
 	if c.inventory == nil {
 		facing, customName := c.Facing, c.CustomName
-		//noinspection GoAssignmentToReceiver
-		c = NewChest()
+		if c.paired {
+			//noinspection GoAssignmentToReceiver
+			c = NewChest(ChestTypeDouble)
+		} else {
+			//noinspection GoAssignmentToReceiver
+			c = NewChest(ChestTypeSingle)
+		}
 		c.Facing, c.CustomName = facing, customName
 	}
 	m := map[string]any{
