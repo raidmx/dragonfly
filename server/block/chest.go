@@ -22,7 +22,6 @@ const (
 
 // Chest is a container block which may be used to store items. Chests may also be paired to create a bigger
 // single container.
-// The empty value of Chest is not valid. It must be created using block.NewChest().
 type Chest struct {
 	chest
 	transparent
@@ -48,10 +47,12 @@ type Chest struct {
 }
 
 // NewChest creates a new initialised chest of the provided type. The inventory
-// is properly initialised.
+// is properly initialised. You still need to set the correct direction facing of
+// the chest etc.
 func NewChest(chestType int) Chest {
-	m := new(sync.RWMutex)
-	v := make(map[ContainerViewer]struct{}, 1)
+	m := &sync.RWMutex{}
+	v := map[ContainerViewer]struct{}{}
+
 	return Chest{
 		inventory: inventory.New(chestType, func(slot int, _, item item.Stack) {
 			m.RLock()
