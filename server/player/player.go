@@ -1928,8 +1928,8 @@ func (p *Player) drops(held item.Stack, pos cube.Pos, w *world.World) []item.Sta
 
 		if c, ok := b.(block.Chest); ok && c.Paired() {
 			// Get the position of the other pair and get its facing
-			pos := c.Pair(pos)
-			facing := w.Block(pos).(block.Chest).Facing
+			pairPos := c.Pair(pos)
+			facing := w.Block(pairPos).(block.Chest).Facing
 
 			// Create a new chest block of single inventory type and put
 			// the same facing we got earlier
@@ -1940,8 +1940,15 @@ func (p *Player) drops(held item.Stack, pos cube.Pos, w *world.World) []item.Sta
 			// Distribute the inventory of the large chest properly so that no more
 			// than half of the total items get dropped and no more than half of the
 			// items get put in the inventory.
-			for slot, it := range inv.Clear() {
-				if slot >= block.ChestTypeSingle {
+			isLeftPair := c.LeftPair(pos)
+			isRightPair := c.RightPair(pos)
+
+			for slot, it := range inv.Slots() {
+				if it.Empty() {
+					continue
+				}
+
+				if (isLeftPair && slot < block.ChestTypeSingle) || (isRightPair && slot >= block.ChestTypeSingle) {
 					drops = append(drops, it)
 				} else {
 					pair.Inventory().AddItem(it)
@@ -1949,7 +1956,7 @@ func (p *Player) drops(held item.Stack, pos cube.Pos, w *world.World) []item.Sta
 			}
 
 			// Send the updated block
-			w.SetBlock(pos, pair, nil)
+			w.SetBlock(pairPos, pair, nil)
 		} else {
 			// If the block is a container, it should drop its inventory contents regardless whether the
 			// player is in creative mode or not.
