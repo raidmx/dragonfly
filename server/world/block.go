@@ -9,7 +9,7 @@ import (
 	"github.com/STCraft/dragonfly/server/block/cube"
 	"github.com/STCraft/dragonfly/server/block/customblock"
 	"github.com/STCraft/dragonfly/server/world/chunk"
-	"github.com/brentp/intintmap"
+	"github.com/STCraft/intintmap"
 )
 
 // Block is a block that may be placed or found in a world. In addition, the block may also be added to an

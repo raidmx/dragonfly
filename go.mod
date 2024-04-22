@@ -3,7 +3,7 @@ module github.com/STCraft/dragonfly
 go 1.21
 
 require (
-	github.com/brentp/intintmap v0.0.0-20190211203843-30dc0ade9af9
+	github.com/STCraft/intintmap v0.0.0-20240422151941-3d281c7c7cb6
 	github.com/cespare/xxhash/v2 v2.2.0
 	github.com/df-mc/atomic v1.10.0
 	github.com/df-mc/goleveldb v1.1.9

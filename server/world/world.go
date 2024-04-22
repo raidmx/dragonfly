@@ -1005,7 +1005,6 @@ func (w *World) Close() {
 		return
 	}
 	w.o.Do(w.close)
-	return
 }
 
 // close stops the World from ticking, saves all chunks to the Provider and updates the world's settings.

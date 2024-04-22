@@ -1,5 +1,5 @@
-github.com/brentp/intintmap v0.0.0-20190211203843-30dc0ade9af9 h1:/G0ghZwrhou0Wq21qc1vXXMm/t/aKWkALWwITptKbE0=
-github.com/brentp/intintmap v0.0.0-20190211203843-30dc0ade9af9/go.mod h1:TOk10ahXejq9wkEaym3KPRNeuR/h5Jx+s8QRWIa2oTM=
+github.com/STCraft/intintmap v0.0.0-20240422151941-3d281c7c7cb6 h1:H0bsrrneljIOOG0tmKSovNmKJ0o5qiHDUSLKqyZL6mw=
+github.com/STCraft/intintmap v0.0.0-20240422151941-3d281c7c7cb6/go.mod h1:igRwOzVRi/LUaXSJzJ3hH69FfwIySOO+UNDILZiRGso=
 github.com/cespare/xxhash/v2 v2.2.0 h1:DC2CZ1Ep5Y4k3ZQ899DldepgrayRUGE6BBZ/cd9Cj44=
 github.com/cespare/xxhash/v2 v2.2.0/go.mod h1:VGX0DQ3Q6kWi7AoAeZDth3/j3BFtOZR5XLFGgcrjCOs=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
