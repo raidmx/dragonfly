@@ -66,6 +66,11 @@ func NewChest(chestType int) Chest {
 	}
 }
 
+// SetInventory sets the inventory of the chest to the one provided.
+func (c *Chest) SetInventory(inv *inventory.Inventory) {
+	c.inventory = inv
+}
+
 // Inventory returns the inventory of the chest. The size of the inventory will be 27 or 54, depending on
 // whether the chest is single or double.
 func (c Chest) Inventory() *inventory.Inventory {
