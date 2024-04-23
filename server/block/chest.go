@@ -135,6 +135,36 @@ func (c Chest) Pair(pos cube.Pos) cube.Pos {
 	return cube.Pos{int(c.pairX), pos.Y(), int(c.pairZ)}
 }
 
+// CreatePair creates a pair with the chest at the provided position in the provided
+// world
+func (c Chest) CreatePair(pos, neighbour cube.Pos, pair Chest, w *world.World) {
+	// Merge the inventory of both the chests into a single large inventory
+	// of a double chest
+	inv := c.inventory
+	facing := c.Facing
+
+	//noinspection GoAssignmentToReceiver
+	c = NewChest(ChestTypeDouble)
+	c.Facing = facing
+
+	// Add the items from the original chest inventory
+	for _, it := range inv.Clear() {
+		c.inventory.AddItem(it)
+	}
+
+	pair.paired = true
+	pair.pairX = int32(pos.X())
+	pair.pairZ = int32(pos.Z())
+	pair.inventory = c.inventory
+
+	c.paired = true
+	c.pairX = int32(neighbour.X())
+	c.pairZ = int32(neighbour.Z())
+
+	w.SetBlock(pos, c, nil)
+	w.SetBlock(neighbour, pair, nil)
+}
+
 // open opens the chest, displaying the animation and playing a sound.
 func (c Chest) open(w *world.World, pos cube.Pos) {
 	for _, v := range w.Viewers(pos.Vec3()) {
@@ -253,31 +283,7 @@ func (c Chest) NeighbourUpdateTick(pos, neighbour cube.Pos, w *world.World) {
 		return
 	}
 
-	// Merge the inventory of both the chests into a single large inventory
-	// of a double chest
-	inv := c.inventory
-	facing := c.Facing
-
-	//noinspection GoAssignmentToReceiver
-	c = NewChest(ChestTypeDouble)
-	c.Facing = facing
-
-	// Add the items from the original chest inventory
-	for _, it := range inv.Clear() {
-		c.inventory.AddItem(it)
-	}
-
-	pair.paired = true
-	pair.pairX = int32(pos.X())
-	pair.pairZ = int32(pos.Z())
-	pair.inventory = c.inventory
-
-	c.paired = true
-	c.pairX = int32(neighbour.X())
-	c.pairZ = int32(neighbour.Z())
-
-	w.SetBlock(pos, c, nil)
-	w.SetBlock(neighbour, pair, nil)
+	c.CreatePair(pos, neighbour, pair, w)
 }
 
 // BreakInfo ...
