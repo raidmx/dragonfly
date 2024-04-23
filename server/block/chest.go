@@ -34,12 +34,12 @@ type Chest struct {
 	// Facing is the direction that the chest is facing.
 	Facing cube.Direction
 
-	// paired is true if the chest is paired
-	paired bool
-	// pairX is the x coordinate of the pair
-	pairX int32
-	// pairZ is the z coordinate of the pair
-	pairZ int32
+	// Paired is true if the chest is Paired
+	Paired bool
+	// PairX is the x coordinate of the pair
+	PairX int32
+	// PairZ is the z coordinate of the pair
+	PairZ int32
 
 	inventory *inventory.Inventory
 	viewerMu  *sync.RWMutex
@@ -83,41 +83,26 @@ func (Chest) SideClosed(cube.Pos, cube.Pos, *world.World) bool {
 	return false
 }
 
-// Paired returns whether the chest is paired
-func (c Chest) Paired() bool {
-	return c.paired
-}
-
-// PairX returns the X coordinate of the pair
-func (c Chest) PairX() int32 {
-	return c.pairX
-}
-
-// PairZ returns the Z coordinate of the pair
-func (c Chest) PairZ() int32 {
-	return c.pairZ
-}
-
 // LeftPair returns whether the chest at the specified position
 // is a paired chest on the left side
 func (c Chest) LeftPair(pos cube.Pos) bool {
-	if pos.X() == int(c.pairX) {
+	if pos.X() == int(c.PairX) {
 		if c.Facing == cube.East {
-			return pos.Z() > int(c.pairZ)
+			return pos.Z() > int(c.PairZ)
 		}
 
 		if c.Facing == cube.West {
-			return pos.Z() < int(c.pairZ)
+			return pos.Z() < int(c.PairZ)
 		}
 	}
 
-	if pos.Z() == int(c.pairZ) {
+	if pos.Z() == int(c.PairZ) {
 		if c.Facing == cube.North {
-			return pos.X() > int(c.pairX)
+			return pos.X() > int(c.PairX)
 		}
 
 		if c.Facing == cube.South {
-			return pos.X() < int(c.pairX)
+			return pos.X() < int(c.PairX)
 		}
 	}
 
@@ -132,7 +117,7 @@ func (c Chest) RightPair(pos cube.Pos) bool {
 
 // Pair returns the cube.Pos of the chest paired with this chest
 func (c Chest) Pair(pos cube.Pos) cube.Pos {
-	return cube.Pos{int(c.pairX), pos.Y(), int(c.pairZ)}
+	return cube.Pos{int(c.PairX), pos.Y(), int(c.PairZ)}
 }
 
 // open opens the chest, displaying the animation and playing a sound.
@@ -140,7 +125,7 @@ func (c Chest) open(w *world.World, pos cube.Pos) {
 	for _, v := range w.Viewers(pos.Vec3()) {
 		v.ViewBlockAction(pos, OpenAction{})
 
-		if c.paired {
+		if c.Paired {
 			v.ViewBlockAction(c.Pair(pos), OpenAction{})
 		}
 	}
@@ -152,7 +137,7 @@ func (c Chest) close(w *world.World, pos cube.Pos) {
 	for _, v := range w.Viewers(pos.Vec3()) {
 		v.ViewBlockAction(pos, CloseAction{})
 
-		if c.paired {
+		if c.Paired {
 			v.ViewBlockAction(c.Pair(pos), CloseAction{})
 		}
 	}
@@ -220,13 +205,13 @@ func (c Chest) NeighbourUpdateTick(pos, neighbour cube.Pos, w *world.World) {
 
 	// If a block was broken and it was the chest pair of this paired chest
 	// then we must unpair the chests
-	if _, ok := b.(Air); ok && c.paired {
+	if _, ok := b.(Air); ok && c.Paired {
 		n := c.Pair(pos)
 
 		// The paired chest block got broken. We should unpair the chests
 		// now.
 		if n == neighbour {
-			c.paired = false
+			c.Paired = false
 			w.SetBlock(pos, c, nil)
 		}
 
@@ -249,7 +234,7 @@ func (c Chest) NeighbourUpdateTick(pos, neighbour cube.Pos, w *world.World) {
 
 	// If either of the chests are already paired with each other or some
 	// other chest then we must return
-	if c.paired || pair.paired {
+	if c.Paired || pair.Paired {
 		return
 	}
 
@@ -267,14 +252,14 @@ func (c Chest) NeighbourUpdateTick(pos, neighbour cube.Pos, w *world.World) {
 		c.inventory.AddItem(it)
 	}
 
-	pair.paired = true
-	pair.pairX = int32(pos.X())
-	pair.pairZ = int32(pos.Z())
+	pair.Paired = true
+	pair.PairX = int32(pos.X())
+	pair.PairZ = int32(pos.Z())
 	pair.inventory = c.inventory
 
-	c.paired = true
-	c.pairX = int32(neighbour.X())
-	c.pairZ = int32(neighbour.Z())
+	c.Paired = true
+	c.PairX = int32(neighbour.X())
+	c.PairZ = int32(neighbour.Z())
 
 	w.SetBlock(pos, c, nil)
 	w.SetBlock(neighbour, pair, nil)
@@ -305,9 +290,9 @@ func (c Chest) DecodeNBT(data map[string]any) any {
 		//noinspection GoAssignmentToReceiver
 		c = NewChest(ChestTypeDouble)
 
-		c.paired = true
-		c.pairX = pairx.(int32)
-		c.pairZ = pairz.(int32)
+		c.Paired = true
+		c.PairX = pairx.(int32)
+		c.PairZ = pairz.(int32)
 	} else {
 		//noinspection GoAssignmentToReceiver
 		c = NewChest(ChestTypeSingle)
@@ -324,7 +309,7 @@ func (c Chest) DecodeNBT(data map[string]any) any {
 func (c Chest) EncodeNBT() map[string]any {
 	if c.inventory == nil {
 		facing, customName := c.Facing, c.CustomName
-		if c.paired {
+		if c.Paired {
 			//noinspection GoAssignmentToReceiver
 			c = NewChest(ChestTypeDouble)
 		} else {
@@ -340,9 +325,9 @@ func (c Chest) EncodeNBT() map[string]any {
 	if c.CustomName != "" {
 		m["CustomName"] = c.CustomName
 	}
-	if c.paired {
-		m["pairx"] = c.pairX
-		m["pairz"] = c.pairZ
+	if c.Paired {
+		m["pairx"] = c.PairX
+		m["pairz"] = c.PairZ
 	}
 	return m
 }

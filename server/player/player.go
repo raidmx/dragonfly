@@ -1926,7 +1926,7 @@ func (p *Player) drops(held item.Stack, pos cube.Pos, w *world.World) []item.Sta
 			handle the drops properly
 		*/
 
-		if c, ok := b.(block.Chest); ok && c.Paired() {
+		if c, ok := b.(block.Chest); ok && c.Paired {
 			// Get the position of the other pair and get its facing
 			pairPos := c.Pair(pos)
 			facing := w.Block(pairPos).(block.Chest).Facing
