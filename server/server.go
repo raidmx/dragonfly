@@ -77,7 +77,7 @@ type HandleFunc func(p *player.Player)
 
 // New creates and returns a new Server using the config.toml if present or returns
 // a Server from the DefaultConfig and creates a new config.toml
-func New() *Server {
+func New() (*Server, *logrus.Logger) {
 	log := logrus.New()
 	log.Formatter = &logrus.TextFormatter{ForceColors: true}
 	log.Level = logrus.DebugLevel
@@ -90,7 +90,7 @@ func New() *Server {
 	}
 
 	go startConsole(log)
-	return config.New()
+	return config.New(), log
 }
 
 // FromDefault creates a Server using a default Config. The Server's worlds are created
