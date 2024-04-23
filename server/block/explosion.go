@@ -66,7 +66,7 @@ func init() {
 	}
 }
 
-// Explode performs the explosion as specified by the configuration.
+// Explode performs the explosion as specified by the configuration
 func (c ExplosionConfig) Explode(w *world.World, explosionPos mgl64.Vec3) {
 	if c.Sound == nil {
 		c.Sound = sound.Explosion{}
@@ -131,7 +131,57 @@ func (c ExplosionConfig) Explode(w *world.World, explosionPos mgl64.Vec3) {
 	}
 	for _, pos := range affectedBlocks {
 		bl := w.Block(pos)
-		if explodable, ok := bl.(Explodable); ok {
+		if container, ok := bl.(Container); ok {
+			var drops []item.Stack
+
+			/*
+				If the block that got broken is a double chest and is paired we must
+				handle the drops properly
+			*/
+
+			if c, ok := bl.(Chest); ok && c.Paired {
+				// Get the position of the other pair and get its facing
+				pairPos := c.Pair(pos)
+				facing := w.Block(pairPos).(Chest).Facing
+
+				// Create a new chest block of single inventory type and put
+				// the same facing we got earlier
+				pair := NewChest(ChestTypeSingle)
+				pair.Facing = facing
+				inv := c.Inventory()
+
+				// Distribute the inventory of the large chest properly so that no more
+				// than half of the total items get dropped and no more than half of the
+				// items get put in the inventory.
+				isLeftPair := c.LeftPair(pos)
+
+				for slot, it := range inv.Slots() {
+					if it.Empty() {
+						continue
+					}
+
+					if (isLeftPair && slot < ChestTypeSingle) || (!isLeftPair && slot >= ChestTypeSingle) {
+						drops = append(drops, it)
+					} else {
+						pair.Inventory().AddItem(it)
+					}
+				}
+
+				// Send the updated block
+				w.SetBlock(pairPos, pair, nil)
+			} else {
+				// If the block is a container, it should drop its inventory contents regardless whether the
+				// player is in creative mode or not.
+				drops = container.Inventory().Items()
+			}
+
+			container.Inventory().Clear()
+			w.SetBlock(pos, nil, nil)
+
+			for _, drop := range drops {
+				dropItem(w, drop, pos.Vec3())
+			}
+		} else if explodable, ok := bl.(Explodable); ok {
 			explodable.Explode(explosionPos, pos, w, c)
 		} else if breakable, ok := bl.(Breakable); ok {
 			w.SetBlock(pos, nil, nil)
