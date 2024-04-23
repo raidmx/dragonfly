@@ -116,14 +116,13 @@ func (srv *Server) Start() {
 }
 
 // RegisterHandler registers the specified handler with the provided key.
-// This returns false if a handler with the specified name already exists.
-func (srv *Server) RegisterHandler(key string, h player.Handler) bool {
+// This panics if a handler with the specified name already exists.
+func (srv *Server) RegisterHandler(key string, h player.Handler) {
 	if _, ok := srv.handlers[key]; ok {
-		return false
+		panic("handler with the same name already exists")
 	}
 
 	srv.handlers[key] = h
-	return true
 }
 
 // UnregisterHandler unregisters the specified handler with the provided key
@@ -430,10 +429,7 @@ func (srv *Server) finaliseConn(ctx context.Context, conn session.Conn, l Listen
 
 	for key, handler := range srv.handlers {
 		h := handler.New(p)
-
-		if !p.AddHandler(key, h) {
-			srv.conf.Log.Debugf("Handler %s failed to register as one already exists!", key)
-		}
+		p.AddHandler(key, h)
 	}
 
 	srv.pmu.Lock()

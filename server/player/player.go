@@ -279,19 +279,14 @@ func (p *Player) Handle(f func(h Handler) *event.Context) bool {
 	return cancelled
 }
 
-// AddHandler adds the specified handler with the provided key. It returns false if the handler
+// AddHandler adds the specified handler with the provided key. It panics if the handler
 // provided is nil or if another handler with the same key exists already.
-func (p *Player) AddHandler(key string, h Handler) bool {
+func (p *Player) AddHandler(key string, h Handler) {
 	if h == nil {
-		return false
-	}
-
-	if _, ok := p.h.Load(key); ok {
-		return false
+		panic("handler provided is nil")
 	}
 
 	p.h.Store(key, h)
-	return true
 }
 
 // RemoveHandler removes the handler with the specified key from the player.

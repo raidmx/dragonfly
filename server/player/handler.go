@@ -142,13 +142,15 @@ type Handler interface {
 // NopHandler implements the Handler interface but does not execute any code when an event is called. The
 // default Handler of players is set to NopHandler.
 // Users may embed NopHandler to avoid having to implement each method.
-type NopHandler struct{}
+type NopHandler struct {
+	p *Player
+}
 
 // Compile time check to make sure NopHandler implements Handler.
 var _ Handler = NopHandler{}
 
-func (NopHandler) New(*Player) Handler {
-	return NopHandler{}
+func (NopHandler) New(p *Player) Handler {
+	return NopHandler{p: p}
 }
 func (NopHandler) HandleJoin(*event.Context)                                                  {}
 func (NopHandler) HandleItemDrop(*event.Context, world.Entity)                                {}
