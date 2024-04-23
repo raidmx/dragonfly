@@ -62,7 +62,7 @@ type Player struct {
 	armour                   *inventory.Armour
 	heldSlot                 *atomic.Uint32
 
-	sneaking, sprinting, swimming, gliding, flying,
+	sneaking, sprinting, swimming, gliding, flight, flying,
 	invisible, immobile, onGround, usingItem atomic.Bool
 	usingSince atomic.Int64
 
@@ -519,6 +519,12 @@ func (p *Player) Speed() float64 {
 // Health returns the current health of the player. It will always be lower than Player.MaxHealth().
 func (p *Player) Health() float64 {
 	return p.health.Health()
+}
+
+// SetHealth sets the health for the player to the value provided. It will always be lower than
+// Player.MaxHealth().
+func (p *Player) SetHealth(health float64) {
+	p.health.SetHealth(health)
 }
 
 // MaxHealth returns the maximum amount of health that a player may have. The MaxHealth will always be higher
@@ -1112,6 +1118,23 @@ func (p *Player) StopFlying() {
 		return
 	}
 	p.Session().SendGameMode(p.GameMode())
+}
+
+// EnableFlight enables the flight for the player
+func (p *Player) EnableFlight() {
+	p.flight.Store(true)
+	p.Session().SendAbilities()
+}
+
+// Flight returns whether the player can fly
+func (p *Player) Flight() bool {
+	return p.flight.Load()
+}
+
+// DisableFlight disables flight for the player
+func (p *Player) DisableFlight() {
+	p.flight.Store(false)
+	p.Session().SendAbilities()
 }
 
 // Jump makes the player jump if they are on ground. It exhausts the player by 0.05 food points, an additional 0.15

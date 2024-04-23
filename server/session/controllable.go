@@ -38,6 +38,7 @@ type Controllable interface {
 	GameMode() world.GameMode
 	SetGameMode(mode world.GameMode)
 	Effects() []effect.Effect
+	Flight() bool
 
 	UseItem()
 	ReleaseItem()

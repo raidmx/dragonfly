@@ -45,6 +45,14 @@ func (m *HealthManager) SetHealth(health float64) {
 	defer m.mu.Unlock()
 	m.mu.Lock()
 
+	if health < 0 {
+		health = 0
+	}
+
+	if health > m.max {
+		health = m.max
+	}
+
 	m.health = health
 }
 

@@ -349,13 +349,13 @@ func (s *Session) SendGameMode(mode world.GameMode) {
 		return
 	}
 	s.writePacket(&packet.SetPlayerGameType{GameType: gameTypeFromMode(mode)})
-	s.sendAbilities()
+	s.SendAbilities()
 }
 
-// sendAbilities sends the abilities of the Controllable entity of the session to the client.
-func (s *Session) sendAbilities() {
+// SendAbilities sends the abilities of the Controllable entity of the session to the client.
+func (s *Session) SendAbilities() {
 	mode, abilities := s.c.GameMode(), uint32(0)
-	if mode.AllowsFlying() {
+	if mode.AllowsFlying() || s.c.Flight() {
 		abilities |= protocol.AbilityMayFly
 		if s.c.Flying() {
 			abilities |= protocol.AbilityFlying
