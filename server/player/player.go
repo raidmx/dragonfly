@@ -2156,6 +2156,25 @@ func (p *Player) Move(deltaPos mgl64.Vec3, deltaYaw, deltaPitch float64) {
 	}
 }
 
+// SetRotation updates the rotation of the entity to the new value provided
+func (p *Player) SetRotation(rot cube.Rotation) {
+	p.yaw.Store(rot.Yaw())
+	p.pitch.Store(rot.Pitch())
+
+	for _, v := range p.viewers() {
+		v.ViewEntityMovement(p, p.Position(), rot, p.OnGround())
+	}
+}
+
+// SetPosition updates the position of the entity to the new value provided
+func (p *Player) SetPosition(pos mgl64.Vec3) {
+	p.pos.Store(pos)
+
+	for _, v := range p.viewers() {
+		v.ViewEntityMovement(p, pos, p.Rotation(), p.OnGround())
+	}
+}
+
 // World returns the world that the player is currently in.
 func (p *Player) World() *world.World {
 	w, _ := world.OfEntity(p)
