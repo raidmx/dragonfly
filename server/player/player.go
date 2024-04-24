@@ -525,6 +525,7 @@ func (p *Player) Health() float64 {
 // Player.MaxHealth().
 func (p *Player) SetHealth(health float64) {
 	p.health.SetHealth(health)
+	p.Session().SendHealth(p.health)
 }
 
 // MaxHealth returns the maximum amount of health that a player may have. The MaxHealth will always be higher
