@@ -4,10 +4,10 @@ import (
 	"math"
 	"time"
 
-	"github.com/STCraft/dragonfly/server/internal/nbtconv"
-	"github.com/STCraft/dragonfly/server/item"
-	"github.com/STCraft/dragonfly/server/world"
 	"github.com/go-gl/mathgl/mgl64"
+	"github.com/stcraft/dragonfly/server/internal/nbtconv"
+	"github.com/stcraft/dragonfly/server/item"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // ItemBehaviourConfig holds optional parameters for an ItemBehaviour.

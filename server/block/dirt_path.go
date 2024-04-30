@@ -1,8 +1,8 @@
 package block
 
 import (
-	"github.com/STCraft/dragonfly/server/block/cube"
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/block/cube"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // DirtPath is a decorative block that can be created by using a shovel on a dirt or grass block.

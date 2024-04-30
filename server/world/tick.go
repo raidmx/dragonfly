@@ -5,8 +5,8 @@ import (
 	"slices"
 	"time"
 
-	"github.com/STCraft/dragonfly/server/block/cube"
-	"github.com/STCraft/dragonfly/server/internal/sliceutil"
+	"github.com/stcraft/dragonfly/server/block/cube"
+	"github.com/stcraft/dragonfly/server/internal/sliceutil"
 	"golang.org/x/exp/maps"
 )
 

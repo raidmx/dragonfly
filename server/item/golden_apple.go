@@ -3,8 +3,8 @@ package item
 import (
 	"time"
 
-	"github.com/STCraft/dragonfly/server/entity/effect"
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/entity/effect"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // GoldenApple is a special food item that bestows beneficial effects.

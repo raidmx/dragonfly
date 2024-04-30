@@ -1,6 +1,6 @@
 package item
 
-import "github.com/STCraft/dragonfly/server/world"
+import "github.com/stcraft/dragonfly/server/world"
 
 // Cookie is a food item that can be obtained in large quantities, but do not restore hunger or saturation significantly.
 type Cookie struct {

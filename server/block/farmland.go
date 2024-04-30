@@ -3,8 +3,8 @@ package block
 import (
 	"math/rand"
 
-	"github.com/STCraft/dragonfly/server/block/cube"
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/block/cube"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // Farmland is a block that crops are grown on. Farmland is created by interacting with a grass or dirt block using a

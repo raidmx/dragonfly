@@ -1,8 +1,8 @@
 package block
 
 import (
-	"github.com/STCraft/dragonfly/server/item"
-	"github.com/STCraft/dragonfly/server/world/sound"
+	"github.com/stcraft/dragonfly/server/item"
+	"github.com/stcraft/dragonfly/server/world/sound"
 )
 
 // Iron is a precious metal block made from 9 iron ingots.

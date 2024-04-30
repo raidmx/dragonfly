@@ -5,12 +5,12 @@ import (
 	"math"
 	"slices"
 
-	"github.com/STCraft/dragonfly/server/item"
-	"github.com/STCraft/dragonfly/server/item/creative"
-	"github.com/STCraft/dragonfly/server/item/inventory"
-	"github.com/STCraft/dragonfly/server/item/recipe"
-	"github.com/STCraft/dragonfly/server/world"
 	"github.com/sandertv/gophertunnel/minecraft/protocol"
+	"github.com/stcraft/dragonfly/server/item"
+	"github.com/stcraft/dragonfly/server/item/creative"
+	"github.com/stcraft/dragonfly/server/item/inventory"
+	"github.com/stcraft/dragonfly/server/item/recipe"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // handleCraft handles the CraftRecipe request action.

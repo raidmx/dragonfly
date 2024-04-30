@@ -4,7 +4,7 @@ import (
 	"image/color"
 	"time"
 
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // InstantHealth is an instant effect that causes the player that it is applied to immediately regain some

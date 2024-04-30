@@ -5,11 +5,11 @@ import (
 	"image/color"
 	"time"
 
-	"github.com/STCraft/dragonfly/server/block/cube"
-	"github.com/STCraft/dragonfly/server/entity/effect"
-	"github.com/STCraft/dragonfly/server/internal/lang"
-	"github.com/STCraft/dragonfly/server/world"
 	"github.com/go-gl/mathgl/mgl64"
+	"github.com/stcraft/dragonfly/server/block/cube"
+	"github.com/stcraft/dragonfly/server/entity/effect"
+	"github.com/stcraft/dragonfly/server/internal/lang"
+	"github.com/stcraft/dragonfly/server/world"
 	"golang.org/x/text/language"
 )
 

@@ -3,8 +3,8 @@ package world
 import (
 	"time"
 
-	"github.com/STCraft/dragonfly/server/block/cube"
 	"github.com/go-gl/mathgl/mgl64"
+	"github.com/stcraft/dragonfly/server/block/cube"
 )
 
 // weather implements weather related methods for World. World embeds this struct, so any exported methods on weather

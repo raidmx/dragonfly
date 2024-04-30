@@ -1,7 +1,7 @@
 package block
 
 import (
-	"github.com/STCraft/dragonfly/server/item"
+	"github.com/stcraft/dragonfly/server/item"
 )
 
 // RawGold is a raw metal block equivalent to nine raw gold.

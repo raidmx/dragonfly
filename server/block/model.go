@@ -1,8 +1,8 @@
 package block
 
 import (
-	"github.com/STCraft/dragonfly/server/block/model"
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/block/model"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // solid represents a block that is fully solid. It always returns a model.Solid when Model is called.

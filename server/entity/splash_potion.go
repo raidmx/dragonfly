@@ -1,14 +1,14 @@
 package entity
 
 import (
-	"github.com/STCraft/dragonfly/server/block/cube"
-	"github.com/STCraft/dragonfly/server/entity/effect"
-	"github.com/STCraft/dragonfly/server/internal/nbtconv"
-	"github.com/STCraft/dragonfly/server/item/potion"
-	"github.com/STCraft/dragonfly/server/world"
-	"github.com/STCraft/dragonfly/server/world/particle"
-	"github.com/STCraft/dragonfly/server/world/sound"
 	"github.com/go-gl/mathgl/mgl64"
+	"github.com/stcraft/dragonfly/server/block/cube"
+	"github.com/stcraft/dragonfly/server/entity/effect"
+	"github.com/stcraft/dragonfly/server/internal/nbtconv"
+	"github.com/stcraft/dragonfly/server/item/potion"
+	"github.com/stcraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/world/particle"
+	"github.com/stcraft/dragonfly/server/world/sound"
 )
 
 // NewSplashPotion creates a splash potion. SplashPotion is an item that grants

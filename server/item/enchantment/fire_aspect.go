@@ -3,8 +3,8 @@ package enchantment
 import (
 	"time"
 
-	"github.com/STCraft/dragonfly/server/item"
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/item"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // FireAspect is a sword enchantment that sets the target on fire.

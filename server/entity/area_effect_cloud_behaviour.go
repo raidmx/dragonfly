@@ -3,10 +3,10 @@ package entity
 import (
 	"time"
 
-	"github.com/STCraft/dragonfly/server/entity/effect"
-	"github.com/STCraft/dragonfly/server/item/potion"
-	"github.com/STCraft/dragonfly/server/world"
 	"github.com/go-gl/mathgl/mgl64"
+	"github.com/stcraft/dragonfly/server/entity/effect"
+	"github.com/stcraft/dragonfly/server/item/potion"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // AreaEffectCloudBehaviourConfig contains optional parameters for an area

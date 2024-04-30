@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"sync"
 
-	"github.com/STCraft/dragonfly/server/entity/effect"
+	"github.com/stcraft/dragonfly/server/entity/effect"
 )
 
 // EffectManager manages the effects of an entity. The effect manager will only store effects that last for

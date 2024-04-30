@@ -1,8 +1,8 @@
 package block
 
 import (
-	"github.com/STCraft/dragonfly/server/world"
-	"github.com/STCraft/dragonfly/server/world/sound"
+	"github.com/stcraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/world/sound"
 )
 
 // SoulSand is a block found naturally only in the Nether. SoulSand slows movement of mobs & players.

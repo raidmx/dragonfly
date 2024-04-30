@@ -1,7 +1,7 @@
 package item
 
 import (
-	"github.com/STCraft/dragonfly/server/world/sound"
+	"github.com/stcraft/dragonfly/server/world/sound"
 )
 
 // MusicDisc is an item that can be played in jukeboxes.

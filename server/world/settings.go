@@ -3,8 +3,8 @@ package world
 import (
 	"sync"
 
-	"github.com/STCraft/dragonfly/server/block/cube"
 	"github.com/df-mc/atomic"
+	"github.com/stcraft/dragonfly/server/block/cube"
 )
 
 // Settings holds the settings of a World. These are typically saved to a level.dat file. It is safe to pass the same

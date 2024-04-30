@@ -4,7 +4,7 @@ import (
 	"image/color"
 	"time"
 
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // Regeneration is an effect that causes the entity that it is added to slowly regenerate health. The level

@@ -3,12 +3,12 @@ package entity
 import (
 	"time"
 
-	"github.com/STCraft/dragonfly/server/block/cube"
-	"github.com/STCraft/dragonfly/server/item"
-	"github.com/STCraft/dragonfly/server/item/enchantment"
-	"github.com/STCraft/dragonfly/server/item/potion"
-	"github.com/STCraft/dragonfly/server/world"
 	"github.com/go-gl/mathgl/mgl64"
+	"github.com/stcraft/dragonfly/server/block/cube"
+	"github.com/stcraft/dragonfly/server/item"
+	"github.com/stcraft/dragonfly/server/item/enchantment"
+	"github.com/stcraft/dragonfly/server/item/potion"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // DefaultRegistry is a world.EntityRegistry that registers all default entities

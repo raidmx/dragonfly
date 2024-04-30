@@ -3,10 +3,10 @@ package particle
 import (
 	"image/color"
 
-	"github.com/STCraft/dragonfly/server/block/cube"
-	"github.com/STCraft/dragonfly/server/world"
-	"github.com/STCraft/dragonfly/server/world/sound"
 	"github.com/go-gl/mathgl/mgl64"
+	"github.com/stcraft/dragonfly/server/block/cube"
+	"github.com/stcraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/world/sound"
 )
 
 // Flame is a particle shown around torches. It can have any colour specified with the Colour field.

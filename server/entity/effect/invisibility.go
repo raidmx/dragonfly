@@ -3,7 +3,7 @@ package effect
 import (
 	"image/color"
 
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // Invisibility is a lasting effect that causes the affected entity to turn invisible. While invisible, the

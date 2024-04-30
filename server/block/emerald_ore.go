@@ -1,7 +1,7 @@
 package block
 
 import (
-	"github.com/STCraft/dragonfly/server/item"
+	"github.com/stcraft/dragonfly/server/item"
 )
 
 // EmeraldOre is an ore generating exclusively under mountain biomes.

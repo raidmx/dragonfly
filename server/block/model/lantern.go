@@ -1,8 +1,8 @@
 package model
 
 import (
-	"github.com/STCraft/dragonfly/server/block/cube"
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/block/cube"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // Lantern is a model for the lantern block. It can be placed on the ground or hanging from the ceiling.

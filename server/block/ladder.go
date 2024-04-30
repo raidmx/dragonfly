@@ -3,12 +3,12 @@ package block
 import (
 	"time"
 
-	"github.com/STCraft/dragonfly/server/block/cube"
-	"github.com/STCraft/dragonfly/server/block/model"
-	"github.com/STCraft/dragonfly/server/item"
-	"github.com/STCraft/dragonfly/server/world"
-	"github.com/STCraft/dragonfly/server/world/particle"
 	"github.com/go-gl/mathgl/mgl64"
+	"github.com/stcraft/dragonfly/server/block/cube"
+	"github.com/stcraft/dragonfly/server/block/model"
+	"github.com/stcraft/dragonfly/server/item"
+	"github.com/stcraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/world/particle"
 )
 
 // Ladder is a wooden block used for climbing walls either vertically or horizontally. They can be placed only on

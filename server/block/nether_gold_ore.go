@@ -3,7 +3,7 @@ package block
 import (
 	"math/rand"
 
-	"github.com/STCraft/dragonfly/server/item"
+	"github.com/stcraft/dragonfly/server/item"
 )
 
 // NetherGoldOre is a variant of gold ore found exclusively in The Nether.

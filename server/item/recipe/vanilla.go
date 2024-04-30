@@ -3,9 +3,9 @@ package recipe
 import (
 	_ "embed"
 	// Ensure all blocks and items are registered before trying to load vanilla recipes.
-	_ "github.com/STCraft/dragonfly/server/block"
-	_ "github.com/STCraft/dragonfly/server/item"
 	"github.com/sandertv/gophertunnel/minecraft/nbt"
+	_ "github.com/stcraft/dragonfly/server/block"
+	_ "github.com/stcraft/dragonfly/server/item"
 )
 
 var (

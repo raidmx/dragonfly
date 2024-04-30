@@ -8,7 +8,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/STCraft/dragonfly/server/item"
+	"github.com/stcraft/dragonfly/server/item"
 )
 
 // Inventory represents an inventory containing items. These inventories may be carried by entities or may be

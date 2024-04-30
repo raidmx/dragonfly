@@ -3,11 +3,11 @@ package playerdb
 import (
 	"time"
 
-	"github.com/STCraft/dragonfly/server/item"
-	"github.com/STCraft/dragonfly/server/player"
-	"github.com/STCraft/dragonfly/server/world"
 	"github.com/go-gl/mathgl/mgl64"
 	"github.com/google/uuid"
+	"github.com/stcraft/dragonfly/server/item"
+	"github.com/stcraft/dragonfly/server/player"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 func (p *Provider) fromJson(d jsonData, lookupWorld func(world.Dimension) *world.World) player.Data {

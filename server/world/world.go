@@ -10,13 +10,13 @@ import (
 
 	"slices"
 
-	"github.com/STCraft/dragonfly/server/block/cube"
-	"github.com/STCraft/dragonfly/server/event"
-	"github.com/STCraft/dragonfly/server/internal/sliceutil"
-	"github.com/STCraft/dragonfly/server/world/chunk"
 	"github.com/df-mc/atomic"
 	"github.com/go-gl/mathgl/mgl64"
 	"github.com/google/uuid"
+	"github.com/stcraft/dragonfly/server/block/cube"
+	"github.com/stcraft/dragonfly/server/event"
+	"github.com/stcraft/dragonfly/server/internal/sliceutil"
+	"github.com/stcraft/dragonfly/server/world/chunk"
 	"golang.org/x/exp/maps"
 )
 

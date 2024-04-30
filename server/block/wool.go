@@ -1,9 +1,9 @@
 package block
 
 import (
-	"github.com/STCraft/dragonfly/server/item"
-	"github.com/STCraft/dragonfly/server/world"
-	"github.com/STCraft/dragonfly/server/world/sound"
+	"github.com/stcraft/dragonfly/server/item"
+	"github.com/stcraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/world/sound"
 )
 
 // Wool is a colourful block that can be obtained by killing/shearing sheep, or crafted using four string.

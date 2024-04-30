@@ -3,7 +3,7 @@ package blockinternal
 import (
 	"slices"
 
-	"github.com/STCraft/dragonfly/server/item/category"
+	"github.com/stcraft/dragonfly/server/item/category"
 	"golang.org/x/exp/maps"
 )
 

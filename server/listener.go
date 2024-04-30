@@ -5,9 +5,9 @@ import (
 	"io"
 	"log"
 
-	"github.com/STCraft/dragonfly/server/session"
 	"github.com/sandertv/gophertunnel/minecraft"
 	"github.com/sirupsen/logrus"
+	"github.com/stcraft/dragonfly/server/session"
 )
 
 // Listener is a source for connections that may be listened on by a Server using Server.listen. Proxies can use this to

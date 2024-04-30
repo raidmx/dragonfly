@@ -1,8 +1,8 @@
 package model
 
 import (
-	"github.com/STCraft/dragonfly/server/block/cube"
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/block/cube"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // Slab is the model of a slab-like block, which is either a half block or a full block, depending on if the

@@ -5,13 +5,13 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/STCraft/dragonfly/server/block"
-	"github.com/STCraft/dragonfly/server/block/cube"
-	"github.com/STCraft/dragonfly/server/block/cube/trace"
-	"github.com/STCraft/dragonfly/server/item"
-	"github.com/STCraft/dragonfly/server/item/potion"
-	"github.com/STCraft/dragonfly/server/world"
 	"github.com/go-gl/mathgl/mgl64"
+	"github.com/stcraft/dragonfly/server/block"
+	"github.com/stcraft/dragonfly/server/block/cube"
+	"github.com/stcraft/dragonfly/server/block/cube/trace"
+	"github.com/stcraft/dragonfly/server/item"
+	"github.com/stcraft/dragonfly/server/item/potion"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // ProjectileBehaviourConfig allows the configuration of projectiles. Calling

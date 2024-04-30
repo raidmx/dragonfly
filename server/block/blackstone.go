@@ -3,8 +3,8 @@ package block
 import (
 	"math/rand"
 
-	"github.com/STCraft/dragonfly/server/item"
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/item"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // Blackstone is a naturally generating block in the nether that can be used to craft stone tools, brewing stands and

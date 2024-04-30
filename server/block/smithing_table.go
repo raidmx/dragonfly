@@ -1,9 +1,9 @@
 package block
 
 import (
-	"github.com/STCraft/dragonfly/server/block/cube"
-	"github.com/STCraft/dragonfly/server/item"
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/block/cube"
+	"github.com/stcraft/dragonfly/server/item"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // SmithingTable is a toolsmith's job site block that generates in villages. It can be used to upgrade diamond gear into

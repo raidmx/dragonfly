@@ -3,7 +3,7 @@ package item
 import (
 	"time"
 
-	"github.com/STCraft/dragonfly/server/entity/effect"
+	"github.com/stcraft/dragonfly/server/entity/effect"
 )
 
 // StewType represents a type of suspicious stew.

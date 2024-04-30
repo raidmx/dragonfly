@@ -3,7 +3,7 @@ package effect
 import (
 	"image/color"
 
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // Speed is a lasting effect that increases the speed of an entity by 20% for each level that the effect has.

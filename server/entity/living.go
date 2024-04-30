@@ -1,9 +1,9 @@
 package entity
 
 import (
-	"github.com/STCraft/dragonfly/server/entity/effect"
-	"github.com/STCraft/dragonfly/server/world"
 	"github.com/go-gl/mathgl/mgl64"
+	"github.com/stcraft/dragonfly/server/entity/effect"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // Living represents an entity that is alive and that has health. It is able to take damage and will die upon

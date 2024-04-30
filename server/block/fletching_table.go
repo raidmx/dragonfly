@@ -3,7 +3,7 @@ package block
 import (
 	"time"
 
-	"github.com/STCraft/dragonfly/server/item"
+	"github.com/stcraft/dragonfly/server/item"
 )
 
 // FletchingTable is a block in villages that turn an unemployed villager into a Fletcher.

@@ -1,8 +1,8 @@
 package inventory
 
 import (
-	"github.com/STCraft/dragonfly/server/event"
-	"github.com/STCraft/dragonfly/server/item"
+	"github.com/stcraft/dragonfly/server/event"
+	"github.com/stcraft/dragonfly/server/item"
 )
 
 // Handler is a type that may be used to handle actions performed on an inventory by a player.

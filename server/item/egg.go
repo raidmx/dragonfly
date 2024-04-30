@@ -1,8 +1,8 @@
 package item
 
 import (
-	"github.com/STCraft/dragonfly/server/world"
-	"github.com/STCraft/dragonfly/server/world/sound"
+	"github.com/stcraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/world/sound"
 )
 
 // Egg is an item that can be used to craft food items, or as a throwable entity to spawn chicks.

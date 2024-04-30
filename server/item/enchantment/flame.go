@@ -3,8 +3,8 @@ package enchantment
 import (
 	"time"
 
-	"github.com/STCraft/dragonfly/server/item"
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/item"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // Flame turns your arrows into flaming arrows allowing you to set your targets on fire.

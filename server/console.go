@@ -6,10 +6,10 @@ import (
 	"os"
 	"strings"
 
-	"github.com/STCraft/dragonfly/server/cmd"
-	"github.com/STCraft/dragonfly/server/world"
 	"github.com/go-gl/mathgl/mgl64"
 	"github.com/sandertv/gophertunnel/minecraft/text"
+	"github.com/stcraft/dragonfly/server/cmd"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // Console represents the Console Source that is responsible for execution of commands

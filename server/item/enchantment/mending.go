@@ -1,8 +1,8 @@
 package enchantment
 
 import (
-	"github.com/STCraft/dragonfly/server/item"
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/item"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // Mending is an enchantment that repairs the item when experience orbs are collected.

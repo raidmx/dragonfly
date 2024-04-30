@@ -6,14 +6,14 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/STCraft/dragonfly/server/block"
-	"github.com/STCraft/dragonfly/server/entity"
-	"github.com/STCraft/dragonfly/server/event"
-	"github.com/STCraft/dragonfly/server/item"
-	"github.com/STCraft/dragonfly/server/item/inventory"
 	"github.com/go-gl/mathgl/mgl64"
 	"github.com/sandertv/gophertunnel/minecraft/protocol"
 	"github.com/sandertv/gophertunnel/minecraft/protocol/packet"
+	"github.com/stcraft/dragonfly/server/block"
+	"github.com/stcraft/dragonfly/server/entity"
+	"github.com/stcraft/dragonfly/server/event"
+	"github.com/stcraft/dragonfly/server/item"
+	"github.com/stcraft/dragonfly/server/item/inventory"
 )
 
 // ItemStackRequestHandler handles the ItemStackRequest packet. It handles the actions done within the

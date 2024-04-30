@@ -3,8 +3,8 @@ package item
 import (
 	"time"
 
-	"github.com/STCraft/dragonfly/server/entity/effect"
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/entity/effect"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // EnchantedApple is a rare variant of the golden apple that has stronger effects.

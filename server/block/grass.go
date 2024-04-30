@@ -3,8 +3,8 @@ package block
 import (
 	"math/rand"
 
-	"github.com/STCraft/dragonfly/server/block/cube"
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/block/cube"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // Grass blocks generate abundantly across the surface of the world.

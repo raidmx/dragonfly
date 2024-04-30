@@ -3,8 +3,8 @@ package session
 import (
 	"fmt"
 
-	"github.com/STCraft/dragonfly/server/item"
 	"github.com/sandertv/gophertunnel/minecraft/protocol/packet"
+	"github.com/stcraft/dragonfly/server/item"
 )
 
 // BookEditHandler handles the BookEdit packet.

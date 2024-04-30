@@ -1,9 +1,8 @@
-module github.com/STCraft/dragonfly
+module github.com/stcraft/dragonfly
 
 go 1.21
 
 require (
-	github.com/STCraft/intintmap v0.0.0-20240422151941-3d281c7c7cb6
 	github.com/cespare/xxhash/v2 v2.2.0
 	github.com/df-mc/atomic v1.10.0
 	github.com/df-mc/goleveldb v1.1.9
@@ -15,6 +14,7 @@ require (
 	github.com/sandertv/gophertunnel v1.36.0
 	github.com/segmentio/fasthash v1.0.3
 	github.com/sirupsen/logrus v1.9.3
+	github.com/stcraft/intintmap v0.0.0-20240430082658-697351915712
 	golang.org/x/exp v0.0.0-20230206171751-46f607a40771
 	golang.org/x/text v0.14.0
 )

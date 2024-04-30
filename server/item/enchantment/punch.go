@@ -1,8 +1,8 @@
 package enchantment
 
 import (
-	"github.com/STCraft/dragonfly/server/item"
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/item"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // Punch increases the knock-back dealt when hitting a player or mob with a bow.

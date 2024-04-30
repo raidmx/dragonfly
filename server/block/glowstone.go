@@ -3,8 +3,8 @@ package block
 import (
 	"math/rand"
 
-	"github.com/STCraft/dragonfly/server/item"
-	"github.com/STCraft/dragonfly/server/world/sound"
+	"github.com/stcraft/dragonfly/server/item"
+	"github.com/stcraft/dragonfly/server/world/sound"
 )
 
 // Glowstone is commonly found on the ceiling of the nether dimension.

@@ -1,8 +1,8 @@
 package session
 
 import (
-	"github.com/STCraft/dragonfly/server/block/cube"
 	"github.com/sandertv/gophertunnel/minecraft/protocol/packet"
+	"github.com/stcraft/dragonfly/server/block/cube"
 )
 
 // BlockPickRequestHandler handles the BlockPickRequest packet.

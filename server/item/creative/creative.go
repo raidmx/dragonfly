@@ -3,14 +3,14 @@ package creative
 import (
 	_ "embed"
 
-	"github.com/STCraft/dragonfly/server/internal/nbtconv"
+	"github.com/stcraft/dragonfly/server/internal/nbtconv"
 
 	// The following three imports are essential for this package: They make sure this package is loaded after
 	// all these imports. This ensures that all items are registered before the creative items are registered
 	// in the init function in this package.
-	"github.com/STCraft/dragonfly/server/item"
-	"github.com/STCraft/dragonfly/server/world"
 	"github.com/sandertv/gophertunnel/minecraft/nbt"
+	"github.com/stcraft/dragonfly/server/item"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // Items returns a list with all items that have been registered as a creative item. These items will

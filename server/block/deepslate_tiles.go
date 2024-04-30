@@ -1,6 +1,6 @@
 package block
 
-import "github.com/STCraft/dragonfly/server/item"
+import "github.com/stcraft/dragonfly/server/item"
 
 // DeepslateTiles are a tiled variant of deepslate and can spawn in ancient cities.
 type DeepslateTiles struct {

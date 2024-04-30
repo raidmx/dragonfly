@@ -1,8 +1,8 @@
 package block
 
 import (
-	"github.com/STCraft/dragonfly/server/block/cube"
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/block/cube"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // GlassPane is a transparent block that can be used as a more efficient alternative to glass blocks.

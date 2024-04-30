@@ -1,9 +1,9 @@
 package block
 
 import (
-	"github.com/STCraft/dragonfly/server/block/cube"
-	"github.com/STCraft/dragonfly/server/block/model"
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/block/cube"
+	"github.com/stcraft/dragonfly/server/block/model"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // NetherBrickFence is the nether brick variant of the fence block.

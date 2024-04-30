@@ -3,13 +3,13 @@ package session
 import (
 	"bytes"
 
-	"github.com/STCraft/dragonfly/server/block/cube"
-	"github.com/STCraft/dragonfly/server/world"
-	"github.com/STCraft/dragonfly/server/world/chunk"
 	"github.com/cespare/xxhash/v2"
 	"github.com/sandertv/gophertunnel/minecraft/nbt"
 	"github.com/sandertv/gophertunnel/minecraft/protocol"
 	"github.com/sandertv/gophertunnel/minecraft/protocol/packet"
+	"github.com/stcraft/dragonfly/server/block/cube"
+	"github.com/stcraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/world/chunk"
 )
 
 // subChunkRequests is set to true to enable the sub-chunk request system. This can (likely) cause unexpected issues,

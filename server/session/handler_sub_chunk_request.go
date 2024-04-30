@@ -1,8 +1,8 @@
 package session
 
 import (
-	"github.com/STCraft/dragonfly/server/world"
 	"github.com/sandertv/gophertunnel/minecraft/protocol/packet"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // SubChunkRequestHandler handles sub-chunk requests from the client. The server will respond with a packet containing

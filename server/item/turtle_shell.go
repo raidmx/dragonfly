@@ -1,6 +1,6 @@
 package item
 
-import "github.com/STCraft/dragonfly/server/world"
+import "github.com/stcraft/dragonfly/server/world"
 
 // TurtleShell are items that are used for brewing or as a helmet to give the player the Water Breathing
 // status effect.

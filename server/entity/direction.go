@@ -1,8 +1,8 @@
 package entity
 
 import (
-	"github.com/STCraft/dragonfly/server/world"
 	"github.com/go-gl/mathgl/mgl64"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // Eyed represents an entity that has eyes.

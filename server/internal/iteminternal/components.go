@@ -3,8 +3,8 @@ package iteminternal
 import (
 	"strings"
 
-	"github.com/STCraft/dragonfly/server/item"
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/item"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // Components returns all the components of the given custom item. If the item has no components, a nil map and false

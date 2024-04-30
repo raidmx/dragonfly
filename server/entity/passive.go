@@ -4,8 +4,8 @@ import (
 	"math"
 	"time"
 
-	"github.com/STCraft/dragonfly/server/block"
 	"github.com/go-gl/mathgl/mgl64"
+	"github.com/stcraft/dragonfly/server/block"
 )
 
 // PassiveBehaviourConfig holds optional parameters for a PassiveBehaviour.

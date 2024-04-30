@@ -1,11 +1,11 @@
 package blockinternal
 
 import (
-	"github.com/STCraft/dragonfly/server/block"
-	"github.com/STCraft/dragonfly/server/block/cube"
-	"github.com/STCraft/dragonfly/server/block/customblock"
-	"github.com/STCraft/dragonfly/server/world"
 	"github.com/go-gl/mathgl/mgl64"
+	"github.com/stcraft/dragonfly/server/block"
+	"github.com/stcraft/dragonfly/server/block/cube"
+	"github.com/stcraft/dragonfly/server/block/customblock"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // Components returns all the components for the custom block, including permutations and properties.

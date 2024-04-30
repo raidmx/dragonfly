@@ -1,6 +1,6 @@
 package cmd
 
-import "github.com/STCraft/dragonfly/server/world"
+import "github.com/stcraft/dragonfly/server/world"
 
 // Source represents a source of a command execution. Commands may limit the sources that can run them by
 // implementing the Allower interface.

@@ -6,22 +6,22 @@ import (
 	"strings"
 	"time"
 
-	"github.com/STCraft/dragonfly/server/entity/effect"
+	"github.com/stcraft/dragonfly/server/entity/effect"
 
-	"github.com/STCraft/dragonfly/server/block"
-	"github.com/STCraft/dragonfly/server/block/cube"
-	"github.com/STCraft/dragonfly/server/entity"
-	"github.com/STCraft/dragonfly/server/internal/nbtconv"
-	"github.com/STCraft/dragonfly/server/item"
-	"github.com/STCraft/dragonfly/server/item/inventory"
-	"github.com/STCraft/dragonfly/server/world"
-	"github.com/STCraft/dragonfly/server/world/particle"
-	"github.com/STCraft/dragonfly/server/world/sound"
 	"github.com/go-gl/mathgl/mgl32"
 	"github.com/go-gl/mathgl/mgl64"
 	"github.com/google/uuid"
 	"github.com/sandertv/gophertunnel/minecraft/protocol"
 	"github.com/sandertv/gophertunnel/minecraft/protocol/packet"
+	"github.com/stcraft/dragonfly/server/block"
+	"github.com/stcraft/dragonfly/server/block/cube"
+	"github.com/stcraft/dragonfly/server/entity"
+	"github.com/stcraft/dragonfly/server/internal/nbtconv"
+	"github.com/stcraft/dragonfly/server/item"
+	"github.com/stcraft/dragonfly/server/item/inventory"
+	"github.com/stcraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/world/particle"
+	"github.com/stcraft/dragonfly/server/world/sound"
 )
 
 // NetworkEncodeableEntity is a world.EntityType where the save ID and network

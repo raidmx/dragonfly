@@ -3,9 +3,9 @@ package session
 import (
 	"fmt"
 
-	"github.com/STCraft/dragonfly/server/block"
-	"github.com/STCraft/dragonfly/server/item"
 	"github.com/sandertv/gophertunnel/minecraft/protocol"
+	"github.com/stcraft/dragonfly/server/block"
+	"github.com/stcraft/dragonfly/server/item"
 )
 
 const (

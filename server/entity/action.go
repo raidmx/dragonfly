@@ -3,7 +3,7 @@ package entity
 import (
 	"time"
 
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // SwingArmAction is a world.EntityAction that makes an entity or player swing its arm.

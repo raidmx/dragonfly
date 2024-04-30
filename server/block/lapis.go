@@ -1,7 +1,7 @@
 package block
 
 import (
-	"github.com/STCraft/dragonfly/server/item"
+	"github.com/stcraft/dragonfly/server/item"
 )
 
 // Lapis is a decorative mineral block that is crafted from lapis lazuli.

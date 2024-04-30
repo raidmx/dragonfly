@@ -1,6 +1,6 @@
 package recipe
 
-import "github.com/STCraft/dragonfly/server/item"
+import "github.com/stcraft/dragonfly/server/item"
 
 // Recipe is implemented by all recipe types.
 type Recipe interface {

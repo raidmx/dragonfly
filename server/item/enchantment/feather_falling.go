@@ -1,8 +1,8 @@
 package enchantment
 
 import (
-	"github.com/STCraft/dragonfly/server/item"
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/item"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // FeatherFalling is an enchantment to boots that reduces fall damage. It does not affect falling speed.

@@ -3,7 +3,7 @@ package block
 import (
 	"math/rand"
 
-	"github.com/STCraft/dragonfly/server/item"
+	"github.com/stcraft/dragonfly/server/item"
 )
 
 // SeaLantern is an underwater light sources that appear in ocean monuments and underwater ruins.

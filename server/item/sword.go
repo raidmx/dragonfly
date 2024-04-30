@@ -3,7 +3,7 @@ package item
 import (
 	"time"
 
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // Sword is a tool generally used to attack enemies. In addition, it may be used to mine any block slightly

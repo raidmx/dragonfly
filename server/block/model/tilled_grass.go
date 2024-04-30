@@ -1,8 +1,8 @@
 package model
 
 import (
-	"github.com/STCraft/dragonfly/server/block/cube"
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/block/cube"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // TilledGrass is a model used for grass that has been tilled in some way, such as dirt paths and farmland.

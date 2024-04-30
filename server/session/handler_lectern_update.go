@@ -3,8 +3,8 @@ package session
 import (
 	"fmt"
 
-	"github.com/STCraft/dragonfly/server/block"
 	"github.com/sandertv/gophertunnel/minecraft/protocol/packet"
+	"github.com/stcraft/dragonfly/server/block"
 )
 
 // LecternUpdateHandler handles the LecternUpdate packet, sent when a player interacts with a lectern.

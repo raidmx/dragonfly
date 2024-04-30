@@ -3,7 +3,7 @@ package block
 import (
 	"time"
 
-	"github.com/STCraft/dragonfly/server/item"
+	"github.com/stcraft/dragonfly/server/item"
 )
 
 // DriedKelp is a block primarily used as fuel in furnaces.

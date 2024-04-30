@@ -1,6 +1,6 @@
 package block
 
-import "github.com/STCraft/dragonfly/server/world"
+import "github.com/stcraft/dragonfly/server/world"
 
 // Podzol is a dirt-type block that naturally blankets the surface of the giant tree taiga and bamboo jungles, along
 // with their respective variants.

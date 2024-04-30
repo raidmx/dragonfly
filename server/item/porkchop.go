@@ -1,6 +1,6 @@
 package item
 
-import "github.com/STCraft/dragonfly/server/world"
+import "github.com/stcraft/dragonfly/server/world"
 
 // Porkchop is a food item obtained from pigs. It can be cooked in a furnace, smoker, or campfire.
 type Porkchop struct {

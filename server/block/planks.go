@@ -3,8 +3,8 @@ package block
 import (
 	"time"
 
-	"github.com/STCraft/dragonfly/server/item"
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/item"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // Planks are common blocks used in crafting recipes. They are made by crafting logs into planks.

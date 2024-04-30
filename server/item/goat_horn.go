@@ -3,8 +3,8 @@ package item
 import (
 	"time"
 
-	"github.com/STCraft/dragonfly/server/world"
-	"github.com/STCraft/dragonfly/server/world/sound"
+	"github.com/stcraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/world/sound"
 )
 
 // GoatHorn is an item dropped by goats. It has eight variants, and each plays a unique sound when used which can be

@@ -1,10 +1,10 @@
 package block
 
 import (
-	"github.com/STCraft/dragonfly/server/block/cube"
-	"github.com/STCraft/dragonfly/server/item"
-	"github.com/STCraft/dragonfly/server/item/inventory"
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/block/cube"
+	"github.com/stcraft/dragonfly/server/item"
+	"github.com/stcraft/dragonfly/server/item/inventory"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // ContainerViewer represents a viewer that is able to view a container and its inventory.

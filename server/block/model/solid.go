@@ -1,8 +1,8 @@
 package model
 
 import (
-	"github.com/STCraft/dragonfly/server/block/cube"
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/block/cube"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // Solid is the model of a fully solid block. Blocks with this model, such as stone or wooden planks, have a

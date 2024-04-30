@@ -4,7 +4,7 @@ import (
 	"math"
 	"time"
 
-	"github.com/STCraft/dragonfly/server/block/cube"
+	"github.com/stcraft/dragonfly/server/block/cube"
 )
 
 var (

@@ -1,7 +1,7 @@
 package item
 
 import (
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // Apple is a food item that can be eaten by the player.

@@ -1,6 +1,6 @@
 package item
 
-import "github.com/STCraft/dragonfly/server/world"
+import "github.com/stcraft/dragonfly/server/world"
 
 // Elytra is a pair of rare wings found in end ships that are the only single-item source of flight in Survival mode.
 type Elytra struct{}

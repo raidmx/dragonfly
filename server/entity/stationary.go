@@ -4,7 +4,7 @@ import (
 	"math"
 	"time"
 
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // StationaryBehaviourConfig holds settings that influence the way

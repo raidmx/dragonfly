@@ -1,9 +1,9 @@
 package item
 
 import (
-	"github.com/STCraft/dragonfly/server/block/cube"
-	"github.com/STCraft/dragonfly/server/world"
 	"github.com/go-gl/mathgl/mgl64"
+	"github.com/stcraft/dragonfly/server/block/cube"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // InkSac is an item dropped by a squid upon death used to create black dye, dark prismarine and book and quill. The

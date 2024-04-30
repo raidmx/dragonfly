@@ -3,8 +3,8 @@ package enchantment
 import (
 	"math/rand"
 
-	"github.com/STCraft/dragonfly/server/item"
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/item"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // Unbreaking is an enchantment that gives a chance for an item to avoid durability reduction when it

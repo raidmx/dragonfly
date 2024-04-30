@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"math"
 
-	"github.com/STCraft/dragonfly/server/block/cube"
 	"github.com/go-gl/mathgl/mgl32"
 	"github.com/go-gl/mathgl/mgl64"
 	"github.com/sandertv/gophertunnel/minecraft/protocol"
 	"github.com/sandertv/gophertunnel/minecraft/protocol/packet"
+	"github.com/stcraft/dragonfly/server/block/cube"
 )
 
 // PlayerAuthInputHandler handles the PlayerAuthInput packet.

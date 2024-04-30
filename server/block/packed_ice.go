@@ -1,7 +1,7 @@
 package block
 
 import (
-	"github.com/STCraft/dragonfly/server/world/sound"
+	"github.com/stcraft/dragonfly/server/world/sound"
 )
 
 // PackedIce is an opaque solid block variant of ice. Unlike regular ice, it does not melt near bright light sources.

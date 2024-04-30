@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"fmt"
 
-	"github.com/STCraft/dragonfly/server/block/cube"
+	"github.com/stcraft/dragonfly/server/block/cube"
 )
 
 // StateToRuntimeID must hold a function to convert a name and its state properties to a runtime ID.

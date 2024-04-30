@@ -1,9 +1,9 @@
 package item
 
 import (
-	"github.com/STCraft/dragonfly/server/item/potion"
-	"github.com/STCraft/dragonfly/server/world"
-	"github.com/STCraft/dragonfly/server/world/sound"
+	"github.com/stcraft/dragonfly/server/item/potion"
+	"github.com/stcraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/world/sound"
 )
 
 // LingeringPotion is a variant of a splash potion that can be thrown to leave clouds with status effects that linger on

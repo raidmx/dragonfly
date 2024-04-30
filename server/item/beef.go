@@ -1,6 +1,6 @@
 package item
 
-import "github.com/STCraft/dragonfly/server/world"
+import "github.com/stcraft/dragonfly/server/world"
 
 // Beef is a food item obtained from cows. It can be cooked in a furnace, smoker, or campfire.
 type Beef struct {

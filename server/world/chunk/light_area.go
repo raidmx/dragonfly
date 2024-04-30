@@ -5,7 +5,7 @@ import (
 	"container/list"
 	"math"
 
-	"github.com/STCraft/dragonfly/server/block/cube"
+	"github.com/stcraft/dragonfly/server/block/cube"
 )
 
 // lightArea represents a square area of N*N chunks. It is used for light calculation specifically.

@@ -5,12 +5,12 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/STCraft/dragonfly/server/entity"
-	"github.com/STCraft/dragonfly/server/world"
-	"github.com/STCraft/dragonfly/server/world/mcdb/leveldat"
 	"github.com/df-mc/goleveldb/leveldb"
 	"github.com/df-mc/goleveldb/leveldb/opt"
 	"github.com/sirupsen/logrus"
+	"github.com/stcraft/dragonfly/server/entity"
+	"github.com/stcraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/world/mcdb/leveldat"
 )
 
 // Logger is a logger implementation that may be passed to the Log field of Config. World will send errors and debug

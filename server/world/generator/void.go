@@ -1,8 +1,8 @@
 package generator
 
 import (
-	"github.com/STCraft/dragonfly/server/world"
-	"github.com/STCraft/dragonfly/server/world/chunk"
+	"github.com/stcraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/world/chunk"
 )
 
 // Flat is the flat generator of World. It generates flat worlds (like those in vanilla) with no other

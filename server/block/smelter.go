@@ -6,10 +6,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com/STCraft/dragonfly/server/block/cube"
-	"github.com/STCraft/dragonfly/server/item"
-	"github.com/STCraft/dragonfly/server/item/inventory"
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/block/cube"
+	"github.com/stcraft/dragonfly/server/item"
+	"github.com/stcraft/dragonfly/server/item/inventory"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // smelter is a struct that may be embedded by blocks that can smelt blocks and items, such as blast furnaces, furnaces,

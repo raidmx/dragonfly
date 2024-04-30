@@ -1,6 +1,6 @@
 package block
 
-import "github.com/STCraft/dragonfly/server/world"
+import "github.com/stcraft/dragonfly/server/world"
 
 // encodeWallBlock encodes the provided block in to an identifier and meta value that can be used to encode the wall.
 func encodeWallBlock(block world.Block) (string, int16) {

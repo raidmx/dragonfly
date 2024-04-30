@@ -1,6 +1,6 @@
 package block
 
-import "github.com/STCraft/dragonfly/server/item"
+import "github.com/stcraft/dragonfly/server/item"
 
 // Cobblestone is a common block, obtained from mining stone.
 type Cobblestone struct {

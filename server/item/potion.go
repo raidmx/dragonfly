@@ -3,8 +3,8 @@ package item
 import (
 	"time"
 
-	"github.com/STCraft/dragonfly/server/item/potion"
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/item/potion"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // Potion is an item that grants effects on consumption.

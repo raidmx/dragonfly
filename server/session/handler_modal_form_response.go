@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/STCraft/dragonfly/server/player/form"
 	"github.com/df-mc/atomic"
 	"github.com/sandertv/gophertunnel/minecraft/protocol/packet"
+	"github.com/stcraft/dragonfly/server/player/form"
 )
 
 // ModalFormResponseHandler handles the ModalFormResponse packet.

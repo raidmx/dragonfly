@@ -4,7 +4,7 @@ import (
 	"image/color"
 	"time"
 
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // LastingType represents an effect type that can have a duration. An effect can be made using it by calling effect.New

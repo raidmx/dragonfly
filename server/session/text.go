@@ -3,9 +3,9 @@ package session
 import (
 	"time"
 
-	"github.com/STCraft/dragonfly/server/player/scoreboard"
 	"github.com/sandertv/gophertunnel/minecraft/protocol"
 	"github.com/sandertv/gophertunnel/minecraft/protocol/packet"
+	"github.com/stcraft/dragonfly/server/player/scoreboard"
 )
 
 // SendMessage ...

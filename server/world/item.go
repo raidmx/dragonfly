@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"image"
 
-	"github.com/STCraft/dragonfly/server/item/category"
 	"github.com/sandertv/gophertunnel/minecraft/nbt"
+	"github.com/stcraft/dragonfly/server/item/category"
 )
 
 // Item represents an item that may be added to an inventory. It has a method to encode the item to an ID and

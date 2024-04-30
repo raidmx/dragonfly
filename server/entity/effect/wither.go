@@ -4,7 +4,7 @@ import (
 	"image/color"
 	"time"
 
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // Wither is a lasting effect that causes an entity to take continuous damage that is capable of killing an

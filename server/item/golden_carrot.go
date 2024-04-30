@@ -1,6 +1,6 @@
 package item
 
-import "github.com/STCraft/dragonfly/server/world"
+import "github.com/stcraft/dragonfly/server/world"
 
 // GoldenCarrot is a valuable food item and brewing ingredient. It provides the second most saturation in the game,
 // behind Suspicious Stew crafted with either a Dandelion or Blue Orchid.

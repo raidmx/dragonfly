@@ -1,7 +1,7 @@
 package block
 
 import (
-	"github.com/STCraft/dragonfly/server/item"
+	"github.com/stcraft/dragonfly/server/item"
 )
 
 // Netherite is a precious mineral block made from 9 netherite ingots.

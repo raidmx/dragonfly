@@ -3,7 +3,7 @@ package item
 import (
 	"time"
 
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // DriedKelp is a food item that can be quickly eaten by the player.

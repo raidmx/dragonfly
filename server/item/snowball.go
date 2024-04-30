@@ -1,8 +1,8 @@
 package item
 
 import (
-	"github.com/STCraft/dragonfly/server/world"
-	"github.com/STCraft/dragonfly/server/world/sound"
+	"github.com/stcraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/world/sound"
 )
 
 // Snowball is a throwable combat item obtained through shovelling snow.

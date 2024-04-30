@@ -4,7 +4,7 @@ import (
 	"image/color"
 	"time"
 
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // Poison is a lasting effect that causes the affected entity to lose health gradually. Poison cannot kill,

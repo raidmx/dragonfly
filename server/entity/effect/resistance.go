@@ -3,7 +3,7 @@ package effect
 import (
 	"image/color"
 
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // Resistance is a lasting effect that reduces the damage taken from any sources except for void damage or

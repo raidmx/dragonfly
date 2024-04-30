@@ -1,8 +1,8 @@
 package enchantment
 
 import (
-	"github.com/STCraft/dragonfly/server/item"
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/item"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // SwiftSneak is a non-renewable enchantment that can be applied to leggings and allows the player to walk more quickly

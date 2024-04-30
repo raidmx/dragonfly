@@ -1,6 +1,6 @@
 package item
 
-import "github.com/STCraft/dragonfly/server/item/potion"
+import "github.com/stcraft/dragonfly/server/item/potion"
 
 // Arrow is used as ammunition for bows, crossbows, and dispensers. Arrows can be modified to
 // imbue status effects on players and mobs.

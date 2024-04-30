@@ -1,9 +1,9 @@
 package entity
 
 import (
-	"github.com/STCraft/dragonfly/server/item"
-	"github.com/STCraft/dragonfly/server/item/enchantment"
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/item"
+	"github.com/stcraft/dragonfly/server/item/enchantment"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 type (

@@ -1,7 +1,7 @@
 package item
 
 import (
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // Beetroot is a food and dye ingredient.

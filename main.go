@@ -1,6 +1,6 @@
 package main
 
-import "github.com/STCraft/dragonfly/server"
+import "github.com/stcraft/dragonfly/server"
 
 func main() {
 	srv, _ := server.New()

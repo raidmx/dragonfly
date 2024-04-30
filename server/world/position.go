@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"math"
 
-	"github.com/STCraft/dragonfly/server/block/cube"
 	"github.com/go-gl/mathgl/mgl64"
+	"github.com/stcraft/dragonfly/server/block/cube"
 )
 
 // ChunkPos holds the position of a chunk. The type is provided as a utility struct for keeping track of a

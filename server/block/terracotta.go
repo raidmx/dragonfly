@@ -1,6 +1,6 @@
 package block
 
-import "github.com/STCraft/dragonfly/server/world"
+import "github.com/stcraft/dragonfly/server/world"
 
 // Terracotta is a block formed from clay, with a hardness and blast resistance comparable to stone. For colouring it,
 // take a look at StainedTerracotta.

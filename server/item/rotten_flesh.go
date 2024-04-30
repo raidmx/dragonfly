@@ -4,8 +4,8 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/STCraft/dragonfly/server/entity/effect"
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/entity/effect"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // RottenFlesh is a food item that can be eaten by the player, at the high risk of inflicting Hunger.

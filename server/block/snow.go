@@ -1,6 +1,6 @@
 package block
 
-import "github.com/STCraft/dragonfly/server/item"
+import "github.com/stcraft/dragonfly/server/item"
 
 // Snow is a full-sized block of snow.
 type Snow struct {

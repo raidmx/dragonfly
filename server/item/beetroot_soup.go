@@ -1,7 +1,7 @@
 package item
 
 import (
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // BeetrootSoup is an unstackable food item.

@@ -8,22 +8,22 @@ import (
 	"time"
 	_ "unsafe" // Imported for compiler directives.
 
-	"github.com/STCraft/dragonfly/server/block"
-	"github.com/STCraft/dragonfly/server/entity"
-	"github.com/STCraft/dragonfly/server/entity/effect"
-	"github.com/STCraft/dragonfly/server/internal/nbtconv"
-	"github.com/STCraft/dragonfly/server/item"
-	"github.com/STCraft/dragonfly/server/item/creative"
-	"github.com/STCraft/dragonfly/server/item/inventory"
-	"github.com/STCraft/dragonfly/server/item/recipe"
-	"github.com/STCraft/dragonfly/server/player/form"
-	"github.com/STCraft/dragonfly/server/player/skin"
-	"github.com/STCraft/dragonfly/server/world"
 	"github.com/df-mc/atomic"
 	"github.com/go-gl/mathgl/mgl64"
 	"github.com/google/uuid"
 	"github.com/sandertv/gophertunnel/minecraft/protocol"
 	"github.com/sandertv/gophertunnel/minecraft/protocol/packet"
+	"github.com/stcraft/dragonfly/server/block"
+	"github.com/stcraft/dragonfly/server/entity"
+	"github.com/stcraft/dragonfly/server/entity/effect"
+	"github.com/stcraft/dragonfly/server/internal/nbtconv"
+	"github.com/stcraft/dragonfly/server/item"
+	"github.com/stcraft/dragonfly/server/item/creative"
+	"github.com/stcraft/dragonfly/server/item/inventory"
+	"github.com/stcraft/dragonfly/server/item/recipe"
+	"github.com/stcraft/dragonfly/server/player/form"
+	"github.com/stcraft/dragonfly/server/player/skin"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // StopShowingEntity stops showing a world.Entity to the Session. It will be completely invisible until a call to
@@ -882,10 +882,10 @@ func gameTypeFromMode(mode world.GameMode) int32 {
 
 // noinspection ALL
 //
-//go:linkname item_id github.com/STCraft/dragonfly/server/item.id
+//go:linkname item_id github.com/stcraft/dragonfly/server/item.id
 func item_id(s item.Stack) int32
 
 // noinspection ALL
 //
-//go:linkname world_add github.com/STCraft/dragonfly/server/world.add
+//go:linkname world_add github.com/stcraft/dragonfly/server/world.add
 func world_add(e world.Entity, w *world.World)

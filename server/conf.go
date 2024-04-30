@@ -6,19 +6,19 @@ import (
 	"path/filepath"
 	"slices"
 
-	"github.com/STCraft/dragonfly/server/block"
-	"github.com/STCraft/dragonfly/server/entity"
-	"github.com/STCraft/dragonfly/server/internal/packbuilder"
-	"github.com/STCraft/dragonfly/server/player"
-	"github.com/STCraft/dragonfly/server/player/playerdb"
-	"github.com/STCraft/dragonfly/server/session"
-	"github.com/STCraft/dragonfly/server/world"
-	"github.com/STCraft/dragonfly/server/world/biome"
-	"github.com/STCraft/dragonfly/server/world/generator"
 	"github.com/google/uuid"
 	"github.com/pelletier/go-toml"
 	"github.com/sandertv/gophertunnel/minecraft/resource"
 	"github.com/sirupsen/logrus"
+	"github.com/stcraft/dragonfly/server/block"
+	"github.com/stcraft/dragonfly/server/entity"
+	"github.com/stcraft/dragonfly/server/internal/packbuilder"
+	"github.com/stcraft/dragonfly/server/player"
+	"github.com/stcraft/dragonfly/server/player/playerdb"
+	"github.com/stcraft/dragonfly/server/session"
+	"github.com/stcraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/world/biome"
+	"github.com/stcraft/dragonfly/server/world/generator"
 )
 
 // Config contains options for starting a Minecraft server.

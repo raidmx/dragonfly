@@ -3,7 +3,7 @@ package potion
 import (
 	"time"
 
-	"github.com/STCraft/dragonfly/server/entity/effect"
+	"github.com/stcraft/dragonfly/server/entity/effect"
 )
 
 // Potion holds the effects given by the potion type.

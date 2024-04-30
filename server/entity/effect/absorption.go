@@ -3,7 +3,7 @@ package effect
 import (
 	"image/color"
 
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // Absorption is a lasting effect that increases the health of an entity over the maximum. Once this extra

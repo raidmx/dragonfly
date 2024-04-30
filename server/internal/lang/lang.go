@@ -4,7 +4,7 @@ import (
 	"embed"
 	"encoding/json"
 
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/world"
 	"golang.org/x/text/language"
 )
 

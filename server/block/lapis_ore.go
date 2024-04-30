@@ -3,7 +3,7 @@ package block
 import (
 	"math/rand"
 
-	"github.com/STCraft/dragonfly/server/item"
+	"github.com/stcraft/dragonfly/server/item"
 )
 
 // LapisOre is an ore block from which lapis lazuli is obtained.

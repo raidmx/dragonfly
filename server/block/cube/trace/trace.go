@@ -3,8 +3,8 @@ package trace
 import (
 	"math"
 
-	"github.com/STCraft/dragonfly/server/block/cube"
 	"github.com/go-gl/mathgl/mgl64"
+	"github.com/stcraft/dragonfly/server/block/cube"
 )
 
 // TraverseBlocks performs a ray trace between the start and end coordinates.

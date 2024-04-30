@@ -1,6 +1,6 @@
 package item
 
-import "github.com/STCraft/dragonfly/server/world"
+import "github.com/stcraft/dragonfly/server/world"
 
 // Rabbit is a food item obtained from rabbits. It can be cooked in a furnace, smoker, or campfire.
 type Rabbit struct {

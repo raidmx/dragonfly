@@ -1,6 +1,6 @@
 package playerdb
 
-import "github.com/STCraft/dragonfly/server/entity/effect"
+import "github.com/stcraft/dragonfly/server/entity/effect"
 
 func effectsToData(effects []effect.Effect) []jsonEffect {
 	data := make([]jsonEffect, len(effects))

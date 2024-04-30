@@ -3,7 +3,7 @@ package item
 import (
 	"time"
 
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // MelonSlice is a food item dropped by melon blocks.

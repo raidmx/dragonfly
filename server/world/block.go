@@ -6,10 +6,10 @@ import (
 	"math"
 	"math/rand"
 
-	"github.com/STCraft/dragonfly/server/block/cube"
-	"github.com/STCraft/dragonfly/server/block/customblock"
-	"github.com/STCraft/dragonfly/server/world/chunk"
-	"github.com/STCraft/intintmap"
+	"github.com/stcraft/dragonfly/server/block/cube"
+	"github.com/stcraft/dragonfly/server/block/customblock"
+	"github.com/stcraft/dragonfly/server/world/chunk"
+	"github.com/stcraft/intintmap"
 )
 
 // Block is a block that may be placed or found in a world. In addition, the block may also be added to an

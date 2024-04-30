@@ -3,8 +3,8 @@ package recipe
 import (
 	"math"
 
-	"github.com/STCraft/dragonfly/server/item"
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/item"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // Item represents an item that can be used as either the input or output of an item. These do not

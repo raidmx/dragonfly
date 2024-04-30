@@ -3,7 +3,7 @@ package item
 import (
 	"image/color"
 
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // Chestplate is a defensive item that may be equipped in the chestplate slot. Generally, chestplates provide

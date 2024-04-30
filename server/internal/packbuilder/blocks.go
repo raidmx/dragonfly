@@ -10,7 +10,7 @@ import (
 	"strings"
 	_ "unsafe" // Imported for compiler directives.
 
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // buildBlocks builds all the block-related files for the resource pack. This includes textures, geometries, language

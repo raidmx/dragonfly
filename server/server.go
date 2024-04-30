@@ -14,18 +14,6 @@ import (
 	"sync"
 	"syscall"
 
-	"github.com/STCraft/dragonfly/server/cmd"
-	"github.com/STCraft/dragonfly/server/event"
-	"github.com/STCraft/dragonfly/server/internal/blockinternal"
-	"github.com/STCraft/dragonfly/server/internal/iteminternal"
-	"github.com/STCraft/dragonfly/server/internal/sliceutil"
-	_ "github.com/STCraft/dragonfly/server/item" // Imported for maintaining correct initialisation order.
-	"github.com/STCraft/dragonfly/server/player"
-	"github.com/STCraft/dragonfly/server/player/chat"
-	"github.com/STCraft/dragonfly/server/player/skin"
-	"github.com/STCraft/dragonfly/server/session"
-	"github.com/STCraft/dragonfly/server/world"
-	"github.com/STCraft/dragonfly/server/world/mcdb"
 	"github.com/df-mc/atomic"
 	"github.com/go-gl/mathgl/mgl32"
 	"github.com/go-gl/mathgl/mgl64"
@@ -37,6 +25,18 @@ import (
 	"github.com/sandertv/gophertunnel/minecraft/protocol/packet"
 	"github.com/sandertv/gophertunnel/minecraft/text"
 	"github.com/sirupsen/logrus"
+	"github.com/stcraft/dragonfly/server/cmd"
+	"github.com/stcraft/dragonfly/server/event"
+	"github.com/stcraft/dragonfly/server/internal/blockinternal"
+	"github.com/stcraft/dragonfly/server/internal/iteminternal"
+	"github.com/stcraft/dragonfly/server/internal/sliceutil"
+	_ "github.com/stcraft/dragonfly/server/item" // Imported for maintaining correct initialisation order.
+	"github.com/stcraft/dragonfly/server/player"
+	"github.com/stcraft/dragonfly/server/player/chat"
+	"github.com/stcraft/dragonfly/server/player/skin"
+	"github.com/stcraft/dragonfly/server/session"
+	"github.com/stcraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/world/mcdb"
 	"golang.org/x/exp/maps"
 )
 

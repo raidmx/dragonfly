@@ -4,8 +4,8 @@ import (
 	"encoding/binary"
 	"fmt"
 
-	"github.com/STCraft/dragonfly/server/world"
 	"github.com/df-mc/goleveldb/leveldb/iterator"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // ColumnIterator iterates over a DB's position/column pairs in key order.

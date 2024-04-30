@@ -1,8 +1,8 @@
 package item
 
 import (
-	"github.com/STCraft/dragonfly/server/world"
-	"github.com/STCraft/dragonfly/server/world/sound"
+	"github.com/stcraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/world/sound"
 )
 
 // BottleOfEnchanting is a bottle that releases experience orbs when thrown.

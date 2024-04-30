@@ -4,9 +4,9 @@ import (
 	"math"
 	"time"
 
-	"github.com/STCraft/dragonfly/server/block/cube"
-	"github.com/STCraft/dragonfly/server/world"
 	"github.com/sandertv/gophertunnel/minecraft/protocol"
+	"github.com/stcraft/dragonfly/server/block/cube"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // Data holds a collection of data that specify a range of Settings of the

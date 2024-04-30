@@ -1,7 +1,7 @@
 package block
 
 import (
-	"github.com/STCraft/dragonfly/server/world/sound"
+	"github.com/stcraft/dragonfly/server/world/sound"
 )
 
 // Honeycomb is a decorative blocks crafted from honeycombs.

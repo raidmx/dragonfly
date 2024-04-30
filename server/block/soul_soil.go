@@ -1,6 +1,6 @@
 package block
 
-import "github.com/STCraft/dragonfly/server/world"
+import "github.com/stcraft/dragonfly/server/world"
 
 // SoulSoil is a block naturally found only in the soul sand valley.
 type SoulSoil struct {

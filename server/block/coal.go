@@ -3,7 +3,7 @@ package block
 import (
 	"time"
 
-	"github.com/STCraft/dragonfly/server/item"
+	"github.com/stcraft/dragonfly/server/item"
 )
 
 // Coal is a precious mineral block made from 9 coal.

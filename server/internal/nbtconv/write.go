@@ -5,9 +5,9 @@ import (
 	"encoding/gob"
 	"sort"
 
-	"github.com/STCraft/dragonfly/server/item"
-	"github.com/STCraft/dragonfly/server/world"
-	"github.com/STCraft/dragonfly/server/world/chunk"
+	"github.com/stcraft/dragonfly/server/item"
+	"github.com/stcraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/world/chunk"
 )
 
 // WriteItem encodes an item stack into a map that can be encoded using NBT.

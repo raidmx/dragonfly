@@ -3,7 +3,7 @@ package item
 import (
 	"time"
 
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // Pickaxe is a tool generally used for mining stone-like blocks and ores at a higher speed and to obtain

@@ -3,8 +3,8 @@ package enchantment
 import (
 	"math"
 
-	"github.com/STCraft/dragonfly/server/item"
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/item"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // AffectedDamageSource represents a world.DamageSource whose damage may be

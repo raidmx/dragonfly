@@ -1,6 +1,6 @@
 package item
 
-import "github.com/STCraft/dragonfly/server/world"
+import "github.com/stcraft/dragonfly/server/world"
 
 // Salmon is a food item obtained from salmons. It can be cooked in a furnace, smoker, or campfire.
 type Salmon struct {

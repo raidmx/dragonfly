@@ -1,6 +1,6 @@
 package block
 
-import "github.com/STCraft/dragonfly/server/internal/nbtconv"
+import "github.com/stcraft/dragonfly/server/internal/nbtconv"
 
 // StructureBlock is used to generate structures manually. They can also
 // be used to save and load structures, alongside structure void blocks.

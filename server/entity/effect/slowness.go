@@ -3,7 +3,7 @@ package effect
 import (
 	"image/color"
 
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // Slowness is a lasting effect that decreases the movement speed of a living entity by 15% for each level

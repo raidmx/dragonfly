@@ -1,9 +1,9 @@
 package world
 
 import (
-	"github.com/STCraft/dragonfly/server/block/cube"
-	"github.com/STCraft/dragonfly/server/event"
 	"github.com/go-gl/mathgl/mgl64"
+	"github.com/stcraft/dragonfly/server/block/cube"
+	"github.com/stcraft/dragonfly/server/event"
 )
 
 // Handler handles events that are called by a world. Implementations of Handler may be used to listen to

@@ -9,15 +9,6 @@ import (
 	"sync"
 	"time"
 
-	"github.com/STCraft/dragonfly/server/block"
-	"github.com/STCraft/dragonfly/server/block/cube"
-	"github.com/STCraft/dragonfly/server/internal/sliceutil"
-	"github.com/STCraft/dragonfly/server/item"
-	"github.com/STCraft/dragonfly/server/item/inventory"
-	"github.com/STCraft/dragonfly/server/item/recipe"
-	"github.com/STCraft/dragonfly/server/player/chat"
-	"github.com/STCraft/dragonfly/server/player/form"
-	"github.com/STCraft/dragonfly/server/world"
 	"github.com/df-mc/atomic"
 	"github.com/go-gl/mathgl/mgl64"
 	"github.com/sandertv/gophertunnel/minecraft"
@@ -26,6 +17,15 @@ import (
 	"github.com/sandertv/gophertunnel/minecraft/protocol/login"
 	"github.com/sandertv/gophertunnel/minecraft/protocol/packet"
 	"github.com/sandertv/gophertunnel/minecraft/text"
+	"github.com/stcraft/dragonfly/server/block"
+	"github.com/stcraft/dragonfly/server/block/cube"
+	"github.com/stcraft/dragonfly/server/internal/sliceutil"
+	"github.com/stcraft/dragonfly/server/item"
+	"github.com/stcraft/dragonfly/server/item/inventory"
+	"github.com/stcraft/dragonfly/server/item/recipe"
+	"github.com/stcraft/dragonfly/server/player/chat"
+	"github.com/stcraft/dragonfly/server/player/form"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // Session handles incoming packets from connections and sends outgoing packets by providing a thin layer

@@ -9,8 +9,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/STCraft/dragonfly/server/internal/sliceutil"
 	"github.com/go-gl/mathgl/mgl64"
+	"github.com/stcraft/dragonfly/server/internal/sliceutil"
 )
 
 // Line represents a command line holding command arguments that were passed upon the execution of the

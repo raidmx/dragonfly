@@ -4,9 +4,9 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/STCraft/dragonfly/server/block/cube"
 	"github.com/df-mc/atomic"
 	"github.com/sirupsen/logrus"
+	"github.com/stcraft/dragonfly/server/block/cube"
 )
 
 // Config may be used to create a new World. It holds a variety of fields that influence the World.

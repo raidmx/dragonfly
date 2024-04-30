@@ -1,6 +1,6 @@
 package enchantment
 
-import "github.com/STCraft/dragonfly/server/item"
+import "github.com/stcraft/dragonfly/server/item"
 
 func init() {
 	item.RegisterEnchantment(0, Protection{})

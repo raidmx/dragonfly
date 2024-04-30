@@ -1,6 +1,6 @@
 package block
 
-import "github.com/STCraft/dragonfly/server/item"
+import "github.com/stcraft/dragonfly/server/item"
 
 // BannerPatternType represents a type of banner pattern, used to customize banners.
 type BannerPatternType struct {

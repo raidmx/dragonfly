@@ -4,8 +4,8 @@ import (
 	"io"
 	"time"
 
-	"github.com/STCraft/dragonfly/server/block/cube"
 	"github.com/go-gl/mathgl/mgl64"
+	"github.com/stcraft/dragonfly/server/block/cube"
 	"golang.org/x/exp/maps"
 )
 

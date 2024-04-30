@@ -4,8 +4,8 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/STCraft/dragonfly/server/entity/effect"
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/entity/effect"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // Chicken is a food item obtained from chickens. It can be cooked in a furnace, smoker, or campfire.

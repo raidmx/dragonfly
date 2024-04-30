@@ -1,6 +1,6 @@
 package item
 
-import "github.com/STCraft/dragonfly/server/world"
+import "github.com/stcraft/dragonfly/server/world"
 
 // Mutton is a food item obtained from sheep. It can be cooked in a furnace, smoker, or campfire.
 type Mutton struct {

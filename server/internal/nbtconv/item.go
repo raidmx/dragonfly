@@ -1,7 +1,7 @@
 package nbtconv
 
 import (
-	"github.com/STCraft/dragonfly/server/item/inventory"
+	"github.com/stcraft/dragonfly/server/item/inventory"
 )
 
 // InvFromNBT decodes the data of an NBT slice into the inventory passed.

@@ -1,6 +1,6 @@
 package block
 
-import "github.com/STCraft/dragonfly/server/world"
+import "github.com/stcraft/dragonfly/server/world"
 
 // Mud is a decorative block obtained by using a water bottle on a dirt block.
 type Mud struct {

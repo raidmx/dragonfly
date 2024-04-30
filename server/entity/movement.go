@@ -3,9 +3,9 @@ package entity
 import (
 	"math"
 
-	"github.com/STCraft/dragonfly/server/block/cube"
-	"github.com/STCraft/dragonfly/server/world"
 	"github.com/go-gl/mathgl/mgl64"
+	"github.com/stcraft/dragonfly/server/block/cube"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // MovementComputer is used to compute movement of an entity. When constructed, the Gravity of the entity

@@ -1,5 +1,3 @@
-github.com/STCraft/intintmap v0.0.0-20240422151941-3d281c7c7cb6 h1:H0bsrrneljIOOG0tmKSovNmKJ0o5qiHDUSLKqyZL6mw=
-github.com/STCraft/intintmap v0.0.0-20240422151941-3d281c7c7cb6/go.mod h1:igRwOzVRi/LUaXSJzJ3hH69FfwIySOO+UNDILZiRGso=
 github.com/cespare/xxhash/v2 v2.2.0 h1:DC2CZ1Ep5Y4k3ZQ899DldepgrayRUGE6BBZ/cd9Cj44=
 github.com/cespare/xxhash/v2 v2.2.0/go.mod h1:VGX0DQ3Q6kWi7AoAeZDth3/j3BFtOZR5XLFGgcrjCOs=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
@@ -56,6 +54,8 @@ github.com/segmentio/fasthash v1.0.3 h1:EI9+KE1EwvMLBWwjpRDc+fEM+prwxDYbslddQGtr
 github.com/segmentio/fasthash v1.0.3/go.mod h1:waKX8l2N8yckOgmSsXJi7x1ZfdKZ4x7KRMzBtS3oedY=
 github.com/sirupsen/logrus v1.9.3 h1:dueUQJ1C2q9oE3F7wvmSGAaVtTmUizReu6fjN8uqzbQ=
 github.com/sirupsen/logrus v1.9.3/go.mod h1:naHLuLoDiP4jHNo9R0sCBMtWGeIprob74mVsIT4qYEQ=
+github.com/stcraft/intintmap v0.0.0-20240430082658-697351915712 h1:KQRPL8hNbAZ0GK92otUeU8Bq/Dl7vIlnCO7Kew7hyLg=
+github.com/stcraft/intintmap v0.0.0-20240430082658-697351915712/go.mod h1:T27Cp31ZRUmWmJy58260018J6KRNxqERzN+Sc6CvRjE=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/testify v1.6.1/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=
 github.com/stretchr/testify v1.7.0/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=

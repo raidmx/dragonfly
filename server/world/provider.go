@@ -3,9 +3,9 @@ package world
 import (
 	"io"
 
-	"github.com/STCraft/dragonfly/server/block/cube"
 	"github.com/df-mc/goleveldb/leveldb"
 	"github.com/google/uuid"
+	"github.com/stcraft/dragonfly/server/block/cube"
 )
 
 // Provider represents a value that may provide world data to a World value. It usually does the reading and

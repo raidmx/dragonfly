@@ -4,8 +4,8 @@ import (
 	"errors"
 	"io"
 
-	"github.com/STCraft/dragonfly/server/world"
 	"github.com/google/uuid"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // Provider represents a value that may provide data to a Player value. It usually does the reading and

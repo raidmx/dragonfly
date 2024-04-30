@@ -1,6 +1,6 @@
 package block
 
-import "github.com/STCraft/dragonfly/server/item"
+import "github.com/stcraft/dragonfly/server/item"
 
 // PolishedBlackstoneBrick are a brick variant of polished blackstone and can spawn in bastion remnants and ruined portals.
 type PolishedBlackstoneBrick struct {

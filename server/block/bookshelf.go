@@ -3,7 +3,7 @@ package block
 import (
 	"time"
 
-	"github.com/STCraft/dragonfly/server/item"
+	"github.com/stcraft/dragonfly/server/item"
 )
 
 // Bookshelf is a decorative block that primarily serves to enhance enchanting with an enchanting table.

@@ -3,7 +3,7 @@ package chunk
 import (
 	"container/list"
 
-	"github.com/STCraft/dragonfly/server/block/cube"
+	"github.com/stcraft/dragonfly/server/block/cube"
 )
 
 // insertBlockLightNodes iterates over the chunk and looks for blocks that have a light level of at least 1.

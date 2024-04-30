@@ -3,7 +3,7 @@ package item
 import (
 	"image/color"
 
-	"github.com/STCraft/dragonfly/server/world"
+	"github.com/stcraft/dragonfly/server/world"
 )
 
 // Boots are a defensive item that may be equipped in the boots armour slot. They come in several tiers, like

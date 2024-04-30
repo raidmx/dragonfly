@@ -10,9 +10,9 @@ import (
 	"strings"
 	"unsafe"
 
-	"github.com/STCraft/dragonfly/server/world/chunk"
 	"github.com/sandertv/gophertunnel/minecraft/nbt"
 	"github.com/segmentio/fasthash/fnv1"
+	"github.com/stcraft/dragonfly/server/world/chunk"
 )
 
 var (
